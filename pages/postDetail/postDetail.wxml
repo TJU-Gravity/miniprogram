@@ -1,12 +1,25 @@
 <!--pages/postList/postList.wxml-->
 <import  src="./replyItem/replyItem.wxml"/> 
 <import  src="./postMain/postMain.wxml"/> 
-<view name="goodsItem">
+<view >
   <template is="postMain" data="{{postDetail}}"/>
 </view>
 
-<block wx:for="{{goodsKey}}">
+<block wx:for="{{replys}}">
     <view class="findMes">
-      <template is="goodsItem" data="{{...item}}" />
+      <template is="replyItem" data="{{...item}}" />
     </ view>
 </ block>
+<view class='footer'>
+<van-cell-group>
+  <van-field
+    value="{{ message }}"
+    type="textarea"
+    placeholder="请输入评论"
+    autosize
+    border="{{ true }}"
+    use-button-slot
+  >
+  <van-button round slot="button" size="small" >评论</van-button>
+  </van-field>
+</van-cell-group></view>

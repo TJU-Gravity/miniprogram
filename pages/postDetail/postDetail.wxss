@@ -2,3 +2,16 @@
 @import "./replyItem/replyItem.wxss";
 @import "./postMain/postMain.wxss";
 
+.footer
+{
+  width: 100%;
+  padding-top:10rpx;
+
+  padding-bottom: 10rpx; 
+  background-color: #eee;
+  border-top: 1rpx #ddd solid;
+  box-shadow:12rpx 12rpx 12rpx 12rpx gainsboro;
+	position: fixed;
+	bottom: 0rpx;
+
+}
