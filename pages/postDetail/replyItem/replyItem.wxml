@@ -1,0 +1,17 @@
+<template name="goodsItem">
+  <view class="goods_container">
+    <view class="goods_auther_data">
+       <text class="date">{{date.year}}年{{date.month}}月{{date.day}}日    {{datetime}}</text>
+    </view>
+    <view class="content_container" catchtap='onDetailTap' data-id="{{id}}">
+      <image class="goods_image" src="{{imgSrc}}" mode="aspectFill"></image>
+      <view class="summary_container">
+        
+        <view class="goods_content">{{content}}</view>
+    <view class="goods_content">{{content}}</view>
+   
+       
+      </view>
+    </view>
+  </view>
+</template>

@@ -1,0 +1,4 @@
+/* pages/postList/postList.wxss */
+@import "./replyItem/replyItem.wxss";
+@import "./postMain/postMain.wxss";
+

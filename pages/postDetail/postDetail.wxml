@@ -1,0 +1,12 @@
+<!--pages/postList/postList.wxml-->
+<import  src="./replyItem/replyItem.wxml"/> 
+<import  src="./postMain/postMain.wxml"/> 
+<view name="goodsItem">
+  <template is="postMain" data="{{postDetail}}"/>
+</view>
+
+<block wx:for="{{goodsKey}}">
+    <view class="findMes">
+      <template is="goodsItem" data="{{...item}}" />
+    </ view>
+</ block>

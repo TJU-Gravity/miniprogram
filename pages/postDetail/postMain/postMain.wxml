@@ -1,0 +1,17 @@
+<!--pages/postDetail/mainPost.wxml-->
+
+<template name="postMain" >
+<view class="detail_container" > 
+ <text class="title">{{postDetail.title}}</text>
+ <view class="bodyBox">
+ <text class="body">{{postDetail.body}}</text>
+ </view>
+ <view class="buttonBox">
+ <view class="button">申请加入</view>
+ </view>
+
+</view>
+
+    
+
+  </template>
