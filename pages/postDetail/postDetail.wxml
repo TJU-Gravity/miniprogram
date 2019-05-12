@@ -1,0 +1,28 @@
+<!--pages/postList/postList.wxml-->
+<import  src="./replyItem/replyItem.wxml"/> 
+<import  src="./postMain/postMain.wxml"/> 
+<view>
+  <template is="postMain" data="{{post}}"/>
+</view>
+
+<block wx:for="{{replies}}">
+    <view class="findMes">
+      <template is="replyItem" data="{{...item}}" />
+    </ view>
+</ block>
+
+<view class='footer'>
+  <van-cell-group>
+    <van-field
+      value="{{ relpyContent }}"
+      type="textarea"
+      placeholder="请输入评论"
+      autosize
+      border="{{ true }}"
+      use-button-slot
+      bind:change="onChangeReply"
+    >
+    <van-button round slot="button" size="small" bind:click="onClick">评论</van-button>
+    </van-field>
+  </van-cell-group>
+</view>

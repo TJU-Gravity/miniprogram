@@ -1,4 +1,5 @@
 <!--index.wxml-->
+<import  src="../post_list/post_list.wxml"/> 
 <view class="container">
   <view class="userinfo">
     <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
@@ -12,14 +13,13 @@
   price="2.00"
   desc="描述信息"
   title="商品标题"
-  thumb="{{ userInfo.avatarUrl}}"
-/>
+  thumb="{{ userInfo.avatarUrl}}"/>
   <view class="usermotto">
     <van-tabbar active="{{ active }}" bind:change="onChange">
-  <van-tabbar-item icon="home-o">标签</van-tabbar-item>
-  <van-tabbar-item icon="search" dot>标签</van-tabbar-item>
-  <van-tabbar-item icon="friends-o" info="5">标签</van-tabbar-item>
-  <van-tabbar-item icon="setting-o" info="20">标签</van-tabbar-item>
-</van-tabbar>
+    <van-tabbar-item icon="home-o">论坛</van-tabbar-item>
+    <van-tabbar-item icon="search" dot>赛事</van-tabbar-item>
+    <van-tabbar-item icon="friends-o" info="5">团队</van-tabbar-item>
+    <van-tabbar-item icon="setting-o" info="20">我</van-tabbar-item>
+    </van-tabbar>
   </view>
 </view>

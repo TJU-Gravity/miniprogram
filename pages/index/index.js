@@ -19,6 +19,11 @@ Page({
   },
   onChange(event) {
     console.log(event.detail);
+    if (event.detail=='1'){
+      wx.switchTab({
+        url: '../news/news',
+      })
+    }
   },
   onLoad: function () {
     if (app.globalData.userInfo) {
