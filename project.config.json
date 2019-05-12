@@ -13,8 +13,10 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.0.4",
-	"appid": "wx195173020b074b59",
-	"projectname": "miniprogram",
+
+	"appid": "wxd1e48ab0818b69b3",
+	"projectname": "gravity",
+
 	"debugOptions": {
 		"hidedInDevtools": []
 	},
