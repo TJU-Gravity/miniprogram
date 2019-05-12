@@ -1,7 +1,0 @@
-{
-  "usingComponents": {
-    "van-button": "../../vant-weapp/dist/button/index",
-    "van-field": "../../vant-weapp/dist/field/index"
-  
-  }
-}
