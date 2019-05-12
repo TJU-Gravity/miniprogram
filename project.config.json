@@ -13,12 +13,16 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.0.4",
+
 	"appid": "wxd1e48ab0818b69b3",
 	"projectname": "gravity",
+
 	"debugOptions": {
 		"hidedInDevtools": []
 	},
 	"isGameTourist": false,
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
 	"condition": {
 		"search": {
 			"current": -1,

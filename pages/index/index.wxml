@@ -1,3 +1,4 @@
+
 <!--pages/index/index.wxml-->
 <view>
 <view wx:if="{{!hasUserInfo && canIUse}}"  > 正在获取头像昵称 </view>
@@ -6,3 +7,4 @@
 <view>{{userInfo.username}}</view>
 </block>
 </view>
+
