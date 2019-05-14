@@ -7,6 +7,11 @@ Page({
    * 页面的初始数据
    */
   data: {
+    userInfo: {},
+    hasUserInfo: false,
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    active: 0,
+
     posts:{},
     abstract:[],
     delBtnWidth: 120, //删除按钮宽度单位（rpx）
@@ -16,6 +21,30 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log("onload")
+    if (app.globalData.userInfo) {
+
+      this.setData({
+        userInfo: app.globalData.userInfo,
+        hasUserInfo: true
+      })
+    } else if (this.data.canIUse) {
+console.log("delay")
+      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+      // 所以此处加入 callback 以防止这种情况
+      app.userInfoReadyCallback = res => {
+
+        this.setData({
+          userInfo: res.data.data,
+          hasUserInfo: true
+        })
+      
+      }
+    }
+    else
+    {
+      console.log("?")
+    } 
     var _this=this;
     var i=0;
     var summary=new Array();

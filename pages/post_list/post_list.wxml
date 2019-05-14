@@ -1,5 +1,8 @@
 <!--post_list.wxml-->
 <view>
+<view wx:if="{{!hasUserInfo && canIUse}}"  > 正在获取头像昵称 </view>
+<block wx:else>
+<view>
   <view class="header">
     <van-search
       class="search"
@@ -30,4 +33,6 @@
       <van-button round type="primary" size="mini" bind:click="onClickAdd">+</van-button>
     </view>
 
+</view>
+</block>
 </view>

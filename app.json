@@ -1,20 +1,20 @@
 {
   "pages": [
-    "pages/index/index",
+      "pages/chat/chat",
     "pages/post_list/post_list",
-    
     "pages/add_post/add_post",
     "pages/postDetail/postDetail",
     "pages/template/goods-item-template",
     "pages/news/news",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/index/index"
+  
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle": "black"
-
   },
   "tabBar": {
     "position": "bottom",
@@ -48,5 +48,4 @@
     ]
   },
   "sitemapLocation": "sitemap.json"
-
 }
