@@ -45,6 +45,7 @@ App({
                 data: {
                   nickname: this.globalData.tmpUserInfo.nickName,
                   headshot: this.globalData.tmpUserInfo.avatarUrl,
+                  gender: this.globalData.tmpUserInfo.gender,
                   code: this.globalData.code
                 },
                 header: {
