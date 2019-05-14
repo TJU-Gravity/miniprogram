@@ -47,7 +47,7 @@ Page({
             url: 'http://118.25.23.44:8080/post/list',
             data: {
                 page: 1,
-                size: 10
+                size: 20
             },
             method: 'POST',
             header: {
@@ -122,16 +122,24 @@ Page({
     onChange(event) {
         console.log(event.detail);
     },
-    onClick: function (e) {
+    onClickDetail: function (e) {
         var id = e.currentTarget.dataset.id;
-        console.log('../postDetail/postDetail?id=' + id);
+        console.log('../postDetail/postDetail?id=' + id+'&username='+this.data.userInfo.username);
         wx.navigateTo({
-            url: '../postDetail/postDetail?id=' + id,
+          url: '../postDetail/postDetail?id=' + id + '&username=' + this.data.userInfo.username,
         })
     },
+  onClickUser: function (e) {
+    var id = e.currentTarget.dataset.id;
+    console.log('../me/me?username=' + id);
+    wx.navigateTo({
+      url: '../me/me?username=' + id,
+    })
+  },
     onClickAdd() {
-        wx.navigateTo({
-            url: '../add_post/add_post',
-        });
+      console.log(this.data.userInfo);
+      wx.navigateTo({
+        url: '../add_post/add_post?username='+this.data.userInfo.username,
+      });
     }
 })

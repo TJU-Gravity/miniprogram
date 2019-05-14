@@ -7,17 +7,19 @@ Page({
    * 页面的初始数据
    */
   data: {
+    username:'',
     title:'',
     content:'',
     type:'1',
-    value:1
+    value:1,
+    options:{}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    this.setData({options:options});
   },
 
   /**
@@ -81,7 +83,7 @@ Page({
       url: 'http://118.25.23.44:8080/post/add',
       data: {
         posttype:this.data.type,
-        posterid:'1',
+        posterid:this.data.options.username,
         title:this.data.title,
         postbody:this.data.content,
         state:this.data.value

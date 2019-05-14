@@ -14,7 +14,7 @@
 <view class='footer'>
   <van-cell-group>
     <van-field
-      value="{{ relpyContent }}"
+      value="{{ replyContent }}"
       type="textarea"
       placeholder="请输入评论"
       autosize

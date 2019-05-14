@@ -97,7 +97,7 @@ Page({
             console.log("加载失败");
           }
         });
-
+        console.log(this.data.userInfo);
       }
     
     } 
