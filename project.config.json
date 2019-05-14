@@ -9,13 +9,14 @@
 		"postcss": true,
 		"minified": true,
 		"newFeature": true,
-		"autoAudits": false,
-		"checkInvalidKey": true
+		"autoAudits": false
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.0.4",
-	"appid": "wx7767aa9b28a1284d",
-	"projectname": "miniprogram-test-1",
+
+	"appid": "wxd1e48ab0818b69b3",
+	"projectname": "gravity",
+
 	"debugOptions": {
 		"hidedInDevtools": []
 	},

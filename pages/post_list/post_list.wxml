@@ -1,0 +1,38 @@
+<!--post_list.wxml-->
+<view>
+<view wx:if="{{!hasUserInfo && canIUse}}"  > 正在获取头像昵称 </view>
+<block wx:else>
+<view>
+  <view class="header">
+    <van-search
+      class="search"
+      value="{{ value }}"
+      placeholder="请输入搜索帖子关键词"
+      use-action-slot
+      bind:search="onSearch"
+    >
+      <view slot="action" bind:tap="onSearch">搜索</view>
+    </van-search>
+  </view>
+  <block wx:for="{{posts.list}}">
+    <view class="post_container" catchtap='onDetailTap' data-id="{{item.postid}}">
+      <image class="post_image" src="{{item.headshot}}" mode="aspectFill" bindtap='onClick' data-id='{{item.postid}}'></image>
+      <view class="summary_container">
+        <view class="locate">
+          <image class="locate_image" src="/images/icons/locate.png"></image>
+          <view class="title">{{item.title}}</view>
+          <text class="date">{{item.postingtime}}</text>
+        </view>
+        <view class="post_body">{{item.postbody}}</view>
+      </view>
+    </view>
+  </block>
+
+   <view class='add'>
+      <van-icon class="add_post" name="add" bind:click="onClickAdd"/>
+      <van-button round type="primary" size="mini" bind:click="onClickAdd">+</van-button>
+    </view>
+
+</view>
+</block>
+</view>

@@ -1,0 +1,10 @@
+{
+  "usingComponents": {
+    "van-nav-bar": "../../vant-weapp/dist/nav-bar/index",
+    "van-cell-group": "../../vant-weapp/dist/cell-group/index",
+    "van-field": "../../vant-weapp/dist/field/index",
+    "van-radio": "../../vant-weapp/dist/radio/index",
+    "van-radio-group": "../../vant-weapp/dist/radio-group/index",
+    "van-stepper": "../../vant-weapp/dist/stepper/index"
+  }
+}

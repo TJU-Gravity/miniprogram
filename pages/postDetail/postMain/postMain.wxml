@@ -1,0 +1,15 @@
+<!--pages/postDetail/mainPost.wxml-->
+
+<template name="postMain" >
+  <view class="detail_container" > 
+    <text class="title">{{post.title}}</text>
+    <text class="second">{{post.posterid}}发布于{{post.postingtime}}</text>
+    <text class="second">点击量：{{post.hits}}</text>
+    <view class="bodyBox">
+    <text class="body">{{post.postbody}}</text>
+  </view>
+  <view class="buttonBox">
+    <view  wx:if="{{post.posttype=='1'}}" class="button">申请加入</view>
+    </view>
+  </view>
+</template>
