@@ -1,7 +1,7 @@
 {
   "pages": [
 
-      "pages/chat/chat",
+  
     "pages/post_list/post_list",
     "pages/add_post/add_post",
     "pages/postDetail/postDetail",
@@ -13,7 +13,8 @@
 
     "pages/info/info",
     "pages/post/post",
-    "pages/home/home"
+    "pages/home/home",
+        "pages/chat/chat"
 
   ],
   "window": {
@@ -31,26 +32,26 @@
       {
         "pagePath": "pages/post_list/post_list",
         "text": "论坛",
-        "iconPath": "image/icon/post_inact.png",
-        "selectedIconPath": "image/icon/post_acted.png"
+        "iconPath": "",
+        "selectedIconPath": ""
       },
       {
         "pagePath": "pages/news/news",
         "text": "赛事",
-        "iconPath": "image/icon/news_inact.png",
-        "selectedIconPath": "image/icon/news_acted.png"
+        "iconPath": "",
+        "selectedIconPath": ""
       },
       {
         "pagePath": "pages/add_post/add_post",
         "text": "团队",
-        "iconPath": "image/icon/team_inact.png",
-        "selectedIconPath": "image/icon/team_acted.png"
+        "iconPath": "",
+        "selectedIconPath": ""
       },
       {
         "pagePath": "pages/add_post/add_post",
         "text": "我",
-        "iconPath": "image/icon/my_inact.png",
-        "selectedIconPath": "image/icon/my_acted.png"
+        "iconPath": "",
+        "selectedIconPath": ""
       }
     ]
 
