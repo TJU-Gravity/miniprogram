@@ -1,21 +1,15 @@
 {
   "pages": [
-
     "pages/post_list/post_list",
-     "pages/me/me",
-
+    "pages/me/me",
     "pages/info/info",
     "pages/chat/chat",
-
     "pages/add_post/add_post",
     "pages/postDetail/postDetail",
     "pages/template/goods-item-template",
     "pages/news/news",
-    "pages/logs/logs"
-
- 
-   
-  
+    "pages/logs/logs",
+    "pages/findMate/findMate"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -31,21 +25,20 @@
       {
         "pagePath": "pages/post_list/post_list",
         "text": "论坛",
-        "iconPath": "image/icon/post_inact.png",
-        "selectedIconPath": "image/icon/post_acted.png"
+        "iconPath": "image/icon/outline_public_black_36dp.png",
+        "selectedIconPath": "image/icon/twotone_public_black_36dp.png"
       },
       {
-        "pagePath": "pages/news/news",
-        "text": "赛事",
-        "iconPath": "image/icon/news_inact.png",
-        "selectedIconPath": "image/icon/news_acted.png"
+        "pagePath": "pages/findMate/findMate",
+        "text": "找队友",
+        "iconPath": "image/icon/outline_face_black_36dp.png",
+        "selectedIconPath": "image/icon/twotone_face_black_36dp.png"
       },
-    
       {
         "pagePath": "pages/me/me",
         "text": "我",
-        "iconPath": "image/icon/my_inact.png",
-        "selectedIconPath": "image/icon/my_acted.png"
+        "iconPath": "image/icon/outline_person_outline_black_36dp.png",
+        "selectedIconPath": "image/icon/twotone_person_outline_black_36dp.png"
       }
     ]
   },
