@@ -1,10 +1,28 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="userinfo">
+    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" round size="small"> 授权头像昵称 </button>
+    <block wx:else>
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{headshot}}" mode="cover"></image>
+      <text class="userinfo-nickname">{{nickname}}</text>
+    </block>
+  </view>
+  
+  <view >
+    <image class='blackImage' src='../../bgpic.png'> </image>
+  </view>
+  
+  <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+  <van-button class="btn" round type="info" size="normal" bind:click="navLogIn">点击登陆</van-button>
+  <van-toast id="van-toast" duration="5000"/>
+  
 
-<!--pages/index/index.wxml-->
-<view>
-<view wx:if="{{!hasUserInfo && canIUse}}"  > 正在获取头像昵称 </view>
-<block wx:else>
-<view>{{userInfo.nickname}}</view>
-<view>{{userInfo.username}}</view>
-</block>
+  <view class="usermotto">
+    <van-tabbar active="{{ active }}" bind:change="onChange">
+  <van-tabbar-item icon="home-o">论坛</van-tabbar-item>
+  <van-tabbar-item icon="search">主页</van-tabbar-item>
+  <van-tabbar-item icon="friends-o" bind:click="navInfo">个人</van-tabbar-item>
+  <van-tabbar-item icon="setting-o" bind:click="navPost">帖子</van-tabbar-item>
+</van-tabbar>
+  </view>
 </view>
-

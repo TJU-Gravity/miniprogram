@@ -1,0 +1,53 @@
+<!--home.wxml-->
+<view class="container">
+  <view class="userinfo">
+    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" round size="small"> 授权头像昵称 </button>
+    <block wx:else>
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{headshot}}" mode="cover"></image>
+      <text class="userinfo-nickname">{{nickname}}</text>
+    </block>
+  </view>
+  
+
+  <view> 
+    <van-row gutter="8">
+      <view class="usertag" wx:for="{{tags}}">
+        <van-col><van-tag type="primary">{{item}}</van-tag></van-col>
+      </view>  
+    </van-row> 
+  </view>
+
+
+  <view class="userdesc">
+  <van-collapse value="{{ activeNames }}" bind:change="onChange">
+  <van-collapse-item title="所在地点" name="1">
+    {{location}}
+  </van-collapse-item>
+  <van-collapse-item title="用户性别" name="2">
+    {{gender}}
+  </van-collapse-item>
+  <van-collapse-item title="用户邮箱" name="3">
+    {{email}}
+  </van-collapse-item>
+  <van-collapse-item title="联系电话" name="4">
+    {{phone}}
+  </van-collapse-item>
+  <van-collapse-item title="个人简介" name="5">
+    {{introduction}}五十字五十字五十字五十字五十字五十字五十字五十字五十字五十字五十字五十字五十字五十字五十字五十字
+  </van-collapse-item>
+  </van-collapse>
+  </view>
+
+  <view class="usertalk">
+  <van-button round type="danger">与我联系</van-button>
+  </view>
+
+  <view class="usermotto">
+    <van-tabbar active="{{ active }}" bind:change="onChange">
+  <van-tabbar-item icon="home-o">论坛</van-tabbar-item>
+  <van-tabbar-item icon="search">主页</van-tabbar-item>
+  <van-tabbar-item icon="friends-o" bind:click="navInfo">个人</van-tabbar-item>
+  <van-tabbar-item icon="setting-o" bind:click="navPost">帖子</van-tabbar-item>
+</van-tabbar>
+  </view>
+</view>
