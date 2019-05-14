@@ -75,15 +75,13 @@
   font-size: 12.5rpx;
   padding-top: 15rpx;
 }
-.add{
-	bottom: 100rpx;
-  left:50%;
-  position: fixed
-}
 
 .add_post{
   color:#315668;
-  size:30px;
+  size:50px;
+  bottom: 50rpx;
+  right:10%;
+  position: fixed
 }
 
 .header{

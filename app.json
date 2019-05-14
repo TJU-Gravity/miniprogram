@@ -10,7 +10,8 @@
     "pages/template/goods-item-template",
     "pages/news/news",
     "pages/logs/logs",
-    "pages/findMate/findMate"
+    "pages/findMate/findMate",
+    "pages/myLsit/myList"
   ],
   "window": {
     "backgroundTextStyle": "light",

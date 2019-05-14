@@ -15,9 +15,9 @@
     </van-search>
   </view>
   <block wx:for="{{posts.list}}">
-    <view class="post_container" catchtap='onDetailTap' data-id="{{item.postid}}">
-      <image class="post_image" src="{{item.headshot}}" mode="aspectFill" bindtap='onClick' data-id='{{item.postid}}'></image>
-      <view class="summary_container">
+    <view class="post_container" >
+      <image class="post_image" src="{{item.headshot}}" mode="aspectFill" bindtap='onClickUser' data-id='{{item.posterid}}'></image>
+      <view class="summary_container" bindtap='onClickDetail' data-id="{{item.postid}}">
         <view class="locate">
           <image class="locate_image" src="/images/icons/locate.png"></image>
           <view class="title">{{item.title}}</view>
@@ -28,11 +28,7 @@
     </view>
   </block>
 
-   <view class='add'>
-      <van-icon class="add_post" name="add" bind:click="onClickAdd"/>
-      <van-button round type="primary" size="mini" bind:click="onClickAdd">+</van-button>
-    </view>
-
-</view>
+    <van-icon class='add_post' name="add" bind:click="onClickAdd"/>
+  </view>
 </block>
-</view>
+  </view>
