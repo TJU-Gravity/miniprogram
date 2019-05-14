@@ -53,7 +53,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    
   },
 
   /**
@@ -116,6 +116,7 @@ Page({
       },
       fail: function (res) {
         console.log("评论失败");
+        wx.showToast({ title: '评论失败', icon: 'none' });
       }
     });
   }

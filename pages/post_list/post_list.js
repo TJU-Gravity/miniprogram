@@ -11,10 +11,9 @@ Page({
       hasUserInfo: false,
       canIUse: wx.canIUse('button.open-type.getUserInfo'),
       active: 0,
-
-        posts: {},
-        abstract: [],
-        delBtnWidth: 120, //删除按钮宽度单位（rpx）
+      posts: {},
+      abstract: [],
+      delBtnWidth: 120, //删除按钮宽度单位（rpx）
     },
 
     /**
@@ -65,6 +64,7 @@ Page({
             },
             fail: function (res) {
                 console.log("加载失败");
+              wx.showToast({ title: '加载失败', icon: 'none' });
             }
         });
 
@@ -81,7 +81,7 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-
+      this.onLoad();
     },
 
     /**
@@ -131,9 +131,9 @@ Page({
     },
   onClickUser: function (e) {
     var id = e.currentTarget.dataset.id;
-    console.log('../me/me?username=' + id);
+    console.log('../visitingCard/visitingCard?username=' + id);
     wx.navigateTo({
-      url: '../me/me?username=' + id,
+      url: '../visitingCard/visitingCard?username=' + id,
     })
   },
     onClickAdd() {

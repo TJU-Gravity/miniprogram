@@ -103,9 +103,18 @@ Page({
     } 
    
   },
+  /**
+     * 生命周期函数--监听页面显示
+     */
+  onShow: function () {
+    this.onLoad();
+  },
   goToMyList:function()
   {
-    console.log("click")
+    console.log('../myList/myList?username=' + this.data.userInfo.username);
+    wx.navigateTo({
+      url: '../myList/myList?username=' + this.data.userInfo.username,
+    });
    
   },
   getUserInfo: function (e) {

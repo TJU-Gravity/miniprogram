@@ -142,7 +142,7 @@ Page({
     wx.request({
       url: 'http://118.25.23.44:8080/user/update',
       data: {
-        username: "1",
+        username: this.data.userInfo.username,
         loc: this.data.location,
         gender: this.data.gen,
         email: this.data.email,
@@ -199,7 +199,7 @@ Page({
     wx.request({
       url: 'http://118.25.23.44:8080/user/detail',
       data: {
-        username: "1",
+        username: this.data.userInfo.username,
       },
       method: 'POST',
       header: {

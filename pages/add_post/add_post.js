@@ -78,7 +78,6 @@ Page({
     });
   },
   onClickRight() {
-    wx.showToast({ title: '点击提交', icon: 'none' });
     wx.request({
       url: 'http://118.25.23.44:8080/post/add',
       data: {
@@ -86,7 +85,8 @@ Page({
         posterid:this.data.options.username,
         title:this.data.title,
         postbody:this.data.content,
-        state:this.data.value
+        state:this.data.value,
+        hits:0
       },
       method: 'POST',
       header: {
@@ -95,6 +95,7 @@ Page({
       success: function (res) {
         console.log(res);
         console.log("发布成功");
+        wx.showToast({ title: '发布成功', icon: 'none' });
         wx.navigateBack({
           delta: 1
         });

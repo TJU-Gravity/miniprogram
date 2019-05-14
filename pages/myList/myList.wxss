@@ -1,4 +1,4 @@
-/**post_list.wxss**/
+/* pages/myLsit/myList.wxss */
 .post_container {
   display: flex;
   flex-direction: column;
@@ -89,16 +89,4 @@
   color: red;
   font-size: 35rpx;
   padding-top: 15rpx;
-}
-.add_post{
-  color:#315668;
-  width:50rpx;
-  height:50rpx;
-  bottom: 50rpx;
-  right:10%;
-  position: fixed
-}
-.search{
-  display: flex;
-  width:100%
 }
