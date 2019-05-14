@@ -4,8 +4,8 @@ page {
 }
 
 .inputRoom {
-  width: 100%;
-  padding: 3vw 0;
+  width: 100vw;
+  height: 16vw;
   border-top: 1px solid #cdcdcd;
   background-color: #f1f1f1;
   position: fixed;
@@ -15,16 +15,14 @@ page {
   z-index: 20;
 }
 
-textarea {
-  width: 90%;
- 
-  line-height: 7vw;
+input {
+  width: 76vw;
+  height: 9.33vw;
   background-color: #fff;
   border-radius: 40rpx;
-align-items: center;
-  padding: 2% 5%;
-  margin: 0 5%;
-  font-size: 35rpx;
+  margin-left: 2vw;
+  padding: 0 3vw;
+  font-size: 28rpx;
   color: #444;
 }
 
@@ -32,7 +30,6 @@ align-items: center;
   font-size: 35rpx;
   color: #444;
   line-height: 7vw;
-  max-width: 68%;
   padding: 2vw 2.5vw;
   background-color: #fff;
   margin-left: -1.6vw;
@@ -43,7 +40,6 @@ align-items: center;
 .rightMsg {
   font-size: 35rpx;
   color: #444;
-  max-width: 68%;
   line-height: 7vw;
   padding: 2vw 2.5vw;
   background-color: #96EB6A;

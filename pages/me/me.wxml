@@ -47,7 +47,7 @@
   <van-button round type="danger">与我联系</van-button>
 </view>
 <block wx:else>
- <van-button round type="info" bindtap="goToMyList">我的帖子</van-button>
+ <van-button round type="info">我的帖子</van-button>
 </block>
   </view>
 

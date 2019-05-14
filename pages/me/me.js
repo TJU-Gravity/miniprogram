@@ -103,16 +103,6 @@ Page({
     } 
    
   },
-  goToMyList:function()
-  {
-    console.log("click")
-    wx.navigateTo({
-      url: '../visitingCard/visitingCard?username=1',
-      fail: function (e){
-        console.log(e)
-      }
-    })
-  },
   getUserInfo: function (e) {
     console.log(e)
     app.globalData.userInfo = e.detail.userInfo
