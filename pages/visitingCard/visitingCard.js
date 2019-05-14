@@ -107,7 +107,7 @@ Page({
   {
     console.log("click")
     wx.navigateTo({
-      url: '../visitingCard/visitingCard?username=1',
+      url: '../me/me?username=1',
       fail: function (e){
         console.log(e)
       }

@@ -2,6 +2,7 @@
   "pages": [
     "pages/post_list/post_list",
     "pages/me/me",
+    "pages/visitingCard/visitingCard",
     "pages/info/info",
     "pages/chat/chat",
     "pages/add_post/add_post",
@@ -35,11 +36,18 @@
         "selectedIconPath": "image/icon/twotone_face_black_36dp.png"
       },
       {
+        "pagePath": "pages/chat/chat",
+        "text": "聊天",
+        "iconPath": "image/icon/outline_chat_black_36dp.png",
+        "selectedIconPath": "image/icon/twotone_chat_black_36dp.png"
+      },
+      {
         "pagePath": "pages/me/me",
         "text": "我",
         "iconPath": "image/icon/outline_person_outline_black_36dp.png",
         "selectedIconPath": "image/icon/twotone_person_outline_black_36dp.png"
       }
+     
     ]
   },
   "sitemapLocation": "sitemap.json"

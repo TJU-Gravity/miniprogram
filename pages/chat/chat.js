@@ -14,14 +14,14 @@ function initData(that) {
   inputVal = '';
 
   msgList = [{
-    speaker: 'server',
+    speaker: 'you',
     contentType: 'text',
-    content: '欢迎来到英雄联盟，敌军还有30秒到达战场，请做好准备！'
+    content: '你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！'
   },
   {
-    speaker: 'customer',
+    speaker: 'me',
     contentType: 'text',
-    content: '我怕是走错片场了...'
+    content: '再见你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！'
   }
   ]
   that.setData({
@@ -45,7 +45,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    cusHeadIcon:null,
+    meHeadIcon:null,
+    youHeadIcon:"http://pic.9ht.com/up/2016-12/14810057988524092.jpg",
     scrollHeight: '100vh',
     inputBottom: 0
   },
@@ -69,7 +70,7 @@ Page({
         initData(this);
         this.setData({
           userInfo: res.data.data,
-          cusHeadIcon: app.globalData.userInfo.headshot,
+          meHeadIcon: app.globalData.userInfo.headshot,
           hasUserInfo: true
         })
       }
@@ -78,7 +79,7 @@ Page({
     if (app.globalData.userInfo) {
  
     this.setData({
-      cusHeadIcon: app.globalData.userInfo.headshot,
+      meHeadIcon: app.globalData.userInfo.headshot,
     });
     }
   },
@@ -138,7 +139,7 @@ Page({
    */
   sendClick: function (e) {
     msgList.push({
-      speaker: 'customer',
+      speaker: 'me',
       contentType: 'text',
       content: e.detail.value
     })
