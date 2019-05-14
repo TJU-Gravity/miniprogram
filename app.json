@@ -1,52 +1,16 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/post_list/post_list",
-    
-    "pages/add_post/add_post",
-    "pages/postDetail/postDetail",
-    "pages/template/goods-item-template",
-    "pages/news/news",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/info/info",
+    "pages/post/post",
+    "pages/home/home"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle": "black"
-
-  },
-  "tabBar": {
-    "position": "bottom",
-    "borderStyle": "white",
-    "selectedColor": "#315668",
-    "list": [
-      {
-        "pagePath": "pages/post_list/post_list",
-        "text": "论坛",
-        "iconPath": "image/icon/post_inact.png",
-        "selectedIconPath": "image/icon/post_acted.png"
-      },
-      {
-        "pagePath": "pages/news/news",
-        "text": "赛事",
-        "iconPath": "image/icon/news_inact.png",
-        "selectedIconPath": "image/icon/news_acted.png"
-      },
-      {
-        "pagePath": "pages/add_post/add_post",
-        "text": "团队",
-        "iconPath": "image/icon/team_inact.png",
-        "selectedIconPath": "image/icon/team_acted.png"
-      },
-      {
-        "pagePath": "pages/add_post/add_post",
-        "text": "我",
-        "iconPath": "image/icon/my_inact.png",
-        "selectedIconPath": "image/icon/my_acted.png"
-      }
-    ]
   },
   "sitemapLocation": "sitemap.json"
-
 }
