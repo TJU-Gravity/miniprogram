@@ -106,7 +106,7 @@ Page({
   goToMyList:function()
   {
     console.log("click")
-   
+    
   },
   getUserInfo: function (e) {
     console.log(e)

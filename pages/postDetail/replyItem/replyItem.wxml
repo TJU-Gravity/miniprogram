@@ -1,7 +1,7 @@
 <template name="replyItem">
   <view class="replyContainer">
     <view class="header">
-       <text class="date">{{postingtime}}</text>
+       <text class="date">{{time}}</text>
     </view>
     <view class="content_container" catchtap='onDetailTap' data-id="{{id}}">
     <view class='avatarBox'> 

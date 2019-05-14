@@ -6,9 +6,9 @@
 </view>
 
 <block wx:for="{{replies}}">
-    <view class="findMes">
+    
       <template is="replyItem" data="{{...item}}" />
-    </ view>
+    
 </ block>
 
 <view class='footer'>

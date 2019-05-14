@@ -36,7 +36,7 @@
 
   <view class='inputRoom' style='bottom: {{inputBottom}}'>
   
-    <textarea bindconfirm='sendClick' adjust-position='{{true}}' confirm-type='send' bindfocus='focus' bindblur='blur' auto-height="{{true}}"></textarea>
+    <input bindconfirm='sendClick' adjust-position='{{true}}' confirm-type='send' bindfocus='focus' bindblur='blur' ></input>
     
   </view>
 </view>
