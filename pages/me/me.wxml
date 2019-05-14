@@ -28,7 +28,9 @@
   <view wx:if="{{userInfo.gender==2}}"> 
     <van-cell title="性别" value="女"/>
   </view>
+  <block wx:else>
     <van-cell title="性别" value="未知"/>
+    </block>
   </block>
     <van-cell title="联系电话" value="{{userInfo.phone}}"/>
  
