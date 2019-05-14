@@ -1,90 +1,140 @@
-// pages/index/index.js
+//index.js
+//获取应用实例
+import Toast from '../../vant-weapp/dist/toast/toast';
 const app = getApp()
+
+
 Page({
-  /**
-   * 页面的初始数据
-   */
   data: {
+    motto: 'Hello World',
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    active: 0
-
+    active: 0,
+    // activeNames: [''],
+    // value:'',
+    // nickname:'',
+    // location:'',
+    // introduction:'',
+    headshot:'',
+    // email:'',
+    // gender:'',
+    // phone:'',
+    nickName:'',
+    username:'',
+    headshot:''   
+  },
+  
+  //事件处理函数
+  bindViewTap: function() {
+    wx.navigateTo({
+      //url: '../logs/logs'
+      //url: '../info/info'
+      url:'../home/home'
+      //url: '../post/post'
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
+  navLogIn: function () {
+    Toast('请添加标签 方便他人查找');
+    // console.log(app.globalData.userInfo.nickName);
+    // console.log(app.globalData.userInfo.avatarUrl);
+    // console.log(app.globalData.userInfo);
+
+    wx.navigateTo({
+      //url: '../logs/logs'
+      //url: '../info/info'
+      url: '../home/home'
+      //url: '../post/post'
+      
+    });
+    var _this = this;
+    wx.request({
+      url: 'http://118.25.23.44:8080/user/loginWeChat',
+      data: {
+        //username: app.globalData.userInfo.nickName,
+        //headshot: app.globalData.userInfo.avatarUrl
+        username: "1",
+        headshot: "https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2546335362.jpg"
+      },
+      method: 'POST',
+      header: {
+        'content-type': 'application/json'//默认值
+      },
+      success: function (res) {
+        console.log(res.data);
+        // _this.setData({ nickname: res.data.data.nickname });
+        // _this.setData({ location: res.data.data.loc });
+        // _this.setData({ introduction: res.data.data.introduction });
+        // _this.setData({ headshot: res.data.data.headshot });
+        // _this.setData({ email: res.data.data.email });
+        // if (res.data.data.gender == 1) {
+        //   _this.setData({ gender: "男" });
+        // } else {
+        //   _this.setData({ gender: "女" });
+        // }
+        // _this.setData({ phone: res.data.data.phonenumber });
+      },
+      fail: function (res) {
+        console.log("加载失败");
+      }
+    });
+  },
+  onChange(event) {
+    this.setData({
+      activeNames: event.detail
+    });
+    //console.log(event.detail);
+  },
   onLoad: function () {
-    console.log("onload")
     if (app.globalData.userInfo) {
-  
       this.setData({
         userInfo: app.globalData.userInfo,
         hasUserInfo: true
       })
+
     } else if (this.data.canIUse) {
 console.log("delay")
+
       // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
       // 所以此处加入 callback 以防止这种情况
       app.userInfoReadyCallback = res => {
- 
         this.setData({
-          userInfo: res.data.data,
+          userInfo: res.userInfo,
           hasUserInfo: true
         })
       }
-    } 
+    } else {
+      // 在没有 open-type=getUserInfo 版本的兼容处理
+      wx.getUserInfo({
+        success: res => {
+          app.globalData.userInfo = res.userInfo
+          this.setData({
+            userInfo: res.userInfo,
+            hasUserInfo: true
+          })
+        }
+      })
+    }
     
   },
-  
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  getUserInfo: function(e) {
+    console.log(e)
+    app.globalData.userInfo = e.detail.userInfo
+    this.setData({
+      userInfo: e.detail.userInfo,
+      hasUserInfo: true
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
+  navInfo: function () {
+    wx.navigateTo({
+      url: '../info/info'
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  navPost: function () {
+    wx.navigateTo({
+      url: '../post/post'
+    })
   },
   
 })

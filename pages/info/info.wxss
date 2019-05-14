@@ -1,32 +1,18 @@
-/**index.wxss**/
-.backView{
-  position: relative;
-  width: 750rpx;
-  height: 800px;
-  background: rebeccapurple;
-}
-.blackImage{
-  position: absolute;
-  top: 20%;
-  bottom: 0px;
-  left: 0px;
-  width: 100%;
-  height: 40%;
-  z-index: 11
-}
-
-.delBtn{
-  
-}
-
+/**info.wxss**/
 .userinfo {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.btn{
-  z-index: 12;
+
+.setinfo{
+  margin: 20rpx;
 }
+
+.saveinfo{
+  margin: 20rpx;
+}
+
 .usertag{
   margin: 20rpx;
 }
@@ -44,7 +30,6 @@
   height: 128rpx;
   margin: 20rpx;
   border-radius: 50%;
-  z-index: 12;
 }
 
 .userinfo-nickname {
