@@ -1,0 +1,8 @@
+/* pages/add_post/add_post.wxss */
+.radio{
+  margin-left: 50rpx;
+}
+.num{
+  display: flex;
+  flex-direction: row;
+}

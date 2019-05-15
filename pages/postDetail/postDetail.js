@@ -1,4 +1,6 @@
 // pages/postList/postList.js
+const app = getApp();
+
 Page({
 
   /**
@@ -9,7 +11,7 @@ Page({
     replies:[],
     user:{},
     replyContent:'',
-    option:{}
+    options:{}
   },
 
   /**
@@ -17,7 +19,7 @@ Page({
    */
   onLoad: function (options) {
     this.setData({options:options});
-    this.setData({replyContent:''});
+    this.setData({replyContent:""});
     var _this=this;
     wx.request({
       url:'http://118.25.23.44:8080/post/detail',
@@ -51,7 +53,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    
   },
 
   /**
@@ -98,7 +100,7 @@ Page({
     wx.request({
       url: 'http://118.25.23.44:8080/reply/add',
       data: {
-        posterid: '1',
+        posterid: this.data.options.username,
         postid: this.data.post.postid,
         replybody: this.data.replyContent
       },
@@ -109,10 +111,12 @@ Page({
       success: function (res) {
         console.log(res);
         console.log("评论成功");
+        wx.showToast({ title: '评论成功', icon: 'none' });
         _this.onLoad(_this.data.options);
       },
       fail: function (res) {
         console.log("评论失败");
+        wx.showToast({ title: '评论失败', icon: 'none' });
       }
     });
   }

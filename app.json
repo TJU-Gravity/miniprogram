@@ -11,8 +11,10 @@
     "pages/template/goods-item-template",
     "pages/news/news",
     "pages/logs/logs",
-    "pages/findMate/findMate"
-   
+
+    "pages/findMate/findMate",
+    "pages/myList/myList"
+
   ],
   "window": {
     "backgroundTextStyle": "light",

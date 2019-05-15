@@ -11,10 +11,9 @@ Page({
       hasUserInfo: false,
       canIUse: wx.canIUse('button.open-type.getUserInfo'),
       active: 0,
-
-        posts: {},
-        abstract: [],
-        delBtnWidth: 120, //删除按钮宽度单位（rpx）
+      posts: {},
+      abstract: [],
+      delBtnWidth: 120, //删除按钮宽度单位（rpx）
     },
 
     /**
@@ -47,7 +46,7 @@ Page({
             url: 'http://118.25.23.44:8080/post/list',
             data: {
                 page: 1,
-                size: 10
+                size: 20
             },
             method: 'POST',
             header: {
@@ -55,16 +54,15 @@ Page({
             },
             success: function (res) {
                 console.log(res.data);
-                _this.setData({ posts: res.data.data });
-
-                for (i = 0; i < length(res.data.data.list); i++) {
-                    summary[i] = res.data.data.list.postbody[i].substr(0, 15);
+                _this.setData({ posts: res.data.data });               
+                for (i = 0; i < res.data.data.list.length; i++) {
+                    summary[i] = res.data.data.list[i].postbody.substr(0, 15);
                 }
-                _this.setData({ abstract: summary });
-                console.log(_this.data.abstract);
+                _this.setData({ abstract: summary });              
             },
             fail: function (res) {
-                console.log("加载失败");
+              console.log("加载失败");
+              wx.showToast({ title: '加载失败', icon: 'none' });
             }
         });
 
@@ -81,7 +79,7 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-
+      this.onLoad();
     },
 
     /**
@@ -122,16 +120,24 @@ Page({
     onChange(event) {
         console.log(event.detail);
     },
-    onClick: function (e) {
+    onClickDetail: function (e) {
         var id = e.currentTarget.dataset.id;
-        console.log('../postDetail/postDetail?id=' + id);
+        console.log('../postDetail/postDetail?id=' + id+'&username='+this.data.userInfo.username);
         wx.navigateTo({
-            url: '../postDetail/postDetail?id=' + id,
+          url: '../postDetail/postDetail?id=' + id + '&username=' + this.data.userInfo.username,
         })
     },
+  onClickUser: function (e) {
+    var id = e.currentTarget.dataset.id;
+    console.log('../visitingCard/visitingCard?username=' + id);
+    wx.navigateTo({
+      url: '../visitingCard/visitingCard?username=' + id,
+    })
+  },
     onClickAdd() {
-        wx.navigateTo({
-            url: '../add_post/add_post',
-        });
+      console.log(this.data.userInfo);
+      wx.navigateTo({
+        url: '../add_post/add_post?username='+this.data.userInfo.username,
+      });
     }
 })
