@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/chatList/chatList",
     "pages/post_list/post_list",
     "pages/me/me",
     "pages/visitingCard/visitingCard",
@@ -10,8 +11,10 @@
     "pages/template/goods-item-template",
     "pages/news/news",
     "pages/logs/logs",
+
     "pages/findMate/findMate",
     "pages/myList/myList"
+
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -37,7 +40,7 @@
         "selectedIconPath": "image/icon/twotone_face_black_36dp.png"
       },
       {
-        "pagePath": "pages/chat/chat",
+        "pagePath": "pages/chatList/chatList",
         "text": "聊天",
         "iconPath": "image/icon/outline_chat_black_36dp.png",
         "selectedIconPath": "image/icon/twotone_chat_black_36dp.png"
@@ -48,7 +51,6 @@
         "iconPath": "image/icon/outline_person_outline_black_36dp.png",
         "selectedIconPath": "image/icon/twotone_person_outline_black_36dp.png"
       }
-     
     ]
   },
   "sitemapLocation": "sitemap.json"
