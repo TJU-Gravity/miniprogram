@@ -155,7 +155,9 @@ Page({
       },
       success: function (res) {
         console.log(res);
-
+        wx.navigateBack({
+          delta:1
+        });
       },
       fail: function (res) {
         console.log("加载失败");
