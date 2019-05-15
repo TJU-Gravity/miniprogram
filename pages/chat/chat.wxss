@@ -15,7 +15,7 @@ page {
   z-index: 20;
 }
 
-textarea {
+input {
   width: 90%;
  
   line-height: 7vw;

@@ -111,6 +111,7 @@ Page({
   },
   goToMyList:function()
   {
+
     console.log('../myList/myList?username=' + this.data.userInfo.username);
     wx.navigateTo({
       url: '../myList/myList?username=' + this.data.userInfo.username,
