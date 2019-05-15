@@ -36,7 +36,7 @@
 
   <view class='inputRoom' style='bottom: {{inputBottom}}'>
   
-    <textarea  adjust-position='{{true}}' auto-height='{{true}}' ></textarea>
+    <textarea  adjust-position='{{true}}' auto-height='{{true}}' show-confirm-bar='{{false}}' fixed='{{true}}'></textarea>
     
   </view>
 </view>
