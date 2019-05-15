@@ -2,7 +2,7 @@
 .post_container {
   display: flex;
   flex-direction: column;
-  height: 450rpx;
+  height: 250rpx;
   box-shadow:12rpx 12rpx 12rpx gainsboro;
 }
 .post_type{
@@ -36,6 +36,8 @@
 .sub_container{
   display: flex;
   flex-direction: row;
+  margin-top: 20rpx;
+  margin-left: 20rpx;
 }
 .postingtime{
   font-size: 25rpx;
@@ -57,16 +59,17 @@
   flex-direction: column;
 }
 .title {
-  margin-left: 10rpx;
+  margin-left: 20rpx;
   margin-top: 10rpx;
   color: #000;
   font-size: 50rpx;
   width: 100%;
 }
 .post_body {
-  margin-top: 35rpx;
-  color: #b3b3b3;
-  font-size: 25rpx;
+  margin-top: 30rpx;
+  margin-left: 20rpx;
+  color: #999;
+  font-size: 30rpx;
   width: 100%;
 }
 .date {

@@ -54,16 +54,14 @@ Page({
             },
             success: function (res) {
                 console.log(res.data);
-                _this.setData({ posts: res.data.data });
-
-                for (i = 0; i < length(res.data.data.list); i++) {
-                    summary[i] = res.data.data.list.postbody[i].substr(0, 15);
+                _this.setData({ posts: res.data.data });               
+                for (i = 0; i < res.data.data.list.length; i++) {
+                    summary[i] = res.data.data.list[i].postbody.substr(0, 15);
                 }
-                _this.setData({ abstract: summary });
-                console.log(_this.data.abstract);
+                _this.setData({ abstract: summary });              
             },
             fail: function (res) {
-                console.log("加载失败");
+              console.log("加载失败");
               wx.showToast({ title: '加载失败', icon: 'none' });
             }
         });
