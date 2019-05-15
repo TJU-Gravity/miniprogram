@@ -1,11 +1,14 @@
 {
   "pages": [
-    "pages/chatList/chatList",
+
     "pages/post_list/post_list",
+
+    "pages/chatList/chatList",
     "pages/me/me",
     "pages/visitingCard/visitingCard",
     "pages/info/info",
     "pages/chat/chat",
+    "pages/chat2/chat",
     "pages/add_post/add_post",
     "pages/postDetail/postDetail",
     "pages/template/goods-item-template",
