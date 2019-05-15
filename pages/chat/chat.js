@@ -113,7 +113,7 @@ Page({
       })
       //前端加一个导航栏
       wx.setNavigationBarTitle({
-        title: options.youName
+        title: options.friendName
       })
     }
 
@@ -140,13 +140,13 @@ Page({
     if (im.checkLogin()) {
       //获取聊天历史记录
       imhandler.getC2CHistoryMsgs(function cbOk(result) {
-        handlerHistoryMsgs(result, that)
+        that.handlerHistoryMsgs(result, that)
       })
     } else {
       imhandler.sdkLogin(that, app, this.data.selToID, () => {
         //获取聊天历史记录
         imhandler.getC2CHistoryMsgs(function cbOk(result) {
-          handlerHistoryMsgs(result, that)
+          that.handlerHistoryMsgs(result, that)
         });
       });
     }
@@ -268,7 +268,7 @@ Page({
     var msgList = that.data.msgList;
     var message = {
       'speaker': isSend ? 'me' : 'you',
-      'contentType': text,
+      'contentType': "text",
       'content': msg
     }
     msgList.push(message);

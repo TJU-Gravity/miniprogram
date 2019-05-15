@@ -1,5 +1,9 @@
+
 // pages/postList/postList.js
 const app = getApp();
+var util = require('../../utils/util.js'); // 转换时间插件
+var im = require('../../utils/webim_wx.js'); // 腾讯云 im 包
+var imhandler = require('../../utils/im_handler.js'); // 这个是所有 im 事件的 js
 
 Page({
 

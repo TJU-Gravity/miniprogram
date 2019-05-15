@@ -67,10 +67,12 @@ App({
                   console.log("app-user info")
                   console.log(res.data)
                   // im 的信息
+                  console.log('登陆成功记录im')
+                  console.log(res.data.data)
                   app.data.im.imId = res.data.data.username;
                   app.data.im.imName = res.data.data.nickname;
                   app.data.im.imAvatarUrl = res.data.data.headshot;
-
+                  console.log(app.data.im)
 
 
                   app.globalData.userInfo = res.data.data
@@ -109,10 +111,10 @@ App({
       data: data,
       success: res => {
         // 初始化 im 数据 初始化完毕再返回回调
-        console.log('init login')
+        console.log('获取userSig并记录')
         console.log(res.data)
-        app.data.im.userSig = res.data.data.urlSig //RestAPI 返回状态码，消息，和data
-        //console.log(res.data)
+        app.data.im.userSig = res.data.data //RestAPI 返回状态码，消息，和data
+        console.log(res.data)
         cbOk()
       },
       fail:err=>{
