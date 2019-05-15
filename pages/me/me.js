@@ -13,16 +13,21 @@ Page({
     active: 0,
     activeNames: [''],
     value: '',
-  
     tags:[]
   },
-  //事件处理函数
-  bindViewTap: function () {
-    wx.navigateTo({
-      //url: '../logs/logs'
-      url: '../info/info'
-      //url: '../post/post'
-    })
+  //事件处理函数 如果是自己 可点击头像进入修改信息页面
+  bindViewTap: function (query) {
+    if (query.username){
+      //不是自己 不跳转
+    }
+    else{
+      wx.navigateTo({
+        //url: '../logs/logs'
+        url: '../info/info'
+        //url: '../post/post'
+      })
+    }
+   
   },
   onChange(event) {
     this.setData({
