@@ -16,16 +16,24 @@ page {
 }
 
 textarea{
-  width: 90%;
+  width: 60%;
  
   line-height: 7vw;
   background-color: #fff;
   border-radius: 40rpx;
-align-items: center;
+align-items: left;
   padding: 2% 5%;
   margin: 0 5%;
   font-size: 35rpx;
   color: #444;
+}
+button
+{
+   width: 20%;
+    border-radius: 40rpx;
+    color:#000;
+    margin-right: 5%;
+    background: #96EB6A;
 }
 
 .leftMsg {
