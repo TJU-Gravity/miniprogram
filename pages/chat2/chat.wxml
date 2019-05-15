@@ -37,6 +37,6 @@
   <view class='inputRoom' style='bottom: {{inputBottom}}'>
   
     <textarea  adjust-position='{{true}}' auto-height='{{true}}' ></textarea>
-    <button>发送</button>
+   
   </view>
 </view>

@@ -21,7 +21,7 @@ textarea{
   line-height: 7vw;
   background-color: #fff;
   border-radius: 40rpx;
-align-items: left;
+  align-items: center;
   padding: 2% 5%;
   margin: 0 5%;
   font-size: 35rpx;
