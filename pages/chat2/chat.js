@@ -1,43 +1,13 @@
 // pages/chat/chat.js
 
 const app = getApp();
-var inputVal = '';
-var msgList = [];
-var windowWidth = wx.getSystemInfoSync().windowWidth;
-var windowHeight = wx.getSystemInfoSync().windowHeight;
-var keyHeight = 0;
+
 
 /**
  * 初始化数据
  */
-function initData(that) {
-  inputVal = '';
 
-  msgList = [{
-    speaker: 'you',
-    contentType: 'text',
-    content: '你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！'
-  },
-  {
-    speaker: 'me',
-    contentType: 'text',
-    content: '再见你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！'
-  }
-  ]
-  that.setData({
-    msgList,
-    inputVal
-  })
-}
 
-/**
- * 计算msg总高度
- */
-// function calScrollHeight(that, keyHeight) {
-//   var query = wx.createSelectorQuery();
-//   query.select('.scrollMsg').boundingClientRect(function(rect) {
-//   }).exec();
-// }
 
 Page({
 
@@ -45,12 +15,30 @@ Page({
    * 页面的初始数据
    */
   data: {
+    chatContent:'',
     meHeadIcon:null,
-    youHeadIcon:"http://pic.9ht.com/up/2016-12/14810057988524092.jpg",
+    msgList:[],youHeadIcon:"http://pic.9ht.com/up/2016-12/14810057988524092.jpg",
     scrollHeight: '100vh',
     inputBottom: 0
   },
 
+  initData() {
+    
+   this.setData({
+      msgList: [{
+        speaker: 'you',
+        contentType: 'text',
+        content: '你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！'
+      },
+      {
+        speaker: 'me',
+        contentType: 'text',
+        content: '再见你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！'
+      }
+      ],
+      inputVal:''
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -68,7 +56,7 @@ Page({
       // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
       // 所以此处加入 callback 以防止这种情况
       app.userInfoReadyCallback = res => {
-        initData(this);
+        this.initData();
         this.setData({
           userInfo: res.data.data,
           meHeadIcon: res.dat.data.headshot,
@@ -76,7 +64,7 @@ Page({
         })
       }
     } 
-    initData(this);
+    this.initData();
     if (app.globalData.userInfo) {
  
     this.setData({
@@ -109,31 +97,7 @@ Page({
   /**
    * 获取聚焦
    */
-  focus: function (e) {
-    keyHeight = e.detail.height;
-    this.setData({
-      scrollHeight: (windowHeight - keyHeight) + 'px'
-    });
-    this.setData({
-      toView: 'msg-' + (msgList.length - 1),
-      inputBottom: keyHeight + 'px'
-    })
-    //计算msg高度
-    // calScrollHeight(this, keyHeight);
-
-  },
-
-  //失去聚焦(软键盘消失)
-  blur: function (e) {
-    this.setData({
-      scrollHeight: '100vh',
-      inputBottom: 0
-    })
-    this.setData({
-      toView: 'msg-' + (msgList.length - 1)
-    })
-
-  },
+  
 
   /**
    * 发送点击监听
@@ -158,6 +122,30 @@ Page({
    */
   toBackClick: function () {
     wx.navigateBack({})
-  }
+  },
+bindFormSubmit(e) {
+    console.log(e.detail.value.textarea)
+ 
+  },
+  
+  onChangeValue(event) {
+    this.setData({ chatContent: event.detail });
+    console.log(this.data.chatContent);
+  },
 
+  onClick() {
+    
+    
+    msgList.push({
+      speaker: 'me',
+      contentType: 'text',
+      content: this.data.chatContent
+    })
+    inputVal = '';
+    this.setData({
+      msgList,
+      inputVal
+    });
+
+  }     
 })
