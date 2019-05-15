@@ -29,9 +29,10 @@
             </block>
           </view>
         </view>
+
         <!--这里是左滑按钮部分----start-->
         <view bindtap="delItem" class="posit">
-            <view class="editor" data-addressid="{{item.address.ID}}" catchtap="setDefaultAddress">设为默认地址</view>
+            <view class="editor" data-addressid="{{item.address.ID}}" catchtap="setDefaultAddress">修改状态</view>
             <view class="del" data-addressid="{{item.address.ID}}" data-index="{{index}}" catchtap="delAddress">删除</view>
         </view>
          <!--这里是左滑按钮部分----end-->
