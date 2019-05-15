@@ -10,6 +10,7 @@
       <!-- 单个消息1 客服发出（左） -->
       <view wx:if='{{item.speaker=="you"}}' id='msg-{{index}}' style='display: flex; padding: 2vw 11vw 2vw 2vw;'>
         <view style='width: 11vw; height: 11vw;'>
+        
           <image style='width: 11vw; height: 11vw; border-radius: 10rpx;' src="{{youHeadIcon}}"></image>
         </view>
         <view style='width: 4vw; height: 11vw; margin-left: 0.5vw; display: flex; align-items: center; z-index: 9;'>
