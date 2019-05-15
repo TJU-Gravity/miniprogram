@@ -1,4 +1,6 @@
 
+
+<!--chat/chat-->
 <view>
 
   <scroll-view scroll-y scroll-into-view='{{toView}}' style='height: {{scrollHeight}};'>
@@ -36,7 +38,7 @@
 
   <view class='inputRoom' style='bottom: {{inputBottom}}'>
   
-    <textarea  adjust-position='{{true}}' auto-height='{{true}}' ></textarea>
-    
+    <input bindconfirm='sendClick' adjust-position='{{true}}' confirm-type='send' bindfocus='focus' bindblur='blur' ></input>
+
   </view>
 </view>

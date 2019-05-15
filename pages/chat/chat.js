@@ -8,11 +8,14 @@ var windowHeight = wx.getSystemInfoSync().windowHeight;
 var keyHeight = 0;
 
 /**
- * 初始化数据
+ * 初始化数据,
+ * TODO//检查用户登录TIM状态，先登录，然后拉取两者的历史信息
  */
+
 function initData(that) {
   inputVal = '';
 
+  //信息是三元组，内容，说话者
   msgList = [{
     speaker: 'you',
     contentType: 'text',
@@ -55,7 +58,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log("onload")
+    //console.log("chat onload")
     if (app.globalData.userInfo) {
 
       this.setData({
@@ -64,7 +67,7 @@ Page({
          meHeadIcon: app.globalData.userInfo.headshot
       })
     } else if (this.data.canIUse) {
-      console.log("delay")
+      //console.log("delay")
       // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
       // 所以此处加入 callback 以防止这种情况
       app.userInfoReadyCallback = res => {

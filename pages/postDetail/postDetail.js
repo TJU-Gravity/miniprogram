@@ -119,5 +119,13 @@ Page({
         wx.showToast({ title: '评论失败', icon: 'none' });
       }
     });
+  },
+  onJoin(){
+    //console.log('申请加入')
+    //转至一对一的聊天界面(自己的openid和对方的openid)，聊天
+    wx.navigateTo({
+      url: '/pages/chat/chat',
+    })
   }
+
 })
