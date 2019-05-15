@@ -76,6 +76,7 @@ Page({
     console.log(new_tag);
     this.setData({ tags: new_tag });
   },
+
   onTypeLocation(event) {
     console.log(event.detail);
     this.setData({ location: event.detail });
@@ -101,6 +102,7 @@ Page({
     console.log(event.detail);
     this.setData({ pwd: event.detail });
   },
+
   onClick() {
     var _this = this;
     
@@ -117,7 +119,14 @@ Page({
     if (this.data.gender == "男") {
       this.setData({ gen: '1' });
     } else {
-      this.setData({ gen: '0' });
+      if (this.data.gender == "女")
+      {
+        this.setData({ gen: '2' });
+      }
+      else 
+      {//未知
+        this.setData({ gen: '0' });
+      }
     }
     //console.log(this.data.gen);
     wx.request({
@@ -155,9 +164,17 @@ Page({
       },
       success: function (res) {
         console.log(res);
+<<<<<<< HEAD
         wx.navigateBack({
           delta:1
         });
+=======
+        app.globalData.userInfo=res.data.data
+        
+wx.navigateBack({
+  delta: 1,
+})
+>>>>>>> fbeb0330440e77d75f05f604ca3c2a0f88e83aa4
       },
       fail: function (res) {
         console.log("加载失败");
@@ -219,7 +236,14 @@ Page({
         if (res.data.data.gender == "1") {
           _this.setData({ gender: "男" });
         } else {
-          _this.setData({ gender: "女" });
+          if (res.data.data.gender == "2")
+          {
+            _this.setData({ gender: "女" });
+          }
+          else 
+          {
+            _this.setData({ gender: "未知" });
+          }
         }
         //_this.setData({ gender: res.data.data.gender});
         _this.setData({ phone: res.data.data.phonenumber });
