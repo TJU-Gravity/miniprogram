@@ -164,17 +164,14 @@ Page({
       },
       success: function (res) {
         console.log(res);
-<<<<<<< HEAD
         wx.navigateBack({
           delta:1
         });
-=======
-        app.globalData.userInfo=res.data.data
+        app.globalData.userInfo=res.data.data;
         
-wx.navigateBack({
-  delta: 1,
-})
->>>>>>> fbeb0330440e77d75f05f604ca3c2a0f88e83aa4
+        wx.navigateBack({
+          delta: 1,
+        })
       },
       fail: function (res) {
         console.log("加载失败");
