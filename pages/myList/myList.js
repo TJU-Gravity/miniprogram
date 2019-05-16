@@ -177,13 +177,29 @@ Page({
   },
   //删除帖子
   onDelete: function (e) {
-    console.log(e);
+    var _this = this;
+    wx.showModal({
+      title: '警告',
+      content: '确定删除该帖子？此操作不可恢复',
+      success(res) {
+        if (res.confirm) {
+          console.log('确定删除');
+          _this.deletePost(e);
+        } else if (res.cancel) {
+          console.log('取消删除')
+        }
+      }
+    });
+    
+  },
+  //确定删除
+  deletePost:function(e){
     var id = e.currentTarget.dataset.index;
-    var _this=this;
+    var _this = this;
     wx.request({
       url: 'http://118.25.23.44:8080/post/delete',
       data: {
-        postid: this.data.posts.list[id].postid
+        ID: this.data.posts.list[id].postid
       },
       method: 'POST',
       header: {
@@ -192,6 +208,7 @@ Page({
       success: function (res) {
         console.log(res);
         _this.onLoad(_this.data.options);
+        wx.showToast({ title: '删除成功', icon: 'none' });
       },
       fail: function (res) {
         console.log("删除失败");
@@ -199,14 +216,14 @@ Page({
       }
     });
   },
+  //开启招募
   onOpenState:function(e){
     var id = e.currentTarget.dataset.index;
     var _this = this;
-    console.log(e);
     wx.request({
       url: 'http://118.25.23.44:8080/post/changeState',
       data: {
-        postid: this.data.posts.list[id].postid,
+        ID: this.data.posts.list[id].postid,
         state:1
       },
       method: 'POST',
@@ -223,14 +240,14 @@ Page({
       }
     });
   },
+  //关闭招募
   onCloseState: function (e) {
-    console.log(e);
     var id = e.currentTarget.dataset.index;
     var _this = this;
     wx.request({
       url: 'http://118.25.23.44:8080/post/changeState',
       data: {
-        postid: this.data.posts.list[id].postid,
+        ID: this.data.posts.list[id].postid,
         state: 0
       },
       method: 'POST',
