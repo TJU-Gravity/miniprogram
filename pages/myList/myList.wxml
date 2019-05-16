@@ -30,10 +30,10 @@
       <view class='buttons'>
       <block wx:if="{{item.posttype=='1'}}">
           <block wx:if="{{item.state>0}}">
-            <view class="edt" data-index="{{item.posutid}}" bindtap='onCloseState'>关闭招募</view>
+            <view class="edt" data-index="{{index}}" bindtap='onCloseState'>关闭招募</view>
           </block>
           <block wx:else>
-            <view class="edt" data-index="{{item.postid}}" bindtap='onOpenState'>开启招募</view>
+            <view class="edt" data-index="{{index}}" bindtap='onOpenState'>开启招募</view>
           </block>
       </block>
           <view class="del" data-index="{{index}}" bindtap='onDelete'>删除</view>
