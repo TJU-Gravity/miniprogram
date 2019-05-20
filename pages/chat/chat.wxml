@@ -35,8 +35,6 @@
   </scroll-view>
 
   <view class='inputRoom' style='bottom: {{inputBottom}}'>
-  
-   
-    
+
   </view>
 </view>
