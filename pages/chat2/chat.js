@@ -15,9 +15,12 @@ Page({
    * 页面的初始数据
    */
   data: {
+    clicked:false,
     chatContent:'',
     meHeadIcon:null,
-    msgList:[],youHeadIcon:"http://pic.9ht.com/up/2016-12/14810057988524092.jpg",
+    scrollTop:0,
+    msgList:[],
+    youHeadIcon:"http://pic.9ht.com/up/2016-12/14810057988524092.jpg",
     scrollHeight: '100vh',
     inputBottom: 0
   },
@@ -102,50 +105,49 @@ Page({
   /**
    * 发送点击监听
    */
-  sendClick: function (e) {
-    msgList.push({
-      speaker: 'me',
-      contentType: 'text',
-      content: e.detail.value
-    })
-    inputVal = '';
-    this.setData({
-      msgList,
-      inputVal
-    });
-
-
-  },
-
+  
   /**
    * 退回上一页
    */
   toBackClick: function () {
     wx.navigateBack({})
   },
-bindFormSubmit(e) {
-    console.log(e.detail.value.textarea)
- 
-  },
+
   
-  onChangeValue(event) {
-    this.setData({ chatContent: event.detail });
-    console.log(this.data.chatContent);
+  onChangeChat(event) {
+    console.log(event);
+    console.log(this.data.chatContent)
+    console.log(event.detail)
+
+    if (!this.data.clicked)
+    {
+      this.setData({ chatContent: event.detail });
+    }
+    else
+    {
+      this.setData({ clicked: false, 
+      chatContent: "" });
+      
+    }
+
   },
 
-  onClick() {
-    
-    
-    msgList.push({
+  onClick(event) {
+    this.setData({ clicked: true });
+    console.log(event);
+    var _msgList = this.data.msgList
+    _msgList.push({
       speaker: 'me',
       contentType: 'text',
       content: this.data.chatContent
     })
-    inputVal = '';
     this.setData({
-      msgList,
-      inputVal
+      msgList: _msgList
     });
-
-  }     
+ 
+    this.setData({ chatContent: "",
+    scrollTop:1000 });
+   
+  }
+  
 })
