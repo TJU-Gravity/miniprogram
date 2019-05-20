@@ -1,44 +1,44 @@
 <!--pages/myLsit/myList.wxml-->
 <view>
-<block wx:for="{{posts.list}}">
 
-    <view class="post_container" >
-
-      <view class='post_type'>
-        <van-tag wx:if="{{item.posttype=='1'}}" class="tags" color="#315668">招募公告</van-tag>
-        <van-tag wx:else class="tags" color="#315668">讨论帖</van-tag>
-        <view class='sub_container'>
-            <text class='postingtime'>{{item.postingtime}}</text>
-            <view class='hits'>
-              <image class='hits_image' src="../../image/icon/baseline_whatshot_black_18dp.png"/>
-              <text class='hits_text'>{{item.hits}}</text>
+    <view class="post_container" wx:for="{{posts.list}}">
+      <view bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" data-index="{{index}}" style="{{txtStyle[index]}}" class="item">
+        <view class='post_type'>
+          <van-tag wx:if="{{item.posttype=='1'}}" class="tags" color="#315668">招募公告</van-tag>
+          <van-tag wx:else class="tags" color="#315668">讨论帖</van-tag>
+          <view class='sub_container'>
+              <text class='postingtime'>{{item.postingtime}}</text>
+              <view class='hits'>
+                <image class='hits_image' src="../../image/icon/baseline_whatshot_black_18dp.png"/>
+                <text class='hits_text'>{{item.hits}}</text>
+              </view>
             </view>
-          </view>
-      </view> 
-
-      
-      <view class="post_content" bindtap='onClickDetail' data-id="{{item.postid}}">
-        <view bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE"data-index="{{index}}">
-          <view class="title">{{item.title}}</view>        
-          <view class="post_body">{{abstract[index]}}...</view>
-          <view>
-            <text class="date">最近回复时间：{{item.lastpost}}</text>
-            <block wx:if="{{item.posttype=='1'}}">
-              <text wx:if="{{item.state>0}}"class="state">招募中</text>
-              <text wx:else class="disabled_state">已招满</text>
-            </block>
-          </view>
+        </view>       
+        <view class="post_content" bindtap='onClickDetail' data-id="{{item.postid}}">        
+            <view class="title">{{item.title}}</view>        
+            <view class="post_body">{{abstract[index]}}...</view>
+            <view>
+              <text class="date">最近回复时间：{{item.lastpost}}</text>
+              <block wx:if="{{item.posttype=='1'}}">
+                <text wx:if="{{item.state>0}}"class="state">招募中</text>
+                <text wx:else class="disabled_state">已招满</text>
+              </block>
+            </view>
         </view>
-        <!--这里是左滑按钮部分----start-->
-        <view bindtap="delItem" class="posit">
-            <view class="editor" data-addressid="{{item.address.ID}}" catchtap="setDefaultAddress">设为默认地址</view>
-            <view class="del" data-addressid="{{item.address.ID}}" data-index="{{index}}" catchtap="delAddress">删除</view>
-        </view>
-         <!--这里是左滑按钮部分----end-->
- 
       </view>
-
+      <!--这里是左滑按钮部分----start-->
+      <view class='buttons'>
+      <block wx:if="{{item.posttype=='1'}}">
+          <block wx:if="{{item.state>0}}">
+            <view class="edt" data-index="{{index}}" bindtap='onCloseState'>关闭招募</view>
+          </block>
+          <block wx:else>
+            <view class="edt" data-index="{{index}}" bindtap='onOpenState'>开启招募</view>
+          </block>
+      </block>
+          <view class="del" data-index="{{index}}" bindtap='onDelete'>删除</view>
+      </view>
+      <!--这里是左滑按钮部分----end-->
     </view>
 
-  </block>
 </view>

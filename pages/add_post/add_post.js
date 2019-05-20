@@ -71,13 +71,7 @@ Page({
     
   },
 
-  onClickLeft() {
-    wx.showToast({ title: '点击返回', icon: 'none' });
-    wx.navigateBack({
-      delta: 1
-    });
-  },
-  onClickRight() {
+  onClickPost() {
     wx.request({
       url: 'http://118.25.23.44:8080/post/add',
       data: {
