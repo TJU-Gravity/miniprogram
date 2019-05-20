@@ -35,13 +35,6 @@
   </scroll-view>
 
   <view class='inputRoom' style='bottom: {{inputBottom}}'>
-  
-<<<<<<< HEAD
 
-    <input bindconfirm='sendClick' adjust-position='{{true}}' confirm-type='send' bindfocus='focus' bindblur='blur' ></input>
-
-=======
-    <input bindconfirm='sendClick' adjust-position='{{true}}' confirm-type='send' bindfocus='focus' bindblur='blur' ></input>
->>>>>>> 018217616b7a314349e4467ce9970438bebf9a98
   </view>
 </view>
