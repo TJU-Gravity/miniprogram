@@ -99,10 +99,7 @@
   right:15%;
   position: fixed;
 }
-.add_post{
-  font-size:50rpx;
-}
 .search{
-  display: flex;
-  width:100%
+
+
 }
