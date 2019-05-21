@@ -132,7 +132,7 @@ Page({
     wx.request({
       url: 'http://118.25.23.44:8080/user/tags/ChangeUserTags',
       data: {
-        username: "1",
+        username: this.data.userInfo.username,
         tags: this.data.tags
         //tags: ["a", "c"]
       },

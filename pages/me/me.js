@@ -18,11 +18,15 @@ Page({
   },
   //事件处理函数
   bindViewTap: function () {
-    wx.navigateTo({
-      //url: '../logs/logs'
-      url: '../info/info'
-      //url: '../post/post'
-    })
+    //是自己 才跳转到修改信息
+    if (this.data.isMyself){
+      wx.navigateTo({
+        //url: '../logs/logs'
+        url: '../info/info'
+        //url: '../post/post'
+      })
+    }
+    
   },
   onChange(event) {
     this.setData({
