@@ -43,7 +43,7 @@
       
       <view class="post_content" bindtap='onClickDetail' data-id="{{item.postid}}">
         <view class="title">{{item.title}}</view>        
-        <view class="post_body">{{item.postbody}}</view>
+        <view class="post_body">{{abstract[index]}}...</view>
         <view>
           <text class="date">最近回复时间：{{item.lastpost}}</text>
           <block wx:if="{{item.posttype=='1'}}">
@@ -56,7 +56,7 @@
     </view>
 
   </block>
-    <van-icon class='add_post' name="add" bind:click="onClickAdd"/>
+    <van-icon name="add" size="100rpx" class='add_button' bind:click="onClickAdd"/>
   </view>
 </block>
 </view>

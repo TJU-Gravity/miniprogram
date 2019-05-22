@@ -60,7 +60,8 @@ Page({
 
       this.setData({
         userInfo: app.globalData.userInfo,
-        hasUserInfo: true
+        hasUserInfo: true,
+         meHeadIcon: app.globalData.userInfo.headshot
       })
     } else if (this.data.canIUse) {
       console.log("delay")
@@ -70,7 +71,7 @@ Page({
         initData(this);
         this.setData({
           userInfo: res.data.data,
-          meHeadIcon: app.globalData.userInfo.headshot,
+          meHeadIcon: res.dat.data.headshot,
           hasUserInfo: true
         })
       }
@@ -152,6 +153,7 @@ Page({
 
   },
 
+  
   /**
    * 退回上一页
    */

@@ -1,15 +1,6 @@
 <!--add_post.wxml-->
 <view>
 
-  <van-nav-bar
-    title="发布帖子"
-    left-text="返回"
-    right-text="发表"
-    left-arrow
-    bind:click-left="onClickLeft"
-    bind:click-right="onClickRight"
-  />
-
     <van-field
       label='帖子主题' 
       value="{{ title }}"
@@ -38,5 +29,8 @@
   <van-cell-group wx:if="{{type=='1'}}" class='num' title="招募人数">
     <van-stepper value="{{ value }}" bind:change="onChangeNum" />
   </van-cell-group>
-
+  <view class='post_button'>
+    <van-button size="large" type='info' bind:click="onClickPost">发布帖子</van-button>
+  </view>
+  
 </view>
