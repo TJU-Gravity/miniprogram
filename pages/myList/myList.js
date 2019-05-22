@@ -8,7 +8,7 @@ Page({
     options:{},
     posts:{},
     abstract:[],
-    list:[],
+    txtStyle:[],
     delBtnWidth: 180//删除按钮宽度单位（rpx）
   },
 
@@ -20,6 +20,7 @@ Page({
     var _this = this;
     var i = 0;
     var summary = new Array();
+    var style = new Array();
     wx.request({
       url: 'http://118.25.23.44:8080/post/myList',
       data: {
@@ -34,11 +35,12 @@ Page({
       success: function (res) {
         console.log(res.data);
         _this.setData({ posts: res.data.data });
-        _this.setData({ list: res.data.data.list });
         for (i = 0; i < res.data.data.list.length; i++) {
           summary[i] = res.data.data.list[i].postbody.substr(0, 15);
+          style[i]='';
         }
         _this.setData({ abstract: summary });
+        _this.setData({txtStyle : style});
       },
       fail: function (res) {
         console.log("加载失败"); 
@@ -95,8 +97,8 @@ Page({
   onShareAppMessage: function () {
 
   },
+
   touchS: function (e) {
-    console.log("touchS" + e);
    //判断是否只有一个触摸点
     if (e.touches.length == 1) {
       this.setData({
@@ -105,8 +107,8 @@ Page({
       });
     }
   },
+
   touchM: function (e) {
-    console.log("touchM:" + e);
     if (e.touches.length == 1) {
       //手指移动时水平方向位置
       var moveX = e.touches[0].clientX;
@@ -124,18 +126,17 @@ Page({
         }
       }
       //获取手指触摸的是哪一项
-      var index = e.target.dataset.index;
+      var index = e.currentTarget.dataset.index;
       var list = this.data.posts.list;
-      list[index].txtStyle = txtStyle;
-      //更新列表的状态
+      var style = this.data.txtStyle;
+      style[index]=txtStyle;
       this.setData({
-        list: list
+        txtStyle:style
       });
     }
   },
 
   touchE: function (e) {
-    console.log("touchE" + e);
     if (e.changedTouches.length == 1) {
       //手指移动结束后水平位置
       var endX = e.changedTouches[0].clientX;
@@ -145,12 +146,12 @@ Page({
       //如果距离小于删除按钮的1/2，不显示删除按钮
       var txtStyle = disX > delBtnWidth / 2 ? "left:-" + delBtnWidth + "px" : "left:0px";
       //获取手指触摸的是哪一项
-      var index = e.target.dataset.index;
-      var list = this.data.list;
-      list[index].txtStyle = txtStyle;
-      //更新列表的状态
+      var index = e.currentTarget.dataset.index;
+      var list = this.data.posts.list;
+      var style = this.data.txtStyle;
+      style[index] = txtStyle;
       this.setData({
-        list: list
+        txtStyle: style
       });
     }
   },
@@ -174,16 +175,93 @@ Page({
       delBtnWidth: delBtnWidth
     });
   },
-  //点击删除按钮事件
-  delItem: function (e) {
-    //获取列表中要删除项的下标
-    var index = e.target.dataset.index;
-    var list = this.data.list;
-    //移除列表中下标为index的项
-    list.splice(index, 1);
-    //更新列表的状态
-    this.setData({
-      list: list
+  //删除帖子
+  onDelete: function (e) {
+    var _this = this;
+    wx.showModal({
+      title: '警告',
+      content: '确定删除该帖子？此操作不可恢复',
+      success(res) {
+        if (res.confirm) {
+          console.log('确定删除');
+          _this.deletePost(e);
+        } else if (res.cancel) {
+          console.log('取消删除')
+        }
+      }
+    });
+    
+  },
+  //确定删除
+  deletePost:function(e){
+    var id = e.currentTarget.dataset.index;
+    var _this = this;
+    wx.request({
+      url: 'http://118.25.23.44:8080/post/delete',
+      data: {
+        ID: this.data.posts.list[id].postid
+      },
+      method: 'POST',
+      header: {
+        'content-type': 'application/json'//默认值
+      },
+      success: function (res) {
+        console.log(res);
+        _this.onLoad(_this.data.options);
+        wx.showToast({ title: '删除成功', icon: 'none' });
+      },
+      fail: function (res) {
+        console.log("删除失败");
+        wx.showToast({ title: '删除失败', icon: 'none' });
+      }
     });
   },
+  //开启招募
+  onOpenState:function(e){
+    var id = e.currentTarget.dataset.index;
+    var _this = this;
+    wx.request({
+      url: 'http://118.25.23.44:8080/post/changeState',
+      data: {
+        ID: this.data.posts.list[id].postid,
+        state:1
+      },
+      method: 'POST',
+      header: {
+        'content-type': 'application/json'//默认值
+      },
+      success: function (res) {
+        console.log(res);
+        _this.onLoad(_this.data.options);
+      },
+      fail: function (res) {
+        console.log("修改失败");
+        wx.showToast({ title: '修改失败', icon: 'none' });
+      }
+    });
+  },
+  //关闭招募
+  onCloseState: function (e) {
+    var id = e.currentTarget.dataset.index;
+    var _this = this;
+    wx.request({
+      url: 'http://118.25.23.44:8080/post/changeState',
+      data: {
+        ID: this.data.posts.list[id].postid,
+        state: 0
+      },
+      method: 'POST',
+      header: {
+        'content-type': 'application/json'//默认值
+      },
+      success: function (res) {
+        console.log(res);
+        _this.onLoad(_this.data.options);
+      },
+      fail: function (res) {
+        console.log("修改失败");
+        wx.showToast({ title: '修改失败', icon: 'none' });
+      }
+    });
+  }
 })

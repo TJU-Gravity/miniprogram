@@ -56,7 +56,7 @@
     </view>
 
   </block>
-    <van-icon class='add_post' name="add" bind:click="onClickAdd"/>
+    <van-icon name="add" size="100rpx" class='add_button' bind:click="onClickAdd"/>
   </view>
 </block>
 </view>

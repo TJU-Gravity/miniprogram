@@ -1,7 +1,6 @@
 {
   "pages": [
-   
-   
+
     "pages/post_list/post_list",
     "pages/chatList/chatList",
     "pages/me/me",
@@ -14,9 +13,10 @@
     "pages/template/goods-item-template",
     "pages/news/news",
     "pages/logs/logs",
-
     "pages/findMate/findMate",
-    "pages/myList/myList"
+
+    "pages/myList/myList",
+    "pages/searchResult/searchResult"
 
   ],
   "window": {

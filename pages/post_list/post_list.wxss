@@ -91,15 +91,15 @@
   font-size: 35rpx;
   padding-top: 15rpx;
 }
-.add_post{
+.add_button{
   color:#315668;
-  width:50rpx;
-  height:50rpx;
-  bottom: 50rpx;
-  right:10%;
-  position: fixed
+  width:20rpx;
+  height:20rpx;
+  bottom: 10%;
+  right:15%;
+  position: fixed;
 }
 .search{
-  display: flex;
-  width:100%
+
+
 }

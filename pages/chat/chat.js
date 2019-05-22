@@ -174,6 +174,7 @@ Page({
    * 发送消息
    */
   sendClick: function (e) {
+
     //debugger
     var that = this
     // 消息锁 锁定中
@@ -221,6 +222,7 @@ Page({
     that.setData({
       msgList: msgList,
       inputVal: '' // 清空输入框文本
+
     })
     that.scrollToBottom();
   },
@@ -236,6 +238,7 @@ Page({
   
  
 
+  
   /**
    * 退回上一页
    */

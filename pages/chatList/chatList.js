@@ -234,6 +234,7 @@ Page({
     var that = this;
     //获取对方用户的id,name,头像
     var username = e.currentTarget.dataset.id;
+
     wx.request({
       url: 'http://118.25.23.44:8080/user/detail',
       method: 'POST',

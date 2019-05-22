@@ -5,6 +5,7 @@
     "van-field": "../../vant-weapp/dist/field/index",
     "van-radio": "../../vant-weapp/dist/radio/index",
     "van-radio-group": "../../vant-weapp/dist/radio-group/index",
-    "van-stepper": "../../vant-weapp/dist/stepper/index"
+    "van-stepper": "../../vant-weapp/dist/stepper/index",
+    "van-button": "../../vant-weapp/dist/button/index"
   }
 }
