@@ -1,2 +1,54 @@
 <!--pages/findMate/findMate.wxml-->
-<text>pages/findMate/findMate.wxml</text>
+<view class="container">
+  
+  <van-collapse value="{{ activeNames }}" bind:change="onChange">
+  <van-collapse-item title="按标签搜索用户" name="1">
+    <view>
+      <van-cell-group>
+      <block wx:for="{{tags}}">
+          <van-field
+            value="{{ item }}"
+            clearable
+            label="修改标签"          
+            placeholder="{{item}}"
+            border="{{ false }}"
+            name= "{{index}}"
+            data-id="{{index}}"
+            bind:change="onTypeTag"
+          />
+          <view class="delBtn" >
+            <van-button round size="small" type="info" data-id="{{index}}" bind:click="onDelTag">删除这个标签</van-button>
+          </view>
+      </block>
+        <van-field
+              value=" "
+              clearable
+              label="添加标签"
+              placeholder="请输入新标签"
+              border="{{ false }}"
+              name= "{{next}}"
+              data-id="{{next}}"
+              bind:change="onTypeAdd"
+            />
+      <view class="delBtn" >
+            <van-button round size="small" type="info" data-id="{{index}}" bind:click="onAddTag">添加这个标签</van-button>
+          </view>
+      
+      
+      </van-cell-group>
+      </view>
+      </van-collapse-item>
+  
+</van-collapse>
+
+  <view class="saveinfo">
+        <van-button round type="danger" bind:click="onClick">点击搜索</van-button>
+      </view>
+
+
+  
+  
+  
+  
+</view>
+
