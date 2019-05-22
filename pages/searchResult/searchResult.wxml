@@ -1,0 +1,34 @@
+<!--pages/searchResult/searchResult.wxml-->
+<view>
+  <view class="search">
+    <van-search
+      value="{{ value }}"
+      placeholder="请输入搜索帖子关键词"
+      use-action-slot
+      bind:search="onSearch"
+    >
+      <view slot="action" bind:tap="onSearch">搜索</view>
+    </van-search>
+  </view>
+  <block wx:if="{{users==null}}">
+    <view class="container">
+      <van-icon class="icon" name="warning-o" size="100rpx"/>
+      <text class="warning">抱歉，未找到符合条件的用户</text>
+    </view>
+  </block>
+  <block wx:else>
+    <view class="result_container" wx:for="{{users}}" bindtap='onClickUser' data-id='{{item.username}}'>
+    <view class="head_shot">
+      <image class="avatar" src="{{item.headshot}}"></image>
+    </view>
+    <view class="user_info">
+      <view>
+        <text class="nickname">{{item.nickname}}</text>
+        <van-icon wx:if="{{item.gender=='1'}}" class="boy" name="contact" size="35rpx"/>
+        <van-icon wx:elif="{{item.gender=='2'}}"class="girl" name="contact" size="35rpx"/>
+      </view>
+      <text class="introduction">{{item.introduction}}</text>
+    </view>
+    </view>
+  </block>
+</view>

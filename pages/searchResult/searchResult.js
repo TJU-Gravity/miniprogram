@@ -1,29 +1,36 @@
-// pages/postList/postList.js
+// pages/searchResult/searchResult.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    post: {},
-    chats:[{
-      time:"2018-10-10",
-      nickname:"you",
-      username:"you",
-      body:"test",
-      headshot:"http://pic.9ht.com/up/2016-12/14810057988524092.jpg"
- 
-    }],
-    user:{},
-    replyContent:'',
-    option:{}
+    users:[]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-   
+    var _this=this;
+    wx.request({
+      url: 'http://118.25.23.44:8080/user/tags/findUsersByTags',
+      data:{
+        tags:['java','pypy'],
+      },
+      method: 'POST',
+        header: {
+        'content-type': 'application/json'//默认值
+      },
+      success: function (res) {
+        console.log(res.data);
+        _this.setData({ users: res.data.data });
+      },
+      fail: function (res) {
+        console.log("加载失败");
+        wx.showToast({ title: '加载失败', icon: 'none' });
+      }
+    });
   },
 
   /**
@@ -74,16 +81,11 @@ Page({
   onShareAppMessage: function () {
 
   },
-  onChangeReply(event){
-    this.setData({replyContent:event.detail});
-    console.log(this.data.replyContent);
-  },
-
-  onClick: function (e) {
-    var username = e.currentTarget.dataset.id;
-    console.log(username)
+  onClickUser: function (e) {
+    var id = e.currentTarget.dataset.id;
+    console.log('../visitingCard/visitingCard?username=' + id);
     wx.navigateTo({
-      url: '../chat/chat?username=' + username,
+      url: '../visitingCard/visitingCard?username=' + id,
     })
   },
 })
