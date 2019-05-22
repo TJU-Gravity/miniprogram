@@ -1,0 +1,46 @@
+/* pages/searchResult/searchResult.wxss */
+.search{
+
+}
+.result_container{
+  flex-direction: row;
+   display: flex;
+}
+.head_shot{
+  margin: 30rpx;
+}
+.avatar{
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50rpx;
+}
+.user_info{
+  flex-direction: column;
+  display: flex;
+}
+.nickname{
+  margin: 10rpx;
+  font-size: 35rpx;
+}
+.introduction{
+  margin: 10rpx;
+  font-size: 25rpx;
+  color: #999;
+}
+.container{
+  align-items: center;
+}
+.icon{
+  color:#315668;
+}
+.boy{
+  color:#34b9fc;
+  margin-top: 20rpx;
+}
+.girl{
+  color:#ff4483;
+  margin-top: 20rpx;
+}
+.warning{
+
+}
