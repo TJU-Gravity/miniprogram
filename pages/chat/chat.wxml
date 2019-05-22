@@ -39,7 +39,7 @@
 
   <view class='inputRoom' style='bottom: {{inputBottom}}'>
   
-    <input bindconfirm='sendClick' adjust-position='{{true}}' confirm-type='send' bindfocus='focus' bindblur='blur' ></input>
+    <input bindconfirm='sendClick' adjust-position='{{true}}' confirm-type='send' bindfocus='focus' bindblur='blur'  value="{{inputVal}}"></input>
 
   </view>
 </view>

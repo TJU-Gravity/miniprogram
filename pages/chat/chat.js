@@ -14,43 +14,13 @@ var keyHeight = 0;
 var util = require('../../utils/util.js'); // 转换时间插件
 var im = require('../../utils/webim_wx.js'); // 腾讯云 im 包
 var imhandler = require('../../utils/im_handler.js'); // 这个是所有 im 事件的 js
-//const app = getApp()
+
 
 
 /**
  * 初始化数据,
  * TODO//检查用户登录TIM状态，先登录，然后拉取两者的历史信息
  */
-
-function initData(that) {
-  inputVal = '';
-
-  //信息是三元组，内容，说话者
-  msgList = [{
-    speaker: 'you',
-    contentType: 'text',
-    content: '你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！'
-  },
-  {
-    speaker: 'me',
-    contentType: 'text',
-    content: '再见你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！'
-  }
-  ]
-  that.setData({
-    msgList,
-    inputVal
-  })
-}
-
-/**
- * 计算msg总高度
- */
-// function calScrollHeight(that, keyHeight) {
-//   var query = wx.createSelectorQuery();
-//   query.select('.scrollMsg').boundingClientRect(function(rect) {
-//   }).exec();
-// }
 
 Page({
 
@@ -63,53 +33,25 @@ Page({
     meHeadIcon:null,
     youHeadIcon:"http://pic.9ht.com/up/2016-12/14810057988524092.jpg",
     scrollHeight: '100vh',
+    inputVal:"",
     inputBottom: 0,
     msgList:[],
     lock:false
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  // onLoad: function (options) {
-  //   //console.log("chat onload")
-  //   if (app.globalData.userInfo) {
-
-  //     this.setData({
-  //       userInfo: app.globalData.userInfo,
-  //       hasUserInfo: true,
-  //        meHeadIcon: app.globalData.userInfo.headshot
-  //     })
-  //   } else if (this.data.canIUse) {
-  //     //console.log("delay")
-  //     // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-  //     // 所以此处加入 callback 以防止这种情况
-  //     app.userInfoReadyCallback = res => {
-  //       initData(this);
-  //       this.setData({
-  //         userInfo: res.data.data,
-  //         meHeadIcon: res.dat.data.headshot,
-  //         hasUserInfo: true
-  //       })
-  //     }
-  //   } 
-  //   initData(this);
-  //   if (app.globalData.userInfo) {
- 
-  //   this.setData({
-  //     meHeadIcon: app.globalData.userInfo.headshot,
-  //   });
-  //   }
-  // },
+  
   onLoad: function (options) {
     var that = this
+   
     if (options) { // 设置会话列表传参过来的好友id
       console.log('chat onload\'s options')
       console.log(options)
+      console.log(app.data.im.imAvatarUrl)
       that.setData({
         youId: options.friendId,
         youName: options.friendName,
-        youHeadIcon: options.friendAvatarUrl
+        youHeadIcon: options.friendAvatarUrl,
+        meHeadIcon: app.data.im.imAvatarUrl
       })
       //前端加一个导航栏
       wx.setNavigationBarTitle({
@@ -232,7 +174,7 @@ Page({
    * 发送消息
    */
   sendClick: function (e) {
-    debugger
+    //debugger
     var that = this
     // 消息锁 锁定中
     if (that.data.lock) {
@@ -243,7 +185,11 @@ Page({
     }
     // 开始加锁
     that.setData({ lock: true })
-    if (that.data.content == '' || !that.data.content.replace(/^\s*|\s*$/g, '')) {
+    that.setData({
+      inputVal:e.detail.value
+    })
+    console.log(that.data.inputVal)
+    if (that.data.inputVal == '' || !that.data.inputVal.replace(/^\s*|\s*$/g, '')) {
       wx.showToast({
         title: '总得填点内容吧'
       });
@@ -286,7 +232,7 @@ Page({
 
    
 
-  // },
+  
   
  
 
