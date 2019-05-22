@@ -48,6 +48,7 @@ Page({
     new_tag.push(this.data.new_add);
     console.log(new_tag)
     this.setData({ tags: new_tag });
+    this.setData({ new_add: "" });
   },
   onDelTag(event) {
     console.log(event.detail);
@@ -72,6 +73,9 @@ Page({
     wx.navigateTo({
       url: '../searchResult/searchResult?tags=' + tags,
     })
+    this.setData({ tags: [] });
+    //this.onLoad();
+    //this.setData({ new_add: [] });
   },
   onChange(event) {
     this.setData({
@@ -106,6 +110,10 @@ Page({
         }
       })
     }
+  },
+  onShow:function(){
+    this.setData({tags:[]});
+    console.log(this.data.tags);
   },
   getUserInfo: function (e) {
     console.log(e)
