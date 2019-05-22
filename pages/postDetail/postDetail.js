@@ -36,9 +36,13 @@ Page({
       },
       success:function(res){
         console.log(res.data);
-        _this.setData({ post:res.data.data.post });
-        _this.setData({ replies: res.data.data.replies });
-        _this.setData({ user: res.data.data.user });
+        res.data.data.post.nickname = res.data.data.user.nickname
+        _this.setData({ post:res.data.data.post,
+          replies: res.data.data.replies ,
+          user: res.data.data.user
+          
+         });
+       
         console.log('post detail\'s user')
         console.log(res.data.data.user)
       },

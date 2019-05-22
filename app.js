@@ -99,7 +99,7 @@ App({
   //初始化登陆TIM的验证，要查看cbOk
   initUserSig: function (cbOk) {
     var app = this;
-    var generatedSigUrl = 'http://192.168.1.101:8080/generatedSig'
+    var generatedSigUrl = 'http://118.25.23.44:8080/generatedSig'
     var header = { "Content-Type": "application/x-www-form-urlencoded" };
     var data = { "identifier": app.data.im.imId}
     console.log('app init userSig')
