@@ -139,6 +139,7 @@ Page({
    * 发送点击监听
    */
   sendClick: function (e) {
+    console.log(e.detail.value)
     msgList.push({
       speaker: 'me',
       contentType: 'text',

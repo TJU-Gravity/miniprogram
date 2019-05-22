@@ -83,7 +83,7 @@ Page({
     var username = e.currentTarget.dataset.id;
     console.log(username)
     wx.navigateTo({
-      url: '../chat2/chat?username=' + username,
+      url: '../chat/chat?username=' + username,
     })
   },
 })
