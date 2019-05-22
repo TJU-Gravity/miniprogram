@@ -5,18 +5,22 @@ Page({
    * 页面的初始数据
    */
   data: {
-    users:[]
+    users:[],
+    tags:[]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options);
+    var tags = JSON.parse(options.tags)
+    this.setData({tags:tags});
     var _this=this;
     wx.request({
       url: 'http://118.25.23.44:8080/user/tags/findUsersByTags',
       data:{
-        tags:['java','pypy'],
+        tags:tags,
       },
       method: 'POST',
         header: {

@@ -21,7 +21,7 @@
           </view>
       </block>
         <van-field
-              value=" "
+              value="{{new_add}}"
               clearable
               label="添加标签"
               placeholder="请输入新标签"
