@@ -9,7 +9,7 @@
     <text class="body">{{post.postbody}}</text>
   </view>
   <view class="buttonBox">
-    <view  wx:if="{{post.posttype=='1'}}" class="button">申请加入</view>
+    <view  wx:if="{{post.posttype=='1'}}" class="button" bindtap='onJoin'>申请加入</view>
     </view>
   </view>
 </template>

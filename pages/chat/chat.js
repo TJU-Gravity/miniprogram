@@ -1,5 +1,7 @@
 // pages/chat/chat.js
 
+
+
 const app = getApp();
 var inputVal = '';
 var msgList = [];
@@ -7,37 +9,18 @@ var windowWidth = wx.getSystemInfoSync().windowWidth;
 var windowHeight = wx.getSystemInfoSync().windowHeight;
 var keyHeight = 0;
 
-/**
- * 初始化数据
- */
-function initData(that) {
-  inputVal = '';
 
-  msgList = [{
-    speaker: 'you',
-    contentType: 'text',
-    content: '你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！'
-  },
-  {
-    speaker: 'me',
-    contentType: 'text',
-    content: '再见你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！你好！'
-  }
-  ]
-  that.setData({
-    msgList,
-    inputVal
-  })
-}
+
+var util = require('../../utils/util.js'); // 转换时间插件
+var im = require('../../utils/webim_wx.js'); // 腾讯云 im 包
+var imhandler = require('../../utils/im_handler.js'); // 这个是所有 im 事件的 js
+
+
 
 /**
- * 计算msg总高度
+ * 初始化数据,
+ * TODO//检查用户登录TIM状态，先登录，然后拉取两者的历史信息
  */
-// function calScrollHeight(that, keyHeight) {
-//   var query = wx.createSelectorQuery();
-//   query.select('.scrollMsg').boundingClientRect(function(rect) {
-//   }).exec();
-// }
 
 Page({
 
@@ -45,67 +28,104 @@ Page({
    * 页面的初始数据
    */
   data: {
+    youId:'',
+    youName:'',
     meHeadIcon:null,
     youHeadIcon:"http://pic.9ht.com/up/2016-12/14810057988524092.jpg",
     scrollHeight: '100vh',
-    inputBottom: 0
+    inputVal:"",
+    inputBottom: 0,
+    msgList:[],
+    lock:false
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
+  
   onLoad: function (options) {
-    console.log("onload")
-    if (app.globalData.userInfo) {
-
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true,
-         meHeadIcon: app.globalData.userInfo.headshot
+    var that = this
+   
+    if (options) { // 设置会话列表传参过来的好友id
+      console.log('chat onload\'s options')
+      console.log(options)
+      console.log(app.data.im.imAvatarUrl)
+      that.setData({
+        youId: options.friendId,
+        youName: options.friendName,
+        youHeadIcon: options.friendAvatarUrl,
+        meHeadIcon: app.data.im.imAvatarUrl
       })
-    } else if (this.data.canIUse) {
-      console.log("delay")
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        initData(this);
-        this.setData({
-          userInfo: res.data.data,
-          meHeadIcon: res.dat.data.headshot,
-          hasUserInfo: true
-        })
-      }
-    } 
-    initData(this);
-    if (app.globalData.userInfo) {
- 
-    this.setData({
-      meHeadIcon: app.globalData.userInfo.headshot,
-    });
+      //前端加一个导航栏
+      wx.setNavigationBarTitle({
+        title: options.friendName
+      })
+    }
+
+    that.data.msgList = [] // 清空历史消息
+  },
+  //app.js里面加上data和获取函数
+  onShow: function () {
+    var that = this
+    // 私聊参数初始化
+    imhandler.init({
+      accountMode: app.data.im.accountMode,
+      accountType: app.data.im.accountType,
+      sdkAppID: app.data.im.sdkappid,
+      selType: im.SESSION_TYPE.C2C, //私聊
+      imId: app.data.im.identifier,
+      imName: app.data.im.imName,
+      imAvatarUrl: app.data.im.imAvatarUrl,
+      friendId: that.data.youId,
+      friendName: that.data.youName,
+      friendAvatarUrl: that.data.youHeadIcon,
+      contactListThat: null,
+      chatThat: that
+    })
+    if (im.checkLogin()) {
+      //获取聊天历史记录
+      imhandler.getC2CHistoryMsgs(function cbOk(result) {
+        that.handlerHistoryMsgs(result, that)
+      })
+    } else {
+      imhandler.sdkLogin(that, app, this.data.selToID, () => {
+        //获取聊天历史记录
+        imhandler.getC2CHistoryMsgs(function cbOk(result) {
+          that.handlerHistoryMsgs(result, that)
+        });
+      });
     }
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
+/**
+ * cbok显示onShow里获取历史消息
+ */
+  handlerHistoryMsgs: function (result, that) {
+    console.log('chat')
+    var historyMsgs = [];
+    for (var i = 0; i < result.MsgList.length; i++) {
+      var msg = result.MsgList[i]
+      //如果代表情，这里处理以下elems列表的遍历
+      var message = {
+        'speaker': msg.isSend ? 'me' : 'you',
+        'contentType': 'text',
+        'content': msg.elems[0].content.text
+      }
+      historyMsgs.push(message)
+    }
+    // 拉取消息后，可以先将下一次拉取信息所需要的数据存储起来
+    // wx.setStorageSync('lastMsgTime', result.LastMsgTime);
+    // wx.setStorageSync('msgKey', result.MsgKey);
+    console.log('history message')
+    console.log(historyMsgs)
+    console.log('last msg time')
+    console.log(result.LastMsgTime)
+    console.log('msg key')
+    console.log(result.MsgKey)
+    that.setData({
+      msgList: historyMsgs,
+      complete: result.Complete
+    })
   },
 
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
+  
   /**
    * 获取聚焦
    */
@@ -120,7 +140,6 @@ Page({
     })
     //计算msg高度
     // calScrollHeight(this, keyHeight);
-
   },
 
   //失去聚焦(软键盘消失)
@@ -132,27 +151,92 @@ Page({
     this.setData({
       toView: 'msg-' + (msgList.length - 1)
     })
-
   },
+
+
 
   /**
    * 发送点击监听
    */
+  // sendClick: function (e) {
+  //   msgList.push({
+  //     speaker: 'me',
+  //     contentType: 'text',
+  //     content: e.detail.value
+  //   })
+  //   inputVal = '';
+  //   this.setData({
+  //     msgList,
+  //     inputVal
+  //   });
+
+  /**
+   * 发送消息
+   */
   sendClick: function (e) {
-    console.log(e.detail.value)
-    msgList.push({
-      speaker: 'me',
-      contentType: 'text',
-      content: e.detail.value
+
+    //debugger
+    var that = this
+    // 消息锁 锁定中
+    if (that.data.lock) {
+      wx.showToast({
+        title: '发消息太急了，慢一点'
+      });
+      return
+    }
+    // 开始加锁
+    that.setData({ lock: true })
+    that.setData({
+      inputVal:e.detail.value
     })
-    inputVal = '';
-    this.setData({
-      msgList,
-      inputVal
-    });
-
-
+    console.log(that.data.inputVal)
+    if (that.data.inputVal == '' || !that.data.inputVal.replace(/^\s*|\s*$/g, '')) {
+      wx.showToast({
+        title: '总得填点内容吧'
+      });
+      this.setData({ lock: false })
+      return;
+    }
+    var content = that.data.inputVal
+    // 调用腾讯IM发送消息
+    imhandler.onSendMsg(content, function cbOk() {
+      that.addMessage(content, true, that)
+    }, function cbErr(err) {
+      im.Log.error("消息发送失败", err)
+    })
+    // 解锁
+    this.setData({ lock: false })
   },
+
+  /**
+   * 发送消息
+   */
+  addMessage: function (msg, isSend, that) {
+    var msgList = that.data.msgList;
+    var message = {
+      'speaker': isSend ? 'me' : 'you',
+      'contentType': "text",
+      'content': msg
+    }
+    msgList.push(message);
+    that.setData({
+      msgList: msgList,
+      inputVal: '' // 清空输入框文本
+
+    })
+    that.scrollToBottom();
+  },
+  scrollToBottom: function () {
+    this.setData({
+      toView: 'row_' + (this.data.msgList.length - 1)
+    });
+  },
+
+   
+
+  
+  
+ 
 
   
   /**
@@ -163,3 +247,40 @@ Page({
   }
 
 })
+
+
+
+
+
+
+// Page({
+//   data: {
+//     friendId: '',
+//     friendName: '',
+//     friendAvatarUrl: '',
+//     /**
+//      * 消息集合（结构如下）：
+//      * msgTime 消息时间
+//      * myself 消息发送人 1 - 自己发的 0 - 好友发的
+//      * avatarUrl 头像
+//      * msgText 消息内容
+//      */
+//     msgList: [],// 消息集合
+//     complete: 0, // 是否还有历史消息可以拉取，1 - 表示没有，0 - 表示有
+//     content: '', // 输入框的文本值
+//     lock: false, // 发送消息锁 true - 加锁状态 false - 解锁状态
+//     scroll_height: wx.getSystemInfoSync().windowHeight - 54,
+//   },
+  
+ 
+//   /**
+//    * 获取文本的消息
+//    */
+//   getContent: function (e) {
+//     var that = this;
+//     that.setData({
+//       content: e.detail.value
+//     })
+//   },
+  
+// })
