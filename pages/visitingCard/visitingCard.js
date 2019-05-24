@@ -22,11 +22,15 @@ Page({
   },
   //事件处理函数
   bindViewTap: function () {
+    if (this.data.isMyself)
+    {
     wx.navigateTo({
+     
       //url: '../logs/logs'
       url: '../info/info'
       //url: '../post/post'
     })
+    }
   },
   clickContact(event)
   {
@@ -87,7 +91,9 @@ Page({
       console.log("page me onLoad")
       console.log(this.data.hasUserInfo)
       //判断是不是自己
-      if (query.username) {
+
+    
+      if (query&&query.username&&query.username!=app.globalData.userInfo.username) {
         console.log("It is not me")
         this.setData
           ({

@@ -17,7 +17,7 @@
         <view class="post_content" bindtap='onClickDetail' data-id="{{item.postid}}">        
             <view class="title">{{item.title}}</view>        
             <view class="post_body">{{abstract[index]}}...</view>
-            <view>
+            <view class="footer">
               <text class="date">最近回复时间：{{item.lastpost}}</text>
               <block wx:if="{{item.posttype=='1'}}">
                 <text wx:if="{{item.state>0}}"class="state">招募中</text>
