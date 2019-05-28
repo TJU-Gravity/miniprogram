@@ -1,6 +1,5 @@
 {
   "pages": [
-
     "pages/post_list/post_list",
     "pages/chatList/chatList",
     "pages/me/me",
@@ -14,10 +13,10 @@
     "pages/news/news",
     "pages/logs/logs",
     "pages/findMate/findMate",
-
     "pages/myList/myList",
-    "pages/searchResult/searchResult"
-
+    "pages/searchResult/searchResult",
+    "pages/myTeam/myTeam",
+    "pages/teamDetail/teamDetail"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -53,6 +52,12 @@
         "text": "我",
         "iconPath": "image/icon/outline_person_outline_black_36dp.png",
         "selectedIconPath": "image/icon/twotone_person_outline_black_36dp.png"
+      },
+      {
+        "pagePath": "pages/teamDetail/teamDetail",
+        "text": "团队",
+        "iconPath": "image/icon/outline_group_black_36dp.png",
+        "selectedIconPath": "image/icon/twotone_group_black_36dp.png"
       }
     ]
   },

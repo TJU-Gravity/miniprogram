@@ -1,0 +1,15 @@
+<!--pages/teamDetail/teamMain/teamMain.wxml-->
+
+<template name="teamMain" >
+  <view class="detail_container" > 
+    <text class="title">互联网+贾团队</text>
+    <text class="second">您创建于今天</text>
+    <text class="second">剩余人数：0</text>
+    <view class="bodyBox">
+    <text class="body">啦啦啦</text>
+  </view>
+  <view class="buttonBox">
+    <view class="button">查看招募帖</view>
+    </view>
+  </view>
+</template>

@@ -1,0 +1,14 @@
+<!--pages/teamDetail/memberItem/memberItem.wxml-->
+
+<template name="memberItem">
+  <view class="replyContainer">
+    <view class="content_container" catchtap='onDetailTap' data-id="{{id}}">
+    <view class='avatarBox'> 
+    <image class="avatar" src="{{headshot}}" mode="aspectFill"></image>
+    </view>
+      <view class="bodyContainer">
+        <view class="username">贾成员1号</view>
+      </view>
+    </view>
+  </view>
+</template>

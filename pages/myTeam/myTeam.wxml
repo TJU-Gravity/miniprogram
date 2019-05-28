@@ -1,0 +1,20 @@
+<!--myTeam.wxml-->
+<view>
+  <block wx:for="{{posts.list}}">
+    <view class="post_container" >
+
+      <view class='post_type'>
+        <block wx:if="{{item.posttype=='1'}}">
+        <van-tag wx:if="{{item.state>0}}" class="tags" color="#315668">招募中</van-tag>
+        <van-tag wx:else class="tags" color="#FF0000">已招满</van-tag>、
+        </block>
+      </view> 
+      
+      <view class="post_content" bindtap='onClickDetail' data-id="{{item.postid}}">
+        <view class="title">{{item.title}}</view>        
+        <view class="post_body">{{abstract[index]}}...</view>
+      </view>
+
+    </view>
+  </block> 
+</view>

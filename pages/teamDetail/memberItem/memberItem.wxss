@@ -1,0 +1,66 @@
+/* pages/teamDetail/memberItem/memberItem.wxss */
+
+.replyContainer {
+  box-shadow:1rpx 1rpx 1rpx gainsboro;
+  display: flex;
+  flex-direction: column;
+  margin-top: 10rpx;
+  background-color: #fff;
+  margin-bottom: 5px;
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  flex-direction:column;
+  height: 30rpx;
+}
+
+
+.date {
+  text-align: right;
+  margin-right: 30rpx;
+  color: #999;
+  font-size: 15rpx;
+  padding-top: 15rpx;
+}
+
+.avatar {
+  width: 70rpx;
+  height: 70rpx;
+  border-radius: 35rpx;
+}
+.avatarBox {
+  margin-left: 20rpx;
+  margin-right:20rpx; 
+  width: 70rpx;
+  height: 70rpx;
+
+}
+
+.bodyContainer {
+
+  flex-direction: column;
+  margin-bottom:20rpx; 
+  margin-right:20rpx; 
+}
+
+.content_container {
+  display: flex;
+  flex-direction: row;
+  margin-top: 0rpx;
+}
+.username {
+  margin-top: 0rpx;
+  color: #000;
+  font-size: 25rpx;
+  width: 370rpx;
+}
+
+.replyBody {
+  margin-top: 10rpx;
+  color: #555;
+  font-size: 20rpx;
+  width: 100%;
+}
+

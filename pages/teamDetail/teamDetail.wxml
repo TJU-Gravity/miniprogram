@@ -1,0 +1,11 @@
+<!--pages/teamDetail/teamDetail.wxml-->
+
+<import  src="./memberItem/memberItem.wxml"/> 
+<import  src="./teamMain/teamMain.wxml"/> 
+<view>
+  <template is="teamMain"/>
+</view>
+
+<block wx:for="{{replies}}">  
+  <template is="memberItem" data="{{...item}}" />
+</ block>
