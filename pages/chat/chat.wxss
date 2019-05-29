@@ -6,7 +6,7 @@ page {
 {
   display:inline-block;
   text-align:center;
- 
+ padding: 20rpx;
   width: 100%;
  
 }
@@ -23,9 +23,24 @@ page {
 {
   margin:0 30rpx; 
 }
-.apply {
+.chatPanel
+{
+  margin-top: 350rpx;
+}
+.applyPanel 
+{
+  height: 300rpx;
+  position: fixed;
+  top: 0;
+
+  align-items: center;
+  z-index: 20;
   width: 100%;
    background-color: #fff;
+}
+.sheet
+{
+  z-index: 1000;
 }
 .inputRoom {
   width: 100%;
