@@ -8,10 +8,12 @@ Page({
    */
   data: {
     username:'',
+    teamname:'',
     title:'',
     content:'',
     type:'1',
     value:1,
+    team:{},
     options:{}
   },
 
@@ -72,15 +74,18 @@ Page({
   },
 
   onClickPost() {
+    console.log(this.data.team);
     wx.request({
-      url: 'http://118.25.23.44:8080/post/add',
+      url: 'http://118.25.23.44:8080/post/team/add',
       data: {
         posttype:this.data.type,
         posterid:this.data.options.username,
         title:this.data.title,
         postbody:this.data.content,
-        state:this.data.value,
-        hits:0
+        state:this.data.value+1,
+        team:this.data.team,
+        hits:0,
+
       },
       method: 'POST',
       header: {
@@ -107,6 +112,17 @@ Page({
   },
   onChangeType(event){
     this.setData({ type:event.detail });
+  },
+  onChangeTeamname(event) {
+    this.setData({ teamname: event.detail });
+    var team={
+      team_name:this.data.teamname,
+      captainid: this.data.options.username,
+      avatar:'',
+      introduction:'',
+      label:''
+      };
+    this.setData({ team: team });
   },
   onChangeNum(event) {
     this.setData({ value: event.detail });

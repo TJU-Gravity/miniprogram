@@ -14,6 +14,7 @@ Page({
     post: {},
     replies:[],
     user:{},
+    team:{},
     replyContent:'',
     options:{}
   },
@@ -22,6 +23,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+
     this.setData({options:options});
     this.setData({replyContent:""});
     var _this=this;
@@ -36,15 +38,33 @@ Page({
       },
       success:function(res){
         console.log(res.data);
-        res.data.data.post.nickname = res.data.data.user.nickname
-        _this.setData({ post:res.data.data.post,
+        res.data.data.post.nickname = res.data.data.user.nickname;
+        _this.setData({ 
+          post:res.data.data.post,
           replies: res.data.data.replies ,
-          user: res.data.data.user
-          
+          user: res.data.data.user        
          });
-       
-        console.log('post detail\'s user')
-        console.log(res.data.data.user)
+        if (res.data.data.post.posttype=='1'){
+          wx.request({
+            url: 'http://118.25.23.44:8080/team/detail',
+            data: {
+              ID: res.data.data.post.teamid
+            },
+            method: 'POST',
+            header: {
+              'content-type': 'application/json'//默认值
+            },
+            success: function (res) {
+              console.log(res.data);
+              _this.setData({
+                team: res.data.data
+              });
+            },
+            fail: function (res) {
+              console.log("加载失败");
+            }
+          });
+        }       
       },
       fail:function(res){
         console.log("加载失败");
@@ -134,6 +154,32 @@ Page({
     //console.log('申请加入')
 
     var that = this;
+
+    wx.request({
+      url: 'http://118.25.23.44:8080/apply/add',
+      data:{
+        username:this.data.options.username,
+        captainid:this.data.post.posterid,
+        teamid:this.data.post.teamid,
+        state:this.data.post.state
+      },
+      method: 'POST',
+      header: {
+        'content-type': 'application/json'//默认值
+      },
+      success: function (res) {
+        console.log(res);
+        if (res.data.code==200)
+          wx.showToast({ title: '已发送申请，正在跳转到聊天页面', icon: 'none' });
+        else if (res.data.code == 400)
+          wx.showToast({ title: '双方有申请正在进行中', icon: 'none' });
+      },
+      fail: function (res) {
+        console.log("申请失败");
+        wx.showToast({ title: '申请失败', icon: 'none' });
+      }
+    });
+
     //如果已经初始化过userSig参数,直接进入一对一私聊，传入朋友的identifier，name，headshhot
     //否则先访问后台，初始化userSig参数，获取到userSig后，如果没有登陆先登陆再进入一对一私聊
     if (app.data.im.userSig){

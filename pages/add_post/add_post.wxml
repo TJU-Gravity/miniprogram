@@ -25,10 +25,19 @@
       </van-radio-group>
     </view>
   </van-cell-group>
-
-  <van-cell-group wx:if="{{type=='1'}}" class='num' title="招募人数">
-    <van-stepper value="{{ value }}" bind:change="onChangeNum" />
+  <block wx:if="{{type=='1'}}">
+  <van-cell-group>
+      <van-field
+        label='团队名称' 
+        value="{{ teamname }}"
+        border="{{ false }}"
+        bind:change="onChangeTeamname"
+        placeholder="请输入团队名称"/>
   </van-cell-group>
+  <van-cell-group class='num' title="招募人数">
+      <van-stepper value="{{ value }}" bind:change="onChangeNum" />
+  </van-cell-group>
+  </block>
   <view class='post_button'>
     <van-button size="large" type='info' bind:click="onClickPost">发布帖子</van-button>
   </view>

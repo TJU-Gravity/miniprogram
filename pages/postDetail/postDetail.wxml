@@ -5,6 +5,12 @@
   <template is="postMain" data="{{post}}"/>
 </view>
 
+<block wx:if="{{post.posttype=='1'}}">
+  <van-cell-group>
+    <van-cell title="{{team.team_name}}" is-link value="剩余{{post.state}}人" />
+  </van-cell-group>
+</block>
+
 <block wx:for="{{replies}}">
     
       <template is="replyItem" data="{{...item}}" />
