@@ -154,70 +154,82 @@ Page({
     //console.log('申请加入')
 
     var that = this;
-
-    wx.request({
-      url: 'http://118.25.23.44:8080/apply/add',
-      data:{
-        username:this.data.options.username,
-        captainid:this.data.post.posterid,
-        teamid:this.data.post.teamid,
-        state:this.data.post.state
-      },
-      method: 'POST',
-      header: {
-        'content-type': 'application/json'//默认值
-      },
-      success: function (res) {
-        console.log(res);
-        if (res.data.code==200)
-          wx.showToast({ title: '已发送申请，正在跳转到聊天页面', icon: 'none' });
-        else if (res.data.code == 400)
-          wx.showToast({ title: '双方有申请正在进行中', icon: 'none' });
-      },
-      fail: function (res) {
-        console.log("申请失败");
-        wx.showToast({ title: '申请失败', icon: 'none' });
+    var i=0;
+    var inteam=false;
+    for (i=0;i<this.data.team.members.length;i++){
+      if (this.data.team.members[i].username==this.data.options.username){
+        console.log("???????");
+        inteam=true;
+        break;
       }
-    });
+    }
+    if (inteam){
+      wx.showToast({ title: '您已在团队中', icon: 'none' });
+    }
+    else{
+      wx.request({
+        url: 'http://118.25.23.44:8080/apply/add',
+        data:{
+          username:this.data.options.username,
+          captainid:this.data.post.posterid,
+          teamid:this.data.post.teamid,
+          state:this.data.post.state
+        },
+        method: 'POST',
+        header: {
+          'content-type': 'application/json'//默认值
+        },
+        success: function (res) {
+          console.log(res);
+          if (res.data.code==200)
+            wx.showToast({ title: '已发送申请，正在跳转到聊天页面', icon: 'none' });
+          else if (res.data.code == 400)
+            wx.showToast({ title: '双方有申请正在进行中', icon: 'none' });
+        },
+        fail: function (res) {
+          console.log("申请失败");
+          wx.showToast({ title: '申请失败', icon: 'none' });
+        }
+      });
 
-    //如果已经初始化过userSig参数,直接进入一对一私聊，传入朋友的identifier，name，headshhot
-    //否则先访问后台，初始化userSig参数，获取到userSig后，如果没有登陆先登陆再进入一对一私聊
-    if (app.data.im.userSig){
-      //转至一对一的聊天界面(自己的openid和对方的openid)，聊天
-      wx.navigateTo({
-        url: '/pages/chat/chat?friendId=' + that.data.user.username
-          + '&friendName=' + that.data.user.nickname
-          + '&friendAvatarUrl=' + that.data.user.headshot,
-      })
-    }else{
-      
-      //获取朋友用户的identifier和headshot和nickname
-      //在this.data.user里
-      
-      app.initUserSig(function cbOk() {
-        // 检查是否登录返回 true 和 false,不登录则重新登录
-        if (im.checkLogin()) {
-          //
-          wx.navigateTo({
-            url: '/pages/chat/chat?friendId=' + that.data.user.username
-              + '&friendName=' + that.data.user.nickname
-              + '&friendAvatarUrl=' + that.data.user.headshot,
-          })
-         
-        } else { //做的事情放到回调函数里
-          imhandler.login(that, app, function () {
+      //如果已经初始化过userSig参数,直接进入一对一私聊，传入朋友的identifier，name，headshhot
+      //否则先访问后台，初始化userSig参数，获取到userSig后，如果没有登陆先登陆再进入一对一私聊
+      if (app.data.im.userSig){
+        //转至一对一的聊天界面(自己的openid和对方的openid)，聊天
+        wx.navigateTo({
+          url: '/pages/chat/chat?friendId=' + that.data.user.username
+            + '&friendName=' + that.data.user.nickname
+            + '&friendAvatarUrl=' + that.data.user.headshot,
+        })
+      }else{
+        
+        //获取朋友用户的identifier和headshot和nickname
+        //在this.data.user里
+        
+        app.initUserSig(function cbOk() {
+          // 检查是否登录返回 true 和 false,不登录则重新登录
+          if (im.checkLogin()) {
+            //
             wx.navigateTo({
               url: '/pages/chat/chat?friendId=' + that.data.user.username
                 + '&friendName=' + that.data.user.nickname
                 + '&friendAvatarUrl=' + that.data.user.headshot,
             })
-          });
-        }
-        wx.hideLoading()
-      });
+          
+          } else { //做的事情放到回调函数里
+            imhandler.login(that, app, function () {
+              wx.navigateTo({
+                url: '/pages/chat/chat?friendId=' + that.data.user.username
+                  + '&friendName=' + that.data.user.nickname
+                  + '&friendAvatarUrl=' + that.data.user.headshot,
+              })
+            });
+          }
+          wx.hideLoading()
+        });
 
+      }
     }
-    
   }
 
 })
