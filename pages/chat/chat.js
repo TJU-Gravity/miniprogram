@@ -387,6 +387,13 @@ onClose() {
       selectedTeamName:event.detail.name
     })
 
+  },
+  invite()
+  {
+    var captainid=app.globalData.userInfo.username;
+    var username=this.data.youId;
+    var teamid=this.data.selectedTeam
+
   }
 })
 
