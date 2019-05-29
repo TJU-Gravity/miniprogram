@@ -30,6 +30,7 @@ Page({
   data: {
     youId:'',
     youName:'',
+    apply:null,
     meHeadIcon:null,
     youHeadIcon:"http://pic.9ht.com/up/2016-12/14810057988524092.jpg",
     scrollHeight: '100vh',
@@ -44,9 +45,7 @@ Page({
     var that = this
    
     if (options) { // 设置会话列表传参过来的好友id
-      console.log('chat onload\'s options')
-      console.log(options)
-      console.log(app.data.im.imAvatarUrl)
+    
       that.setData({
         youId: options.friendId,
         youName: options.friendName,
@@ -60,6 +59,22 @@ Page({
     }
 
     that.data.msgList = [] // 清空历史消息
+
+    wx.request({
+      url: 'http://118.25.23.44:8080/apply/check',
+      data: [this.data.youId,app.globalData.userInfo.username],
+      method:'POST',
+       success: function (res) {
+         console.log(res)
+     
+         that.setData({apply:{teamName:res.data.data.teamname,
+           teamid:res.data.data.teamid,
+           applicant: res.data.data.username,
+           nickname: (res.data.data.username===that.data.youId?that.data.youName:"你")}});
+        
+         
+       }
+    })
   },
   //app.js里面加上data和获取函数
   onShow: function () {
@@ -113,12 +128,7 @@ Page({
     // 拉取消息后，可以先将下一次拉取信息所需要的数据存储起来
     // wx.setStorageSync('lastMsgTime', result.LastMsgTime);
     // wx.setStorageSync('msgKey', result.MsgKey);
-    console.log('history message')
-    console.log(historyMsgs)
-    console.log('last msg time')
-    console.log(result.LastMsgTime)
-    console.log('msg key')
-    console.log(result.MsgKey)
+ 
     that.setData({
       msgList: historyMsgs,
       complete: result.Complete
@@ -244,7 +254,50 @@ Page({
    */
   toBackClick: function () {
     wx.navigateBack({})
+  },
+  cancel: function () {
+    //lyx推送一下？
+    var that=this;
+    wx.request({
+      url: 'http://118.25.23.44:8080/apply/delete',
+      data: [this.data.youId, app.globalData.userInfo.username],
+      method: 'POST',
+      success: function (res) {
+        console.log(res)
+        that.setData({apply:null})
+      }
+    })
+  },
+  reject: function () {
+//lyx推送一下？
+    var that = this;
+    wx.request({
+      url: 'http://118.25.23.44:8080/apply/delete',
+      data: [this.data.youId, app.globalData.userInfo.username],
+      method: 'POST',
+      success: function (res) {
+        console.log(res)
+        that.setData({ apply: null })
+      }
+    })
+  },
+  accept: function () {
+    //lyx推送一下？
+    var that = this;
+    wx.request({
+      url: 'http://118.25.23.44:8080/user/team/delete',
+      data: {
+        teamid:that.data.apply.teamid,
+        username: that.data.apply.applicant
+      },
+      method: 'POST',
+      success: function (res) {
+        console.log(res)
+        that.setData({ apply: null })
+      }
+    })
   }
+
 
 })
 

@@ -2,7 +2,22 @@
 
 <!--chat/chat-->
 <view>
-
+<view wx:if="{{apply}}">
+<view class='applyPanel'>
+<van-panel  use-footer-slot>
+<view class='applyContent'>{{apply.nickname}}申请加入团队"{{apply.teamName}}"</view>
+  <view class='applyFooter' slot="footer">
+  <view wx:if="{{apply.applicant===youId}}">
+    <van-button class='applyButton' size="normal"  type="primary" bindtap="accept">同意</van-button>
+    <van-button class='applyButton'  size="normal" bindtap="reject" >拒绝</van-button>
+   </view>
+   <block wx:else>
+     <van-button class='applyButton'  size="normal"  bindtap="cancel">撤销</van-button>
+   </block>
+  </view>
+</van-panel>
+</view>
+</view>
   <scroll-view scroll-y scroll-into-view='{{toView}}' style='height: {{scrollHeight}};'>
     <!-- <view class='scrollMsg'> -->
     <block wx:key wx:for='{{msgList}}' wx:for-index="index">
