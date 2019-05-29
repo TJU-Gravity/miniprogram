@@ -2,7 +2,31 @@
 page {
   background-color: #f1f1f1;
 }
+.applyFooter
+{
+  display:inline-block;
+  text-align:center;
+ 
+  width: 100%;
+ 
+}
+.applyContent
+{
+  padding: 20rpx 0;
 
+  text-align:center;
+ 
+  width: 100%;
+ 
+}
+.applyButton
+{
+  margin:0 30rpx; 
+}
+.apply {
+  width: 100%;
+   background-color: #fff;
+}
 .inputRoom {
   width: 100%;
   padding-top:10rpx;
@@ -10,8 +34,6 @@ page {
 
  
   box-shadow:12rpx 12rpx 12rpx 12rpx gainsboro;
-
-
 
   padding: 3vw 0;
   border-top: 1px solid #cdcdcd;
