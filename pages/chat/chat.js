@@ -42,6 +42,8 @@ Page({
 
   
   onLoad: function (options) {
+    console.log("来聊天呀~")
+    console.log(options)
     var that = this
    
     if (options) { // 设置会话列表传参过来的好友id
@@ -59,7 +61,7 @@ Page({
     }
 
     that.data.msgList = [] // 清空历史消息
-
+  
     wx.request({
       url: 'http://118.25.23.44:8080/apply/check',
       data: [this.data.youId,app.globalData.userInfo.username],
@@ -79,6 +81,7 @@ Page({
   //app.js里面加上data和获取函数
   onShow: function () {
     var that = this
+   
     // 私聊参数初始化
     imhandler.init({
       accountMode: app.data.im.accountMode,
@@ -94,6 +97,15 @@ Page({
       contactListThat: null,
       chatThat: that
     })
+    console.log("onshow 参数初始化")
+    console.log("onshow 参数初始化")
+    console.log("onshow 参数初始化")
+    console.log("onshow 参数初始化")
+   
+    console.log(that.data.youId)
+    console.log(that.data.youName)
+    console.log(that.data.youHeadIcon)
+    
     if (im.checkLogin()) {
       //获取聊天历史记录
       imhandler.getC2CHistoryMsgs(function cbOk(result) {
@@ -117,7 +129,7 @@ Page({
     var historyMsgs = [];
     for (var i = 0; i < result.MsgList.length; i++) {
       var msg = result.MsgList[i]
-      //如果代表情，这里处理以下elems列表的遍历
+     
       var message = {
         'speaker': msg.isSend ? 'me' : 'you',
         'contentType': 'text',
@@ -125,9 +137,7 @@ Page({
       }
       historyMsgs.push(message)
     }
-    // 拉取消息后，可以先将下一次拉取信息所需要的数据存储起来
-    // wx.setStorageSync('lastMsgTime', result.LastMsgTime);
-    // wx.setStorageSync('msgKey', result.MsgKey);
+    
  
     that.setData({
       msgList: historyMsgs,
@@ -148,8 +158,6 @@ Page({
       toView: 'msg-' + (msgList.length - 1),
       inputBottom: keyHeight + 'px'
     })
-    //计算msg高度
-    // calScrollHeight(this, keyHeight);
   },
 
   //失去聚焦(软键盘消失)
@@ -165,20 +173,6 @@ Page({
 
 
 
-  /**
-   * 发送点击监听
-   */
-  // sendClick: function (e) {
-  //   msgList.push({
-  //     speaker: 'me',
-  //     contentType: 'text',
-  //     content: e.detail.value
-  //   })
-  //   inputVal = '';
-  //   this.setData({
-  //     msgList,
-  //     inputVal
-  //   });
 
   /**
    * 发送消息
@@ -232,7 +226,6 @@ Page({
     that.setData({
       msgList: msgList,
       inputVal: '' // 清空输入框文本
-
     })
     that.scrollToBottom();
   },
@@ -253,11 +246,25 @@ Page({
    * 退回上一页
    */
   toBackClick: function () {
-    wx.navigateBack({})
+    //wx.navigateBack({})
+    wx.navigateTo({
+      url: "../chatList/chatList"
+    })
   },
+
   cancel: function () {
+    var that = this;
     //lyx推送一下？
-    var that=this;
+    this.setData({ lock: true })
+    var content = "NOTE: " + app.data.im.imName + " 已撤销加入 " + that.youName+" 的队伍。"
+    imhandler.onSendMsg(content, function cbOk() {
+      that.addMessage(content, true, that)
+    }, function cbErr(err) {
+      im.Log.error("消息发送失败", err)
+    })
+    // 解锁
+    this.setData({ lock: false })
+   
     wx.request({
       url: 'http://118.25.23.44:8080/apply/delete',
       data: [this.data.youId, app.globalData.userInfo.username],
@@ -283,7 +290,9 @@ Page({
   },
   accept: function () {
     //lyx推送一下？
+
     var that = this;
+
     wx.request({
       url: 'http://118.25.23.44:8080/user/team/delete',
       data: {

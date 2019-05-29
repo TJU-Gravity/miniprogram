@@ -27,8 +27,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    console.log('in chatList onLoad')
+    console.log('聊天列表加载load')
+    console.log('聊天列表加载load')
+    console.log('聊天列表加载load')
+    console.log('聊天列表加载load')
     var that = this;
+
     //加载动画
     wx.showLoading()
     if (app.globalData.userInfo) {
@@ -47,40 +51,9 @@ Page({
         contactListThat: that,
         chatThat: null
       })
+     //判断有没有Identifier,和获取UserSig,login,initRecentContactList放到了onShow
+      wx.hideLoading()
 
-      //设置Identifier,和获取UserSig
-      if (!app.data.im.userSig) {
-        console.log('聊天列表初始化userSig')
-        app.initUserSig(function cbOk() {
-          // 检查是否登录返回 true 和 false,不登录则重新登录
-          if (im.checkLogin()) {
-            that.initRecentContactList();
-            // 初始化最近会话的消息未读数（监听新消息事件）
-            im.syncMsgs(imhandler.onMsgNotify());
-          } else {
-            imhandler.login(that, app, function () {
-              that.initRecentContactList();
-              // 初始化最近会话的消息未读数（监听新消息事件）
-              im.syncMsgs(imhandler.onMsgNotify());
-            });
-          }
-          wx.hideLoading()
-        })
-      } else {
-        if (im.checkLogin()) {
-          that.initRecentContactList();
-          // 初始化最近会话的消息未读数（监听新消息事件）
-          im.syncMsgs(imhandler.onMsgNotify());
-        } else {
-          imhandler.login(that, app, function () {
-            that.initRecentContactList();
-            // 初始化最近会话的消息未读数（监听新消息事件）
-            im.syncMsgs(imhandler.onMsgNotify());
-          });
-        }
-        wx.hideLoading();
-      }
-      
     } else if (this.data.canIUse) {
       //console.log("delay")
       // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
@@ -101,41 +74,13 @@ Page({
           contactListThat: that,
           chatThat: null
         })
-
-        //设置Identifier,和获取UserSig
-        if (!app.data.im.userSig) {
-          console.log('聊天列表初始化userSig')
-          app.initUserSig(function cbOk() {
-            // 检查是否登录返回 true 和 false,不登录则重新登录
-            if (im.checkLogin()) {
-              that.initRecentContactList();
-              // 初始化最近会话的消息未读数（监听新消息事件）
-              im.syncMsgs(imhandler.onMsgNotify());
-            } else {
-              imhandler.login(that, app, function () {
-                that.initRecentContactList();
-                // 初始化最近会话的消息未读数（监听新消息事件）
-                im.syncMsgs(imhandler.onMsgNotify());
-              });
-            }
-            wx.hideLoading()
-          })
-        } else {
-          if (im.checkLogin()) {
-            that.initRecentContactList();
-            // 初始化最近会话的消息未读数（监听新消息事件）
-            im.syncMsgs(imhandler.onMsgNotify());
-          } else {
-            imhandler.login(that, app, function () {
-              that.initRecentContactList();
-              // 初始化最近会话的消息未读数（监听新消息事件）
-              im.syncMsgs(imhandler.onMsgNotify());
-            });
-          }
-          wx.hideLoading();
-        }
+        //判断有没有Identifier,和获取UserSig,login,initRecentContactList放到了onShow
+        wx.hideLoading()
+       
       }
     }
+    console.log("聊天列表onLoad结束")
+  
   },
   initRecentContactList: function() {
     //登陆，并拉取会话列表
@@ -156,12 +101,14 @@ Page({
           }
         })
         console.log('拉取到的会话列表')
+       
         console.log(contactList)
         // 设置联系人列表
         that.setData({
           chats: contactList,
           isNoData: true
         })
+       
       } else {
         that.setData({
           isNoData: false,
@@ -183,7 +130,46 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+    console.log('聊天列表加载show')
+    console.log('聊天列表加载show')
+    console.log('聊天列表加载show')
+    console.log('聊天列表加载show')
+    var that = this;
 
+    //加载动画
+    wx.showLoading()
+    if (!app.data.im.userSig) {
+      console.log('聊天列表初始化userSig')
+      app.initUserSig(function cbOk() {
+        // 检查是否登录返回 true 和 false,不登录则重新登录
+        if (im.checkLogin()) {
+          that.initRecentContactList();
+          // 初始化最近会话的消息未读数（监听新消息事件）
+          im.syncMsgs(imhandler.onMsgNotify());
+        } else {
+          imhandler.login(that, app, function () {
+            that.initRecentContactList();
+            // 初始化最近会话的消息未读数（监听新消息事件）
+            im.syncMsgs(imhandler.onMsgNotify());
+          });
+        }
+        wx.hideLoading()
+      })
+    } else {
+      if (im.checkLogin()) {
+        that.initRecentContactList();
+        // 初始化最近会话的消息未读数（监听新消息事件）
+        im.syncMsgs(imhandler.onMsgNotify());
+      } else {
+        imhandler.login(that, app, function () {
+          that.initRecentContactList();
+          // 初始化最近会话的消息未读数（监听新消息事件）
+          im.syncMsgs(imhandler.onMsgNotify());
+
+        });
+      }
+      wx.hideLoading();
+    }
   },
 
   /**
