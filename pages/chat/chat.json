@@ -1,6 +1,7 @@
 {
   "usingComponents": {
     "van-panel": "../../vant-weapp/dist/panel/index",
-    "van-button": "../../vant-weapp/dist/button/index"
+    "van-button": "../../vant-weapp/dist/button/index",
+    "van-action-sheet": "../../vant-weapp/dist/action-sheet/index"
   }
 }

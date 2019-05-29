@@ -28,6 +28,24 @@ Page({
    * 页面的初始数据
    */
   data: {
+    selectedTeam:null,
+    selectedTeamName:'',
+    show: false,
+    actions: [
+      {
+        loading: true
+      },
+     
+      {
+        name: '',
+        disabled: true
+      },
+     
+      {
+        name: '',
+        disabled: true
+      }
+    ],
     youId:'',
     youName:'',
     apply:null,
@@ -68,12 +86,12 @@ Page({
       method:'POST',
        success: function (res) {
          console.log(res)
-     
-         that.setData({apply:{teamName:res.data.data.teamname,
+         if ( res.data.data)
+         {that.setData({apply:{teamName:res.data.data.teamname,
            teamid:res.data.data.teamid,
            applicant: res.data.data.username,
            nickname: (res.data.data.username===that.data.youId?that.data.youName:"你")}});
-        
+         }
          
        }
     })
@@ -305,9 +323,87 @@ Page({
         that.setData({ apply: null })
       }
     })
+  },
+  onOpen() {
+    var that=this;
+    console.log("open")
+    this.setData({
+      show: true, 
+      actions: [
+       
+        {
+          loading: true
+        },
+
+        {
+          name: '',
+          disabled: true
+        },
+
+        {
+          name: '',
+          disabled: true
+        }
+      ] });
+    var username = app.globalData.userInfo.username;
+    wx.request({
+      url: 'http://118.25.23.44:8080/team/myList',
+      data: {
+        username: username
+      },
+      method: 'POST',
+      success: function (res) {
+        console.log(res)
+        var list=res.data.data.list;
+        var myList=[];
+        for(var i=0;i!=list.length;i++)
+        {
+          if(list[i].captainid===username)
+          {
+            console.log("my team")
+            console.log(list[i].captainid)
+            myList.push({
+              name:list[i].team_name,
+              teamid:list[i].teamid})
+          }
+        }
+        myList.push({
+          name: '',
+          disabled: true
+        })
+        myList.push({
+          name: '',
+          disabled: true
+        })
+        console.log(myList)
+        that.setData({
+          show: true,
+          actions: myList
+        });
+       
+      }
+    })
+
+  },
+onClose() {
+    this.setData({ show: false });
+  },
+
+  onSelect(event) {
+    console.log(event.detail);
+    this.setData({
+      selectedTeam: event.detail.teamid,
+      selectedTeamName:event.detail.name
+    })
+
+  },
+  invite()
+  {
+    var captainid=app.globalData.userInfo.username;
+    var username=this.data.youId;
+    var teamid=this.data.selectedTeam
+
   }
-
-
 })
 
 

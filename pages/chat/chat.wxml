@@ -18,6 +18,26 @@
 </van-panel>
 </view>
 </view>
+<block wx:else>
+<view class='applyPanel'>
+<view class='applyContent'>邀请{{youName}}加入团队{{selectedTeamName}}</view>
+<view class='sheet'>
+ <van-action-sheet 
+  show="{{ show }}"
+  actions="{{ actions }}"
+  bind:close="onClose"
+  bind:select="onSelect"
+/>
+</view>
+  <view class='applyFooter' slot="footer">
+   <van-button class='applyButton' bindtap="onOpen">选择团队</van-button>
+    <van-button class='applyButton'  size="normal" type="primary" bindtap="invite">邀请</van-button>
+    </view>
+</view>
+
+
+</block>
+<view class='chatPanel'>
   <scroll-view scroll-y scroll-into-view='{{toView}}' style='height: {{scrollHeight}};'>
     <!-- <view class='scrollMsg'> -->
     <block wx:key wx:for='{{msgList}}' wx:for-index="index">
@@ -56,6 +76,6 @@
 
    <input value='{{inputVal}}'bindconfirm='sendClick' adjust-position='{{true}}' confirm-type='send'  ></input>
 
-
+</view>
   </view>
 </view>
