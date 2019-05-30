@@ -1,20 +1,22 @@
-<!--myTeam.wxml-->
+<!--pages/myTeam/myTeam.wxml-->
 <view>
-  <block wx:for="{{posts.list}}">
-    <view class="post_container" >
-
-      <view class='post_type'>
-        <block wx:if="{{item.posttype=='1'}}">
-        <van-tag wx:if="{{item.state>0}}" class="tags" color="#315668">招募中</van-tag>
-        <van-tag wx:else class="tags" color="#FF0000">已招满</van-tag>、
-        </block>
-      </view> 
-      
-      <view class="post_content" bindtap='onClickDetail' data-id="{{item.postid}}">
-        <view class="title">{{item.title}}</view>        
-        <view class="post_body">{{abstract[index]}}...</view>
-      </view>
-
+  <block wx:if="{{teams==null}}">
+    <view class="container">
+      <van-icon class="icon" name="warning-o" size="100rpx"/>
+      <text class="warning">抱歉，您还没有创建团队</text>
     </view>
-  </block> 
+  </block>
+  <block wx:else>
+    <view class="result_container" wx:for="{{teams}}" bindtap='onClickTeam' data-id='{{item.team_name}}'>
+    <view class="head_shot">
+      <image class="avatar" src="{{item.avatar}}"></image>
+    </view>
+    <view class="user_info">
+      <view>
+        <text class="nickname">{{item.team_name}}</text>
+      </view>
+      <text class="introduction">{{item.introduction}}</text>
+    </view>
+    </view>
+  </block>
 </view>

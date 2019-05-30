@@ -13,6 +13,8 @@ Page({
     active: 0,
     posts: {},
     abstract: [],
+    teams:[],
+    temp: {}
   },
 
   /**
@@ -42,10 +44,11 @@ Page({
     var i = 0;
     var summary = new Array();
     wx.request({
-      url: 'http://118.25.23.44:8080/post/list',
+      url: 'http://118.25.23.44:8080/team/myList',
       data: {
         page: 1,
-        size: 20
+        size: 5,
+        username:"ohNps5dNofohp2j0EuDDpFg8fxXQ"
       },
       method: 'POST',
       header: {
@@ -53,18 +56,14 @@ Page({
       },
       success: function (res) {
         console.log(res.data);
-        _this.setData({ posts: res.data.data });
-        for (i = 0; i < res.data.data.list.length; i++) {
-          summary[i] = res.data.data.list[i].postbody.substr(0, 15);
-        }
-        _this.setData({ abstract: summary });
+        _this.setData({ teams: res.data.data.list });
+        console.log(_this.data.teams)
       },
       fail: function (res) {
         console.log("加载失败");
         wx.showToast({ title: '加载失败', icon: 'none' });
       }
     });
-
   },
 
   /**
@@ -119,11 +118,13 @@ Page({
   onChange(event) {
     console.log(event.detail);
   },
-  onClickDetail: function (e) {
+  onClickTeam: function(e){
     var id = e.currentTarget.dataset.id;
-    console.log('../postDetail/postDetail?id=' + id + '&username=' + this.data.userInfo.username);
+    console.log(id);
+    console.log('../teamDetail/teamDetail?teamid=' + id );
     wx.navigateTo({
-      url: '../postDetail/postDetail?id=' + id + '&username=' + this.data.userInfo.username,
+      url: '../teamDetail/teamDetail?teamid=' + id,
     })
+    
   }
 })

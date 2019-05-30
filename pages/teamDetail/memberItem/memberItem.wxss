@@ -1,5 +1,6 @@
 /* pages/teamDetail/memberItem/memberItem.wxss */
 
+
 .replyContainer {
   box-shadow:1rpx 1rpx 1rpx gainsboro;
   display: flex;
@@ -31,8 +32,9 @@
   border-radius: 35rpx;
 }
 .avatarBox {
-  margin-left: 20rpx;
-  margin-right:20rpx; 
+  margin-top: 10px;
+  margin-left: 50rpx;
+  margin-right:50rpx; 
   width: 70rpx;
   height: 70rpx;
 
@@ -43,6 +45,11 @@
   flex-direction: column;
   margin-bottom:20rpx; 
   margin-right:20rpx; 
+  
+}
+
+.delBtn{
+  margin-right: 5px;
 }
 
 .content_container {

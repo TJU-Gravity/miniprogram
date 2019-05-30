@@ -44,7 +44,8 @@
 {
   color:#555;
   font-size: 30rpx;
-  margin: 10rpx;
+  margin-left: 50rpx;
+  margin-right: 50rpx;
   align-items: right;
   text-align: left;
 }

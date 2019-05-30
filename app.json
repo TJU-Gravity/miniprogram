@@ -54,7 +54,7 @@
         "selectedIconPath": "image/icon/twotone_person_outline_black_36dp.png"
       },
       {
-        "pagePath": "pages/teamDetail/teamDetail",
+        "pagePath": "pages/myTeam/myTeam",
         "text": "团队",
         "iconPath": "image/icon/outline_group_black_36dp.png",
         "selectedIconPath": "image/icon/twotone_group_black_36dp.png"

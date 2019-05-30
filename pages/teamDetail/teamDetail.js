@@ -15,7 +15,9 @@ Page({
     replies: [],
     user: {},
     replyContent: '',
-    options: {}
+    options: {},
+    team_info: {},
+    team_mem: []
   },
 
   /**
@@ -23,9 +25,26 @@ Page({
    */
   onLoad: function (options) {
     this.setData({ options: options });
-    this.setData({ replyContent: "" });
     var _this = this;
-
+    wx.request({
+      url: 'http://118.25.23.44:8080/team/detail',
+      data: {
+        ID: 7//上一个页面传参
+      },
+      method: 'POST',
+      header: {
+        'content-type': 'application/json'//默认值
+      },
+      success: function (res) {
+        console.log(res.data);
+        _this.setData({ team_info: res.data.data });
+        _this.setData({ team_mem: res.data.data.members });
+        console.log(_this.data.team_info);
+      },
+      fail: function (res) {
+        console.log("加载失败");
+      }
+    });
   },
 
   /**
@@ -81,7 +100,13 @@ Page({
 
   onClick() {
   },
-  onJoin() {
-  }
-
+  onPost: function(e) {
+    //var id = e.currentTarget.dataset.id;
+    var id = 1;
+    console.log('../postDetail/postDetail?id=' + id);
+    wx.navigateTo({
+      url: '../postDetail/postDetail?id=' + id,
+    })
+  },
+  onDelMember
 })

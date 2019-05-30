@@ -1,105 +1,48 @@
 /* pages/myTeam/myTeam.wxss */
-.post_container {
-  display: flex;
-  flex-direction: column;
-  height: 250rpx;
-  box-shadow:12rpx 12rpx 12rpx gainsboro;
-}
-.post_type{
-  display: flex;
-  width: 100%;
-}
-.tags{ 
-  size:medium;
-  margin-left: 10rpx;
-}
-.header{
-  display: flex;
-}
-.post_image {
-  margin-left: 30rpx;
-  margin-right: 30rpx;
-  width: 80rpx;
-  height: 80rpx;
-  margin-bottom: 15px;
-  margin-top: 15px;
-  border-radius: 40rpx;
-}
-.sub_header{
-  display: flex;
-  flex-direction: column;
-}
-.nickname{
-  padding: 20rpx;
-  font-size: 35rpx;
-}
-.sub_container{
-  display: flex;
-  flex-direction: row;
-}
-.postingtime{
-  font-size: 25rpx;
-}
-.hits{
-  display: flex;
-  margin-left: 250rpx;
-}
-.hits_image{
-  width: 30rpx;
-  height: 30rpx;
-}
-.hits_text{
-  font-size: 25rpx;
-}
-.post_content {
-  margin-left: 40rpx;
-  display: flex;
-  flex-direction: column;
-}
-.title {
-  margin-left: 20rpx;
-  margin-top: 10rpx;
-  color: #000;
-  font-size: 50rpx;
-  width: 100%;
-}
-.post_body {
-  margin-top: 35rpx;
-  margin-left: 20rpx;
-  color: #999;
-  font-size: 30rpx;
-  width: 100%;
-}
-.date {
-  text-align: right;
-  margin-right: 30rpx;
-  color: #999;
-  font-size: 25rpx;
-  padding-top: 15rpx;
-}
-.state {
-  text-align: right;
-  margin-right: 300rpx;
-  color: green;
-  font-size: 35rpx;
-  padding-top: 15rpx;
-}
-.disabled_state {
-  text-align: right;
-  margin-right: 300rpx;
-  color: red;
-  font-size: 35rpx;
-  padding-top: 15rpx;
-}
-.add_button{
-  color:#315668;
-  width:20rpx;
-  height:20rpx;
-  bottom: 10%;
-  right:15%;
-  position: fixed;
-}
+
+/* pages/searchResult/searchResult.wxss */
 .search{
 
+}
+.result_container{
+  flex-direction: row;
+   display: flex;
+}
+.head_shot{
+  margin: 30rpx;
+}
+.avatar{
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50rpx;
+}
+.user_info{
+  flex-direction: column;
+  display: flex;
+}
+.nickname{
+  margin: 10rpx;
+  font-size: 35rpx;
+}
+.introduction{
+  margin: 10rpx;
+  font-size: 25rpx;
+  color: #999;
+}
+.container{
+  align-items: center;
+}
+.icon{
+  color:#315668;
+}
+.boy{
+  color:#34b9fc;
+  margin-top: 20rpx;
+}
+.girl{
+  color:#ff4483;
+  margin-top: 20rpx;
+}
+.warning{
 
 }

@@ -3,9 +3,9 @@
 <import  src="./memberItem/memberItem.wxml"/> 
 <import  src="./teamMain/teamMain.wxml"/> 
 <view>
-  <template is="teamMain"/>
+  <template is="teamMain" data="{{team_info}}"/>
 </view>
 
-<block wx:for="{{replies}}">  
+<block wx:for="{{team_mem}}">  
   <template is="memberItem" data="{{...item}}" />
 </ block>
