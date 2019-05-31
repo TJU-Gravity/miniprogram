@@ -14,10 +14,14 @@ Page({
     post: {},
     replies: [],
     user: {},
+    username: "", 
+    userInfo: {},
     replyContent: '',
     options: {},
     team_info: {},
-    team_mem: []
+    team_mem: [],
+    captain:"",
+    isCaptain: false,
   },
 
   /**
@@ -26,10 +30,15 @@ Page({
   onLoad: function (options) {
     this.setData({ options: options });
     var _this = this;
+    // console.log(options.id);
+    if(app.globalData.userInfo) {
+      this.setData({userInfo: app.globalData.userInfo});
+    };
+    console.log(this.data.userInfo);
     wx.request({
       url: 'http://118.25.23.44:8080/team/detail',
       data: {
-        ID: 7//上一个页面传参
+        ID: options.teamid //上一个页面传参
       },
       method: 'POST',
       header: {
@@ -39,12 +48,20 @@ Page({
         console.log(res.data);
         _this.setData({ team_info: res.data.data });
         _this.setData({ team_mem: res.data.data.members });
+        _this.setData({ captain:res.data.data.captainid});
+        console.log(_this.data.captain);
         console.log(_this.data.team_info);
       },
       fail: function (res) {
         console.log("加载失败");
       }
     });
+    console.log(this.data.userInfo.username);
+    console.log(this.data.captain);
+    if (this.data.userInfo.username == this.data.captain){
+      this.setData({ isCaptain: true });
+    }
+    console.log(this.data.isCaptain);
   },
 
   /**
@@ -108,5 +125,26 @@ Page({
       url: '../postDetail/postDetail?id=' + id,
     })
   },
-  onDelMember
+  onDelMember:function(e){
+    var _this = this;
+    var id = e.currentTarget.dataset.id;
+    console.log(id);
+    wx.request({
+      url: 'http://118.25.23.44:8080/user/team/delete',
+      data: {
+        username: id,
+        teamid: this.data.team_info.teamid,
+      },
+      method: 'POST',
+      header: {
+        'content-type': 'application/json'//默认值
+      },
+      success: function (res) {
+        console.log(res.data);
+      },
+      fail: function (res) {
+        console.log("加载失败");
+      }
+    });
+  }, 
 })

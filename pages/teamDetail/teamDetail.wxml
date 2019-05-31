@@ -1,11 +1,30 @@
 <!--pages/teamDetail/teamDetail.wxml-->
 
-<import  src="./memberItem/memberItem.wxml"/> 
+<!-- <import  src="./memberItem/memberItem.wxml"/>  -->
 <import  src="./teamMain/teamMain.wxml"/> 
 <view>
   <template is="teamMain" data="{{team_info}}"/>
 </view>
 
 <block wx:for="{{team_mem}}">  
-  <template is="memberItem" data="{{...item}}" />
-</ block>
+  <!-- <template is="memberItem" data="{{...item}}" /> -->
+  <view class="replyContainer">
+    <view class="content_container">
+      <view class='avatarBox'> 
+        <image class="avatar" src="{{item.headshot}}" mode="aspectFill"></image>
+      </view>
+      <view class="bodyContainer">
+        <view class="header">{{item.nickname}}
+        <block wx:if="{{userInfo.username == team_info.captainid}}">
+          <view class="delBtn" wx:if="{{item.username!=userInfo.username}}">
+            <van-button size="small" bindtap='onDelMember' data-id='{{username}}'>删除成员</van-button>
+          </view>
+          </block>
+        </view>
+        <text class="username">简介：{{item.introduction}}</text>
+      </view>
+      
+    </view>
+  </view>
+
+</block>

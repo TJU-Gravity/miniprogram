@@ -3,17 +3,20 @@
 <template name="memberItem">
   <view class="replyContainer">
     <view class="content_container" catchtap='onDetailTap' data-id="{{id}}">
-    <view class='avatarBox'> 
-    <image class="avatar" src="{{headshot}}" mode="aspectFill"></image>
-    </view>
+      <view class='avatarBox'> 
+        <image class="avatar" src="{{headshot}}" mode="aspectFill"></image>
+      </view>
       <view class="bodyContainer">
-        <view>{{nickname}}
-        <van-icon wx:if="{{item.gender=='1'}}" class="boy" name="contact" size="35rpx"/>
-        <van-icon wx:elif="{{item.gender=='2'}}"class="girl" name="contact" size="35rpx"/>
+        <view class="header">{{nickname}}
+          <view class="delBtn">
+            <van-button size="small" bindtap='onDelMember' data-id='{{username}}'>删除成员</van-button>
+          </view>
         </view>
         <text class="username">简介：{{introduction}}</text>
       </view>
-      <van-button size="small" class="delBtn" bindtap='onDelMember' data-id='{{username}}'>删除成员</van-button>
+      
+        
+      
 
     </view>
   </view>

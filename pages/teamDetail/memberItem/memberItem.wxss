@@ -1,5 +1,7 @@
 /* pages/teamDetail/memberItem/memberItem.wxss */
-
+.delBtn{
+  margin-left: 20px;
+}
 
 .replyContainer {
   box-shadow:1rpx 1rpx 1rpx gainsboro;
@@ -13,8 +15,8 @@
 
 .header {
   display: flex;
-  flex-direction:column;
-  height: 30rpx;
+  width:100%;
+  flex-direction:row;
 }
 
 
@@ -33,8 +35,8 @@
 }
 .avatarBox {
   margin-top: 10px;
-  margin-left: 50rpx;
-  margin-right:50rpx; 
+  margin-left: 70rpx;
+  margin-right:40rpx; 
   width: 70rpx;
   height: 70rpx;
 

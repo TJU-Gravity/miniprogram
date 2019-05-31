@@ -7,7 +7,7 @@
     </view>
   </block>
   <block wx:else>
-    <view class="result_container" wx:for="{{teams}}" bindtap='onClickTeam' data-id='{{item.team_name}}'>
+    <view class="result_container" wx:for="{{teams}}" bindtap='onClickTeam' data-id='{{item.teamid}}'>
     <view class="head_shot">
       <image class="avatar" src="{{item.avatar}}"></image>
     </view>

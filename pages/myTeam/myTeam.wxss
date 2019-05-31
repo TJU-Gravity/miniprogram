@@ -5,8 +5,10 @@
 
 }
 .result_container{
+  margin-top: 30px;
+  margin-left: 20px;
   flex-direction: row;
-   display: flex;
+  display: flex;
 }
 .head_shot{
   margin: 30rpx;

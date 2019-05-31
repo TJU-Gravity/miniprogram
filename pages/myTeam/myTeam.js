@@ -48,7 +48,7 @@ Page({
       data: {
         page: 1,
         size: 5,
-        username:"ohNps5dNofohp2j0EuDDpFg8fxXQ"
+        username: this.data.userInfo.username
       },
       method: 'POST',
       header: {
