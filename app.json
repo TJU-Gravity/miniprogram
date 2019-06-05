@@ -48,17 +48,18 @@
         "selectedIconPath": "image/icon/twotone_chat_black_36dp.png"
       },
       {
-        "pagePath": "pages/me/me",
-        "text": "我",
-        "iconPath": "image/icon/outline_person_outline_black_36dp.png",
-        "selectedIconPath": "image/icon/twotone_person_outline_black_36dp.png"
-      },
-      {
         "pagePath": "pages/myTeam/myTeam",
         "text": "团队",
         "iconPath": "image/icon/outline_group_black_36dp.png",
         "selectedIconPath": "image/icon/twotone_group_black_36dp.png"
+      },
+      {
+        "pagePath": "pages/me/me",
+        "text": "我",
+        "iconPath": "image/icon/outline_person_outline_black_36dp.png",
+        "selectedIconPath": "image/icon/twotone_person_outline_black_36dp.png"
       }
+     
     ]
   },
   "sitemapLocation": "sitemap.json"
