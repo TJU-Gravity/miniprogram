@@ -115,14 +115,6 @@ Page({
       contactListThat: null,
       chatThat: that
     })
-    console.log("onshow 参数初始化")
-    console.log("onshow 参数初始化")
-    console.log("onshow 参数初始化")
-    console.log("onshow 参数初始化")
-   
-    console.log(that.data.youId)
-    console.log(that.data.youName)
-    console.log(that.data.youHeadIcon)
     
     if (im.checkLogin()) {
       //获取聊天历史记录
@@ -156,7 +148,7 @@ Page({
       historyMsgs.push(message)
     }
     
- 
+    
     that.setData({
       msgList: historyMsgs,
       complete: result.Complete
@@ -240,11 +232,14 @@ Page({
       'contentType': "text",
       'content': msg
     }
+    //消息列表加入消息
     msgList.push(message);
+    //绑定数据，清空输入框
     that.setData({
       msgList: msgList,
       inputVal: '' // 清空输入框文本
     })
+    //滚动到聊天底部
     that.scrollToBottom();
   },
   scrollToBottom: function () {

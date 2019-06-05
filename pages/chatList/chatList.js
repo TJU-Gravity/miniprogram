@@ -27,10 +27,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    console.log('聊天列表加载load')
-    console.log('聊天列表加载load')
-    console.log('聊天列表加载load')
-    console.log('聊天列表加载load')
     var that = this;
 
     //加载动画
@@ -116,7 +112,6 @@ Page({
       }
     })
     im.Log.warn("成功拉取最近联系人列表");
-
   },
 
   /**
@@ -130,12 +125,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    console.log('聊天列表加载show')
-    console.log('聊天列表加载show')
-    console.log('聊天列表加载show')
-    console.log('聊天列表加载show')
     var that = this;
-
     //加载动画
     wx.showLoading()
     if (!app.data.im.userSig) {
