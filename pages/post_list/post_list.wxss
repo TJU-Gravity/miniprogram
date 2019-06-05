@@ -40,17 +40,6 @@
 .postingtime{
   font-size: 25rpx;
 }
-.hits{
-  display: flex;
-  margin-left: 250rpx;
-}
-.hits_image{
-  width: 30rpx;
-  height: 30rpx;
-}
-.hits_text{
-  font-size: 25rpx;
-}
 .post_content {
   margin-left: 40rpx;
   display: flex;
@@ -98,8 +87,4 @@
   bottom: 10%;
   right:15%;
   position: fixed;
-}
-.search{
-
-
 }
