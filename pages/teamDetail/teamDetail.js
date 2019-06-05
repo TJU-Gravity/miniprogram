@@ -161,9 +161,7 @@ Page({
       },
       success: function (res) {
         console.log(res.data);
-        wx.navigateTo({
-          url: '../myTeam/myTeam?id=' + this.data.username,
-        })
+        wx.navigateBack();
       },
       fail: function (res) {
         console.log("加载失败");
