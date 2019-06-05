@@ -401,8 +401,31 @@ onClose() {
   {
     var captainid=app.globalData.userInfo.username;
     var username=this.data.youId;
-    var teamid=this.data.selectedTeam
-
+    var teamid=this.data.selectedTeam;
+    wx.request({
+      url: 'http://118.25.23.44:8080/apply/add',
+      data: {
+        username: username,
+        captainid: captainid,
+        teamid: teamid,
+        type: 1
+      },
+      method: 'POST',
+      header: {
+        'content-type': 'application/json'//默认值
+      },
+      success: function (res) {
+        console.log(res);
+        if (res.data.code == 200)
+          wx.showToast({ title: '已发送邀请', icon: 'none' });
+        else if (res.data.code == 400)
+          wx.showToast({ title: '双方有申请正在进行中', icon: 'none' });
+      },
+      fail: function (res) {
+        console.log("邀请失败");
+        wx.showToast({ title: '邀请失败', icon: 'none' });
+      }
+    });
   }
 })
 

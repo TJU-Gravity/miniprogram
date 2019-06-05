@@ -74,7 +74,7 @@ Page({
   },
 
   onClickPost() {
-    console.log(this.data.team);
+    // console.log(this.data.team);
     wx.request({
       url: 'http://118.25.23.44:8080/post/team/add',
       data: {
@@ -112,6 +112,8 @@ Page({
   },
   onChangeType(event){
     this.setData({ type:event.detail });
+    if (event.detail=='2')
+      this.setData({team:''});
   },
   onChangeTeamname(event) {
     this.setData({ teamname: event.detail });

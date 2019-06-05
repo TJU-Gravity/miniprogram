@@ -173,7 +173,8 @@ Page({
           username:this.data.options.username,
           captainid:this.data.post.posterid,
           teamid:this.data.post.teamid,
-          state:this.data.post.state
+          state:this.data.post.state,
+          type:0
         },
         method: 'POST',
         header: {
