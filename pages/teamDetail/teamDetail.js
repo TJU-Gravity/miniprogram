@@ -11,7 +11,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    post: {},
     replies: [],
     user: {},
     username: "", 
@@ -119,7 +118,7 @@ Page({
   },
   onPost: function(e) {
     //var id = e.currentTarget.dataset.id;
-    var id = 1;
+    var id = this.data.team_info.post.postid;
     console.log('../postDetail/postDetail?id=' + id);
     wx.navigateTo({
       url: '../postDetail/postDetail?id=' + id,

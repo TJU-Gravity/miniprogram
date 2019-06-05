@@ -9,7 +9,7 @@
     <text class="body">团队简介：{{team_info.introduction}}</text>
     </view>
     <view class="buttonBox">
-      <view class="button" bindtap='onPost'>查看招募帖</view>
+      <view class="button" bindtap='onPost' wx:if="{{team_info.post.postid!=null}}">查看招募帖</view>
     </view>
   </view>
 </template>

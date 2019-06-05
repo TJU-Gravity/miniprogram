@@ -46,9 +46,10 @@ Page({
     wx.request({
       url: 'http://118.25.23.44:8080/team/myList',
       data: {
-        page: 1,
-        size: 5,
-        username: this.data.userInfo.username
+        // page: 1,
+        // size: 5,
+        // username: this.data.userInfo.username
+        username: "ohNps5dNofohp2j0EuDDpFg8fxXQ"
       },
       method: 'POST',
       header: {
