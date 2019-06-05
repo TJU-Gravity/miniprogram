@@ -146,4 +146,28 @@ Page({
       }
     });
   }, 
+  onDelTeam: function (e) {
+    var _this = this;
+    var id = e.currentTarget.dataset.id;
+    console.log(id);
+    wx.request({
+      url: 'http://118.25.23.44:8080/team/delete',
+      data: {
+        ID: this.data.team_info.teamid,
+      },
+      method: 'POST',
+      header: {
+        'content-type': 'application/json'//默认值
+      },
+      success: function (res) {
+        console.log(res.data);
+        wx.navigateTo({
+          url: '../myTeam/myTeam?id=' + this.data.username,
+        })
+      },
+      fail: function (res) {
+        console.log("加载失败");
+      }
+    });
+  }
 })

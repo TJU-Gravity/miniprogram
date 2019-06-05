@@ -48,8 +48,8 @@ Page({
       data: {
         // page: 1,
         // size: 5,
-        // username: this.data.userInfo.username
-        username: "ohNps5dNofohp2j0EuDDpFg8fxXQ"
+        username: this.data.userInfo.username
+        // username: "ohNps5dNofohp2j0EuDDpFg8fxXQ"
       },
       method: 'POST',
       header: {
