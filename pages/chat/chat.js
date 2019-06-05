@@ -336,7 +336,7 @@ Page({
 
 
     wx.request({
-      url: 'http://118.25.23.44:8080/user/team/delete',
+      url: 'http://118.25.23.44:8080/user/team/add',
       data: {
         teamid:that.data.apply.teamid,
         username: that.data.apply.applicant
@@ -443,7 +443,7 @@ onClose() {
         if (res.data.code == 200)
           wx.showToast({ title: '已发送邀请', icon: 'none' });
         else if (res.data.code == 400)
-          wx.showToast({ title: '双方有申请正在进行中', icon: 'none' });
+          wx.showToast({ title: res.data.message, icon: 'none' });
       },
       fail: function (res) {
         console.log("邀请失败");
