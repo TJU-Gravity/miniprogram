@@ -1,0 +1,4 @@
+/* pages/teamDetail/teamDetail.wxss */
+@import "./memberItem/memberItem.wxss";
+@import "./teamMain/teamMain.wxss";
+

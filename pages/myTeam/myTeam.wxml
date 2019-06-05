@@ -1,0 +1,22 @@
+<!--pages/myTeam/myTeam.wxml-->
+<view>
+  <block wx:if="{{teams==null}}">
+    <view class="container">
+      <van-icon class="icon" name="warning-o" size="100rpx"/>
+      <text class="warning">抱歉，您还没有创建团队</text>
+    </view>
+  </block>
+  <block wx:else>
+    <view class="result_container" wx:for="{{teams}}" bindtap='onClickTeam' data-id='{{item.teamid}}'>
+    <view class="head_shot">
+      <image class="avatar" src="{{item.avatar}}"></image>
+    </view>
+    <view class="user_info">
+      <view>
+        <text class="nickname">{{item.team_name}}</text>
+      </view>
+      <text class="introduction">{{item.introduction}}</text>
+    </view>
+    </view>
+  </block>
+</view>

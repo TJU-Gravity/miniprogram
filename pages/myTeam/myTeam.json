@@ -1,0 +1,13 @@
+{
+  "usingComponents": {
+    "van-card": "../../vant-weapp/dist/card/index",
+    "van-tabbar": "../../vant-weapp/dist/tabbar/index",
+    "van-tabbar-item": "../../vant-weapp/dist/tabbar-item/index",
+    "van-tag": "../../vant-weapp/dist/tag/index",
+    "van-search": "../../vant-weapp/dist/search/index",
+    "van-icon": "../../vant-weapp/dist/icon/index",
+    "van-button": "../../vant-weapp/dist/button/index"
+  },
+  "enablePullDownRefresh": true,
+  "backgroundColor": "#f0145a"
+}

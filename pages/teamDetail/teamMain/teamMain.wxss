@@ -1,0 +1,66 @@
+/* pages/teamDetail/teamMain/teamMain.wxss */
+
+.detail_container {
+  box-shadow:12rpx 12rpx 12rpx gainsboro;
+  display: flex;
+  flex-direction: column;
+  margin-top: 10rpx;
+  background-color: #fff;
+  padding-bottom: 20px;
+  width: 100%;
+  text-align: center;
+}
+
+.title
+{
+  font-weight:bold;
+  font-size:40rpx;
+  padding-top: 20rpx;
+  align-items: center;
+  text-align: center;
+}
+
+.second
+{
+  font-size:20rpx;
+  padding-top: 10rpx;
+  align-items: center;
+  text-align: center;
+  color: #999;
+}
+
+.bodyBox
+{
+  display: flex;
+  flex-direction: horizontal;
+  margin-right:20rpx;
+  margin-left: 30rpx;
+  background-color: #fff;
+  padding-bottom: 15rpx;
+  padding-top: 15rpx;
+
+}
+.body
+{
+  color:#555;
+  font-size: 30rpx;
+  margin-left: 50rpx;
+  margin-right: 50rpx;
+  align-items: right;
+  text-align: left;
+}
+.buttonBox{
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  font-size: 35rpx;
+}
+.button{
+  background-color: #315668;
+  margin-left: 20rpx;
+  padding: 10rpx 30rpx 10rpx 30rpx;
+  border-radius: 20rpx;
+  align-items: center;
+  text-align: center;
+  color: #fff;
+}
