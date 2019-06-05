@@ -273,15 +273,16 @@ Page({
   cancel: function () {
     var that = this;
     //lyx推送一下？
-    this.setData({ lock: true })
-    var content = "NOTE: " + app.data.im.imName + " 已撤销加入 " + that.youName+" 的队伍。"
+    that.setData({ lock: true })
+    // console.log(that.data.youName) 
+    var content = "NOTE: " + app.data.im.imName + " 已撤销加入 " + that.data.youName+" 的队伍。"
     imhandler.onSendMsg(content, function cbOk() {
       that.addMessage(content, true, that)
     }, function cbErr(err) {
       im.Log.error("消息发送失败", err)
     })
     // 解锁
-    this.setData({ lock: false })
+    that.setData({ lock: false })
    
     wx.request({
       url: 'http://118.25.23.44:8080/apply/delete',
@@ -294,8 +295,20 @@ Page({
     })
   },
   reject: function () {
-//lyx推送一下？
+   // lyx推送一下？
     var that = this;
+    that.setData({ lock: true })
+    // console.log(that.data.youName) 
+    var content = "NOTE: " + app.data.im.imName + " 已拒绝加入 " + that.data.youName + " 的队伍。"
+    imhandler.onSendMsg(content, function cbOk() {
+      that.addMessage(content, true, that)
+    }, function cbErr(err) {
+      im.Log.error("消息发送失败", err)
+    })
+    // 解锁
+    that.setData({ lock: false })
+
+
     wx.request({
       url: 'http://118.25.23.44:8080/apply/delete',
       data: [this.data.youId, app.globalData.userInfo.username],
@@ -310,6 +323,17 @@ Page({
     //lyx推送一下？
 
     var that = this;
+    that.setData({ lock: true })
+    // console.log(that.data.youName) 
+    var content = "NOTE: " + app.data.im.imName + " 已接收加入 " + that.data.youName + " 的队伍。"
+    imhandler.onSendMsg(content, function cbOk() {
+      that.addMessage(content, true, that)
+    }, function cbErr(err) {
+      im.Log.error("消息发送失败", err)
+    })
+    // 解锁
+    that.setData({ lock: false })
+
 
     wx.request({
       url: 'http://118.25.23.44:8080/user/team/delete',
