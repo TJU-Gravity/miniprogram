@@ -263,6 +263,8 @@ Page({
         }
       });
   },
+
+  //使用bindlongpress，与bindtap不冲突，实现长按删除
   bindLongTap: function (e) {
     console.log("长按");
     var that = this;
@@ -273,7 +275,6 @@ Page({
       success: function (res) {
         if (res.confirm) {
           console.log('点击确定了');
-          
           var options = {
             'To_Account': id,
             'chatType': 1
@@ -303,7 +304,6 @@ Page({
           console.log('点击取消了');
           return false;
         }
-    
       }
     })
   }
