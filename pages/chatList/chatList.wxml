@@ -4,7 +4,7 @@
 
 <block wx:for="{{chats}}" >
    <view class="replyContainer" catchtap='onDetailTap' data-id="{{item.username}}">
-    <view bindtap='onClick' data-id="{{item.username}}">
+    <view bindtap='onClick' bindlongpress="bindLongTap" data-id="{{item.username}}">
      <view class="header">
       <text class="date">{{item.time}}</text>
      </view>

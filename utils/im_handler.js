@@ -85,6 +85,7 @@ function onMsgNotify(newMsgList) {
       newMsg = newMsgList[j];
       if (chatThat && newMsg.getSession().id() == friendId) {
         selSess = newMsg.getSession()
+        console.log("别人给我发消息啦！~")
         chatThat.addMessage(newMsg.elems[0].content.text, false, chatThat)
       }
     }
@@ -135,7 +136,9 @@ function onSendMsg(msg, cbOk, cbErr) {
   var msgtosend = msg;
   // 创建会话对象
   if (!selSess) {
-    selSess = new im.Session(selType, friendId, friendName, friendAvatarUrl, Math.round(new Date().getTime() / 1000));
+    console.log("前来创建新的会话啦")
+    console.log(selSess)
+    selSess = new im.Session(selType, friendId, friendName, friendAvatarUrl, Math.round(new Date().getTime() / 1000)  );
   }
   var isSend = true;// 是否为自己发送
   var seq = -1; // 消息序列，-1 表示 sdk 自动生成，用于去重
@@ -143,6 +146,10 @@ function onSendMsg(msg, cbOk, cbErr) {
   var msgTime = Date.parse(new Date()) / 1000; // 消息时间戳
   var subType = im.C2C_MSG_SUB_TYPE.COMMON; // 消息子类型 c2c 消息时，参考 c2c 消息子类型对象：im.C2C_MSG_SUB_TYPE 
   // loginInfo.identifier 消息发送者账号,loginInfo.identifierNick 消息发送者昵称
+  console.log("你在和谁发消息呢？？？")
+  console.log(imName)
+  console.log(friendName)
+  console.log(selSess)
   var msg = new im.Msg(selSess, isSend, seq, random, msgTime, imId, subType, imName);
   var textObj = new im.Msg.Elem.Text(msgtosend);
   msg.addText(textObj);
@@ -169,7 +176,9 @@ function init(opts) {
   friendAvatarUrl = opts.friendAvatarUrl
   contactListThat = opts.contactListThat
   chatThat = opts.chatThat
+  selSess = null
 }
+
 
 module.exports = {
   init: init, //初始化参数
