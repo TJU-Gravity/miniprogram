@@ -269,10 +269,13 @@ Page({
     console.log("长按");
     var that = this;
     var id = e.currentTarget.dataset.id;
+    //只有删除选项，简单起见用模态框进行操作
     wx.showModal({
       title: '提示',
       content: '确定要删除此聊天会话吗？',
       success: function (res) {
+        //成功回调，是指用户点击了confirm或cancel后执行相应处理
+        //点击了确定
         if (res.confirm) {
           console.log('点击确定了');
           var options = {
@@ -299,7 +302,7 @@ Page({
               console.log("chats")
               console.log(chats)
           });
-  
+        //点击了取消
         } else if (res.cancel) {
           console.log('点击取消了');
           return false;
