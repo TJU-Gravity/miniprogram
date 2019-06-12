@@ -45,8 +45,7 @@ Page({
         wx.request({
             url: 'http://118.25.23.44:8080/post/list',
             data: {
-                page: 1,
-                size: 20
+                
             },
             method: 'POST',
             header: {
@@ -102,6 +101,7 @@ Page({
     onPullDownRefresh: function () {
         wx.showNavigationBarLoading();
         wx.stopPullDownRefresh();
+        this.onLoad();
     },
 
     /**

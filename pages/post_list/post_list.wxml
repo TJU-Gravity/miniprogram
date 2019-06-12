@@ -4,17 +4,6 @@
 <block wx:else>
 <view>
 
-  <view class="search">
-    <van-search
-      value="{{ value }}"
-      placeholder="请输入搜索帖子关键词"
-      use-action-slot
-      bind:search="onSearch"
-    >
-      <view slot="action" bind:tap="onSearch">搜索</view>
-    </van-search>
-  </view>
-
   <block wx:for="{{posts.list}}">
 
     <view class="post_container" >
@@ -32,10 +21,7 @@
 
           <view class='sub_container'>
             <text class='postingtime'>{{item.postingtime}}</text>
-            <view class='hits'>
-              <image class='hits_image' src="../../image/icon/baseline_whatshot_black_18dp.png"/>
-              <text class='hits_text'>{{item.hits}}</text>
-            </view>
+            
           </view>
 
         </view>
