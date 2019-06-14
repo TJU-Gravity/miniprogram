@@ -301,6 +301,7 @@ Page({
       data: [this.data.youId, app.globalData.userInfo.username],
       method: 'POST',
       success: function (res) {
+        this.onLoad()
         console.log(res)
         that.setData({apply:null})
       }
@@ -326,6 +327,7 @@ Page({
       data: [this.data.youId, app.globalData.userInfo.username],
       method: 'POST',
       success: function (res) {
+        this.onLoad;
         console.log(res)
         that.setData({ apply: null })
       }
@@ -356,6 +358,7 @@ Page({
       },
       method: 'POST',
       success: function (res) {
+        this.onLoad();
         console.log(res)
         that.setData({ apply: null })
       }
@@ -457,6 +460,7 @@ onClose() {
           wx.showToast({ title: '已发送邀请', icon: 'none' });
         else if (res.data.code == 400)
           wx.showToast({ title: res.data.message, icon: 'none' });
+          this.onLoad()
       },
       fail: function (res) {
         console.log("邀请失败");
