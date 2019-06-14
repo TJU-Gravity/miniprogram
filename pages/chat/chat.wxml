@@ -1,42 +1,61 @@
-
-
 <!--chat/chat-->
 <view>
-<view wx:if="{{apply}}">
-<view class='applyPanel'>
-<van-panel  use-footer-slot>
-<view class='applyContent'>{{apply.nickname}}申请加入团队"{{apply.teamName}}"</view>
-  <view class='applyFooter' slot="footer">
-  <view wx:if="{{apply.applicant===youId}}">
-    <van-button class='applyButton' size="normal"  type="primary" bindtap="accept">同意</van-button>
-    <van-button class='applyButton'  size="normal" bindtap="reject" >拒绝</van-button>
-   </view>
-   <block wx:else>
-     <van-button class='applyButton'  size="normal"  bindtap="cancel">撤销</van-button>
-   </block>
-  </view>
-</van-panel>
-</view>
-</view>
-<block wx:else>
-<view class='applyPanel'>
-<view class='applyContent'>邀请{{youName}}加入团队{{selectedTeamName}}</view>
-<view class='sheet'>
- <van-action-sheet 
-  show="{{ show }}"
-  actions="{{ actions }}"
-  bind:close="onClose"
-  bind:select="onSelect"
-/>
-</view>
-  <view class='applyFooter' slot="footer">
-   <van-button class='applyButton' bindtap="onOpen">选择团队</van-button>
-    <van-button class='applyButton'  size="normal" type="primary" bindtap="invite">邀请</van-button>
+  <view wx:if="{{apply}}">
+    <view wx:if="{{apply.type==1}}">
+      <view class='applyPanel'>
+        <van-panel use-footer-slot>
+          <view class='applyContent'>{{apply.nickname}}申请加入团队"{{apply.teamName}}"</view>
+          <view class='applyFooter' slot="footer">
+            <view wx:if="{{apply.applicant===youId}}">
+              <van-button class='applyButton' size="normal" type="primary" bindtap="accept">同意</van-button>
+              <van-button class='applyButton' size="normal" bindtap="reject">拒绝</van-button>
+            </view>
+
+            <block wx:else>
+              <van-button class='applyButton' size="normal" bindtap="cancel">撤销</van-button>
+            </block>
+          </view>
+        </van-panel>
+      </view>
     </view>
+    <block wx:else>
+      <view class='applyPanel'>
+        <van-panel use-footer-slot>
+          <view wx:if="{{apply.applicant===youId}}">
+            <view class='applyContent'>你邀请"{{youName}}"加入团队"{{apply.teamName}}"</view>
+            <view class='applyFooter' slot="footer">
+<van-button class='applyButton' size="normal" bindtap="cancel">撤销</van-button>
+             
+            </view>
+          </view>
+          <block wx:else>
+            <view class='applyContent'>"{{youName}}"邀请你加入团队"{{apply.teamName}}"</view>
+            <view class='applyFooter' slot="footer">
+             <van-button class='applyButton' size="normal" type="primary" bindtap="accept">同意
+              </van-button>
+              <van-button class='applyButton' size="normal" bindtap="reject">拒绝</van-button>
+              
+            </view>
+          </block>
+        </van-panel>
+      </view>
+
+    </block>
+  </view>
+
+  <block wx:else>
+    <view class='applyPanel'>
+      <view class='applyContent'>邀请{{youName}}加入团队{{selectedTeamName}}</view>
+      <view class='sheet'>
+        <van-action-sheet show="{{ show }}" actions="{{ actions }}" bind:close="onClose" bind:select="onSelect" />
+      </view>
+      <view class='applyFooter' slot="footer">
+        <van-button class='applyButton' bindtap="onOpen">选择团队</van-button>
+        <van-button class='applyButton' size="normal" type="primary" bindtap="invite">邀请</van-button>
+      </view>
+    </view>
+  </block>
 </view>
-
-
-</block>
 <view class='chatPanel'>
   <scroll-view scroll-y scroll-into-view='{{toView}}' style='height: {{scrollHeight}};'>
     <!-- <view class='scrollMsg'> -->
@@ -45,11 +64,11 @@
       <!-- 单个消息1 客服发出（左） -->
       <view wx:if='{{item.speaker=="you"}}' id='msg-{{index}}' style='display: flex; padding: 2vw 11vw 2vw 2vw;'>
         <view style='width: 11vw; height: 11vw;'>
-        
+
           <image style='width: 11vw; height: 11vw; border-radius: 10rpx;' src="{{youHeadIcon}}"></image>
         </view>
         <view style='width: 4vw; height: 11vw; margin-left: 0.5vw; display: flex; align-items: center; z-index: 9;'>
-          
+
         </view>
         <view class='leftMsg'>{{item.content}}</view>
       </view>
@@ -58,7 +77,7 @@
       <view wx:else id='msg-{{index}}' style='display: flex; justify-content: flex-end; padding: 2vw 2vw 2vw 11vw;'>
         <view class='rightMsg'>{{item.content}}</view>
         <view style='width: 4vw; height: 11vw; margin-right: 0.5vw; display: flex; align-items: center; z-index: 9;'>
-        
+
         </view>
         <view style='width: 11vw; height: 11vw;'>
           <image style='width: 11vw; height: 11vw; border-radius: 10rpx;' src="{{meHeadIcon}}"></image>
@@ -74,8 +93,7 @@
 
   <view class='inputRoom' style='bottom: {{inputBottom}}'>
 
-   <input value='{{inputVal}}'bindconfirm='sendClick' adjust-position='{{true}}' confirm-type='send'  ></input>
+    <input value='{{inputVal}}' bindconfirm='sendClick' adjust-position='{{true}}' confirm-type='send'></input>
 
-</view>
   </view>
 </view>

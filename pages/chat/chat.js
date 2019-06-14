@@ -152,7 +152,9 @@ Page({
     var historyMsgs = [];
     for (var i = 0; i < result.MsgList.length; i++) {
       var msg = result.MsgList[i]
-     
+
+      if (msg.elems[0].content.text.substr(0, 5) === 'NOTE:')
+        msg.elems[0].content.text = msg.elems[0].content.text.substr(6, msg.elems[0].content.text.length)
       var message = {
         'speaker': msg.isSend ? 'me' : 'you',
         'contentType': 'text',
@@ -240,11 +242,18 @@ Page({
    */
   addMessage: function (msg, isSend, that) {
     var msgList = that.data.msgList;
+    console.log(msg)
+    if (msg.substr(0, 5) === 'NOTE:')
+    {
+      msg = msg.substr(6, msg.length)
+      this.onLoad()
+    }
     var message = {
       'speaker': isSend ? 'me' : 'you',
       'contentType': "text",
       'content': msg
     }
+  
     //消息列表加入消息
     msgList.push(message);
     //绑定数据，清空输入框
@@ -329,6 +338,7 @@ Page({
     that.setData({ lock: true })
     // console.log(that.data.youName) 
     var content = "NOTE: " + app.data.im.imName + " 已接收加入 " + that.data.youName + " 的队伍。"
+   
     imhandler.onSendMsg(content, function cbOk() {
       that.addMessage(content, true, that)
     }, function cbErr(err) {

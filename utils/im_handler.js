@@ -86,6 +86,7 @@ function onMsgNotify(newMsgList) {
       if (chatThat && newMsg.getSession().id() == friendId) {
         selSess = newMsg.getSession()
         console.log("别人给我发消息啦！~")
+        
         chatThat.addMessage(newMsg.elems[0].content.text, false, chatThat)
       }
     }
