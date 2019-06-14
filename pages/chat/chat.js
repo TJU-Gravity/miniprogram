@@ -301,9 +301,10 @@ Page({
       data: [this.data.youId, app.globalData.userInfo.username],
       method: 'POST',
       success: function (res) {
-        this.onLoad()
+     
         console.log(res)
         that.setData({apply:null})
+        this.onLoad()
       }
     })
   },
@@ -327,9 +328,10 @@ Page({
       data: [this.data.youId, app.globalData.userInfo.username],
       method: 'POST',
       success: function (res) {
-        this.onLoad;
+     
         console.log(res)
         that.setData({ apply: null })
+        this.onLoad;
       }
     })
   },
@@ -358,9 +360,10 @@ Page({
       },
       method: 'POST',
       success: function (res) {
-        this.onLoad();
+      
         console.log(res)
         that.setData({ apply: null })
+        this.onLoad();
       }
     })
   },
@@ -456,11 +459,12 @@ onClose() {
       },
       success: function (res) {
         console.log(res);
+
         if (res.data.code == 200)
           wx.showToast({ title: '已发送邀请', icon: 'none' });
         else if (res.data.code == 400)
           wx.showToast({ title: res.data.message, icon: 'none' });
-          this.onLoad()
+        this.onLoad()
       },
       fail: function (res) {
         console.log("邀请失败");
