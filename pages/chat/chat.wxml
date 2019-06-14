@@ -1,7 +1,7 @@
 <!--chat/chat-->
 <view>
   <view wx:if="{{apply}}">
-    <view wx:if="{{apply.type==1}}">
+    <view wx:if="{{apply.type!==1}}">
       <view class='applyPanel'>
         <van-panel use-footer-slot>
           <view class='applyContent'>{{apply.nickname}}申请加入团队"{{apply.teamName}}"</view>

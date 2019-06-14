@@ -1,14 +1,8 @@
 <!--pages/searchResult/searchResult.wxml-->
 <view>
   <view class="search">
-    <van-search
-      value="{{ value }}"
-      placeholder="请输入搜索帖子关键词"
-      use-action-slot
-      bind:search="onSearch"
-    >
-      <view slot="action" bind:tap="onSearch">搜索</view>
-    </van-search>
+  
+      
   </view>
   <block wx:if="{{users==null}}">
     <view class="container">
