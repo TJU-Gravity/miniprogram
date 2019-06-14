@@ -140,6 +140,7 @@ Page({
       },
       success: function (res) {
         console.log(res.data);
+        wx.navigateBack();
       },
       fail: function (res) {
         console.log("加载失败");

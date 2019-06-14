@@ -20,7 +20,7 @@
           <van-button size="small" bindtap='onDelTeam' type="danger" data-id='{{team_info.teamid}}'>删除团队</van-button>
           </view>
           <view class="delBtn" wx:if="{{item.username!=userInfo.username}}">
-            <van-button size="small" bindtap='onDelMember' data-id='{{username}}'>删除成员</van-button>
+            <van-button size="small" bindtap='onDelMember' data-id='{{item.username}}'>删除成员</van-button>
           </view>
           </block>
         </view>
