@@ -61,11 +61,11 @@ Page({
   
   onLoad: function (options) {
     console.log("来聊天呀~")
-    console.log(options)
-    var that = this
-   
-    if (options) { // 设置会话列表传参过来的好友id
     
+    var that = this
+    console.log(options)
+    if (options) { // 设置会话列表传参过来的好友id
+      console.log(options)
       that.setData({
         youId: options.friendId,
         youName: options.friendName,
@@ -115,15 +115,20 @@ Page({
       contactListThat: null,
       chatThat: that
     })
-    console.log("onshow 参数初始化")
-    console.log("onshow 参数初始化")
-    console.log("onshow 参数初始化")
-    console.log("onshow 参数初始化")
-   
-    console.log(that.data.youId)
-    console.log(that.data.youName)
-    console.log(that.data.youHeadIcon)
-    
+    console.log({
+      accountMode: app.data.im.accountMode,
+      accountType: app.data.im.accountType,
+      sdkAppID: app.data.im.sdkappid,
+      selType: im.SESSION_TYPE.C2C, //私聊
+      imId: app.data.im.identifier,
+      imName: app.data.im.imName,
+      imAvatarUrl: app.data.im.imAvatarUrl,
+      friendId: that.data.youId,
+      friendName: that.data.youName,
+      friendAvatarUrl: that.data.youHeadIcon,
+      contactListThat: null,
+      chatThat: that
+    })
     if (im.checkLogin()) {
       //获取聊天历史记录
       imhandler.getC2CHistoryMsgs(function cbOk(result) {
@@ -156,7 +161,7 @@ Page({
       historyMsgs.push(message)
     }
     
- 
+    
     that.setData({
       msgList: historyMsgs,
       complete: result.Complete
@@ -240,11 +245,14 @@ Page({
       'contentType': "text",
       'content': msg
     }
+    //消息列表加入消息
     msgList.push(message);
+    //绑定数据，清空输入框
     that.setData({
       msgList: msgList,
       inputVal: '' // 清空输入框文本
     })
+    //滚动到聊天底部
     that.scrollToBottom();
   },
   scrollToBottom: function () {
@@ -263,12 +271,7 @@ Page({
   /**
    * 退回上一页
    */
-  toBackClick: function () {
-    //wx.navigateBack({})
-    wx.navigateTo({
-      url: "../chatList/chatList"
-    })
-  },
+  
 
   cancel: function () {
     var that = this;
@@ -336,7 +339,7 @@ Page({
 
 
     wx.request({
-      url: 'http://118.25.23.44:8080/user/team/delete',
+      url: 'http://118.25.23.44:8080/user/team/add',
       data: {
         teamid:that.data.apply.teamid,
         username: that.data.apply.applicant
@@ -443,7 +446,7 @@ onClose() {
         if (res.data.code == 200)
           wx.showToast({ title: '已发送邀请', icon: 'none' });
         else if (res.data.code == 400)
-          wx.showToast({ title: '双方有申请正在进行中', icon: 'none' });
+          wx.showToast({ title: res.data.message, icon: 'none' });
       },
       fail: function (res) {
         console.log("邀请失败");
@@ -456,36 +459,3 @@ onClose() {
 
 
 
-
-
-// Page({
-//   data: {
-//     friendId: '',
-//     friendName: '',
-//     friendAvatarUrl: '',
-//     /**
-//      * 消息集合（结构如下）：
-//      * msgTime 消息时间
-//      * myself 消息发送人 1 - 自己发的 0 - 好友发的
-//      * avatarUrl 头像
-//      * msgText 消息内容
-//      */
-//     msgList: [],// 消息集合
-//     complete: 0, // 是否还有历史消息可以拉取，1 - 表示没有，0 - 表示有
-//     content: '', // 输入框的文本值
-//     lock: false, // 发送消息锁 true - 加锁状态 false - 解锁状态
-//     scroll_height: wx.getSystemInfoSync().windowHeight - 54,
-//   },
-  
- 
-//   /**
-//    * 获取文本的消息
-//    */
-//   getContent: function (e) {
-//     var that = this;
-//     that.setData({
-//       content: e.detail.value
-//     })
-//   },
-  
-// })

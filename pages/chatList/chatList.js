@@ -27,10 +27,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    console.log('聊天列表加载load')
-    console.log('聊天列表加载load')
-    console.log('聊天列表加载load')
-    console.log('聊天列表加载load')
     var that = this;
 
     //加载动画
@@ -76,7 +72,6 @@ Page({
         })
         //判断有没有Identifier,和获取UserSig,login,initRecentContactList放到了onShow
         wx.hideLoading()
-       
       }
     }
     console.log("聊天列表onLoad结束")
@@ -116,7 +111,6 @@ Page({
       }
     })
     im.Log.warn("成功拉取最近联系人列表");
-
   },
 
   /**
@@ -130,12 +124,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    console.log('聊天列表加载show')
-    console.log('聊天列表加载show')
-    console.log('聊天列表加载show')
-    console.log('聊天列表加载show')
+    imhandler.selSess = null;
     var that = this;
-
     //加载动画
     wx.showLoading()
     if (!app.data.im.userSig) {
@@ -214,69 +204,110 @@ Page({
   },
 
   onClick: function(e) {
+      var that = this;
+      //获取对方用户的id,name,头像
+      var username = e.currentTarget.dataset.id;
 
-    //console.log('申请加入')
+      //获取userSig登陆进入详情页，或者直接进入聊天详情页
+      wx.request({
+        url: 'http://118.25.23.44:8080/user/detail',
+        method: 'POST',
+        data: {
+          username: username
+        },
+        header: {
+          'content-type': 'application/json'
+        },
+        success: function (res) {
+          var clickUser = res.data.data
+          //如果已经初始化过userSig参数,直接进入一对一私聊，传入朋友的identifier，name，headshhot
+          //否则先访问后台，初始化userSig参数，获取到userSig后，如果没有登陆先登陆再进入一对一私聊
+          if (app.data.im.userSig) {
+            //转至一对一的聊天界面(自己的openid和对方的openid)，聊天
+            wx.navigateTo({
+              url: '/pages/chat/chat?friendId=' + clickUser.username +
+                '&friendName=' + clickUser.nickname +
+                '&friendAvatarUrl=' + clickUser.headshot,
+            })
+          } else {
 
-    var that = this;
-    //获取对方用户的id,name,头像
-    var username = e.currentTarget.dataset.id;
+            //获取朋友用户的identifier和headshot和nickname
+            //在this.data.user里
 
-    wx.request({
-      url: 'http://118.25.23.44:8080/user/detail',
-      method: 'POST',
-      data: {
-        username: username
-      },
-      header: {
-        'content-type': 'application/json'
-      },
-      success: function(res) {
-        var clickUser = res.data.data
-        //如果已经初始化过userSig参数,直接进入一对一私聊，传入朋友的identifier，name，headshhot
-        //否则先访问后台，初始化userSig参数，获取到userSig后，如果没有登陆先登陆再进入一对一私聊
-        if (app.data.im.userSig) {
-          //转至一对一的聊天界面(自己的openid和对方的openid)，聊天
-          wx.navigateTo({
-            url: '/pages/chat/chat?friendId=' + clickUser.username +
-              '&friendName=' + clickUser.nickname +
-              '&friendAvatarUrl=' + clickUser.headshot,
-          })
-        } else {
+            app.initUserSig(function cbOk() {
+              // 检查是否登录返回 true 和 false,不登录则重新登录
+              if (im.checkLogin()) {
 
-          //获取朋友用户的identifier和headshot和nickname
-          //在this.data.user里
-
-          app.initUserSig(function cbOk() {
-            // 检查是否登录返回 true 和 false,不登录则重新登录
-            if (im.checkLogin()) {
-
-              wx.navigateTo({
-                url: '/pages/chat/chat?friendId=' + clickUser.username +
-                  '&friendName=' + clickUser.nickname +
-                  '&friendAvatarUrl=' + clickUser.headshot,
-              })
-
-            } else { //做的事情放到回调函数里
-              imhandler.login(that, app, function() {
                 wx.navigateTo({
                   url: '/pages/chat/chat?friendId=' + clickUser.username +
                     '&friendName=' + clickUser.nickname +
                     '&friendAvatarUrl=' + clickUser.headshot,
                 })
-              });
-            }
-            wx.hideLoading()
-          });
 
+              } else { //做的事情放到回调函数里
+                imhandler.login(that, app, function () {
+                  wx.navigateTo({
+                    url: '/pages/chat/chat?friendId=' + clickUser.username +
+                      '&friendName=' + clickUser.nickname +
+                      '&friendAvatarUrl=' + clickUser.headshot,
+                  })
+                });
+              }
+              wx.hideLoading()
+            });
+
+          }
+        },
+        fail: function (res) {
+          console.log(res.data)
         }
-      },
-      fail: function(res) {
-        console.log(res.data)
-      }
-    });
-
-
-
-
+      });
   },
+
+  //使用bindlongpress，与bindtap不冲突，实现长按删除
+  bindLongTap: function (e) {
+    console.log("长按");
+    var that = this;
+    var id = e.currentTarget.dataset.id;
+    //只有删除选项，简单起见用模态框进行操作
+    wx.showModal({
+      title: '提示',
+      content: '确定要删除此聊天会话吗？',
+      success: function (res) {
+        //成功回调，是指用户点击了confirm或cancel后执行相应处理
+        //点击了确定
+        if (res.confirm) {
+          console.log('点击确定了');
+          var options = {
+            'To_Account': id,
+            'chatType': 1
+          }
+          var chats = that.data.chats;  
+          im.deleteChat(options,
+            function (resp) {
+              var len = chats.length
+              for (var i = 0; i < len;i++){
+                console.log(chats[i])
+                console.log(id)
+                console.log(chats[i].username==id)
+                if (chats[i].username == id){
+                  console.log("jjj")
+                  chats.splice(i, 1);
+                  console.log(chats);   
+                }
+              }
+              that.setData({
+                chats:chats
+              })
+              console.log("chats")
+              console.log(chats)
+          });
+        //点击了取消
+        } else if (res.cancel) {
+          console.log('点击取消了');
+          return false;
+        }
+      }
+    })
+  }
 })

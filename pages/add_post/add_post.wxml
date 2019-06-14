@@ -1,13 +1,14 @@
 <!--add_post.wxml-->
 <view>
-
+  <view class="row">
     <van-field
       label='帖子主题' 
       value="{{ title }}"
       border="{{ false }}"
       bind:change="onChangeTitle"
       placeholder="请输入主题"/>
-
+  </view>
+  <view class="row">
     <van-field
       label="帖子内容"
       value="{{ content }}"
@@ -16,30 +17,32 @@
       placeholder="请输入内容"
       autosize
       type="textarea"/>
-
-  <van-cell-group title="帖子类型">
+  </view>
+  <view class="type">
+    <view class="text">帖子类型</view>
     <view class='radio'>
       <van-radio-group value="{{ type }}" bind:change="onChangeType">
         <van-radio name="1">招募帖</van-radio>
         <van-radio name="2">讨论帖</van-radio>
       </van-radio-group>
     </view>
-  </van-cell-group>
+  </view>
   <block wx:if="{{type=='1'}}">
-  <van-cell-group>
-      <van-field
-        label='团队名称' 
-        value="{{ teamname }}"
-        border="{{ false }}"
-        bind:change="onChangeTeamname"
-        placeholder="请输入团队名称"/>
-  </van-cell-group>
-  <van-cell-group class='num' title="招募人数">
-      <van-stepper value="{{ value }}" bind:change="onChangeNum" />
-  </van-cell-group>
+      <view class='row'>
+        <van-field
+          label='团队名称' 
+          value="{{ teamname }}"
+          border="{{ false }}"
+          bind:change="onChangeTeamname"
+          placeholder="请输入团队名称"/>
+      </view>
+      <view class='type'>
+        <view class="text">招募人数</view>
+        <van-stepper class="radio" value="{{ value }}" bind:change="onChangeNum" />
+      </view>
   </block>
-  <view class='post_button'>
-    <van-button size="large" type='info' bind:click="onClickPost">发布帖子</van-button>
+  <view class='footer'>
+    <van-button class='post_button' size="large" type='info' bind:click="onClickPost">发布帖子</van-button>
   </view>
   
 </view>

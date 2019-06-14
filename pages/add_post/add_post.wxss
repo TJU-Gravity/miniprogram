@@ -1,11 +1,25 @@
 /* pages/add_post/add_post.wxss */
 .radio{
-  margin-left: 50rpx;
+  margin-left: 45rpx;
 }
-.num{
+.row{
+  margin-top: 35rpx;
+  margin-bottom: 35rpx;
+}
+.footer{
+  position: fixed;
+	bottom: 50rpx;
+  left: 50rpx;
+  right: 50rpx; 
+}
+.type{
   display: flex;
   flex-direction: row;
+  margin-top: 35rpx;
+  margin-bottom: 35rpx;
 }
-.post_button{
-  margin:50rpx 50rpx 50rpx 50rpx;
+.text{
+  font-size: 35rpx;
+  margin-left:35rpx;
+  margin-right: 35rpx; 
 }
