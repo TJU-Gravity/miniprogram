@@ -125,6 +125,7 @@ Page({
     })
   },
   onDelMember:function(e){
+    console.log("delete")
     var _this = this;
     var id = e.currentTarget.dataset.id;
     console.log(id);
