@@ -87,6 +87,7 @@ Page({
        success: function (res) {
          console.log(res)
          if ( res.data.data)
+         
          {that.setData({apply:{
            type: res.data.data.type,
            teamName:res.data.data.teamname,
@@ -453,7 +454,7 @@ onClose() {
     var teamid=this.data.selectedTeam;
     var that=this;
     wx.request({
-      url: 'http://192.168.1.100:8080/apply/add',
+      url: 'http://118.25.23.44:8080/apply/add',
       data: {
         username: username,
         captainid: captainid,
