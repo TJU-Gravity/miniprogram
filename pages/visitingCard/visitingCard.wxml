@@ -34,7 +34,7 @@
   </block>
     <van-cell title="联系电话" value="{{userInfo.phone}}"/>
  
- <van-cell title="个人简介"  size="large" label="{{userInfo.introduction}}测试多行内容：页面加载时，data 将会以JSON字符串的形式由逻辑层传至渲染层，因此data中的数据必须是可以转成JSON的类型：字符串，数字，布尔值，对象，数组。" />
+ <van-cell title="个人简介"  size="large" label="{{userInfo.introduction}}通过搜索标签可以找到我！" />
 
 </view>
 

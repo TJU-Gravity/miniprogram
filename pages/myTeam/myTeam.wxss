@@ -5,13 +5,14 @@
 
 }
 .result_container{
-  margin-top: 30px;
-  margin-left: 20px;
+  margin-top: 10px;
+  margin-left: 0px;
   flex-direction: row;
   display: flex;
+  box-shadow:12rpx 12rpx 12rpx gainsboro;
 }
 .head_shot{
-  margin: 30rpx;
+  margin: 50rpx;
 }
 .avatar{
   width: 100rpx;
