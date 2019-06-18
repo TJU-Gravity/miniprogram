@@ -98,6 +98,7 @@ Page({
          
        }
     })
+    this.onShow()
   },
   //app.js里面加上data和获取函数
   onShow: function () {
@@ -289,8 +290,13 @@ Page({
     var that = this;
     //lyx推送一下？
     that.setData({ lock: true })
-    // console.log(that.data.youName) 
-    var content = "NOTE: " + app.data.im.imName + " 已撤销加入 " + that.data.youName+" 的队伍。"
+    if(this.data.apply.type!=1){
+      // console.log(that.data.youName) 
+      var content = "NOTE: " + app.data.im.imName + " 已撤销加入 " + that.data.youName + " 的队伍 "+ that.data.apply.teamName
+     
+    }else{
+      var content = "NOTE: " + app.data.im.imName + " 已撤销邀请 " + that.data.youName + " 加入 " + this.data.apply.teamName
+    }
     imhandler.onSendMsg(content, function cbOk() {
       that.addMessage(content, true, that)
     }, function cbErr(err) {
