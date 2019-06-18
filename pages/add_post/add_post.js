@@ -75,34 +75,62 @@ Page({
 
   onClickPost() {
     // console.log(this.data.team);
-    wx.request({
-      url: 'http://118.25.23.44:8080/post/team/add',
-      data: {
-        posttype:this.data.type,
-        posterid:this.data.options.username,
-        title:this.data.title,
-        postbody:this.data.content,
-        state:this.data.value+1,
-        team:this.data.team,
-        hits:0,
+    if (this.data.type=='1') {
+      wx.request({
+        url: 'http://118.25.23.44:8080/post/team/add',
+        data: {
+          posttype: this.data.type,
+          posterid: this.data.options.username,
+          title: this.data.title,
+          postbody: this.data.content,
+          state: this.data.value + 1,
+          team: this.data.team,
+          hits: 0,
 
-      },
-      method: 'POST',
-      header: {
-        'content-type': 'application/json'//默认值
-      },
-      success: function (res) {
-        console.log(res);
-        console.log("发布成功");
-        wx.showToast({ title: '发布成功', icon: 'none' });
-        wx.navigateBack({
-          delta: 1
-        });
-      },
-      fail: function (res) {
-        console.log("发布失败");
-      }
-    });
+        },
+        method: 'POST',
+        header: {
+          'content-type': 'application/json'//默认值
+        },
+        success: function (res) {
+          console.log(res);
+          console.log("发布成功");
+          wx.showToast({ title: '发布成功', icon: 'none' });
+          wx.navigateBack({
+            delta: 1
+          });
+        },
+        fail: function (res) {
+          console.log("发布失败");
+        }
+      });
+    }else{
+      wx.request({
+        url: 'http://118.25.23.44:8080/post/add',
+        data: {
+          posttype: this.data.type,
+          posterid: this.data.options.username,
+          title: this.data.title,
+          postbody: this.data.content,
+          state: this.data.value + 1,
+        },
+        method: 'POST',
+        header: {
+          'content-type': 'application/json'//默认值
+        },
+        success: function (res) {
+          console.log(res);
+          console.log("发布成功");
+          wx.showToast({ title: '发布成功', icon: 'none' });
+          wx.navigateBack({
+            delta: 1
+          });
+        },
+        fail: function (res) {
+          console.log("发布失败");
+        }
+      });
+    }
   },
   onChangeTitle(event) {
     this.setData({ title: event.detail });
