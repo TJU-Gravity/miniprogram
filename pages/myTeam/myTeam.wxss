@@ -19,11 +19,13 @@
   border-radius: 50rpx;
 }
 .user_info{
-  flex-direction: column;
-  display: flex;
+  /* flex-direction: column; */
+  /* display: flex; */
+  padding-top: 30px;
 }
 .nickname{
   margin: 10rpx;
+  /* padding-top: 50px; */
   font-size: 35rpx;
 }
 .introduction{

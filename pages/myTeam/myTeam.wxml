@@ -8,15 +8,15 @@
   </block>
   <block wx:else>
     <view class="result_container" wx:for="{{teams}}" bindtap='onClickTeam' data-id='{{item.teamid}}'>
-    <view class="head_shot">
-      <image class="avatar" src="./../../image/avatar.jpg"></image>
-    </view>
-    <view class="user_info">
-      <view>
-        <text class="nickname">{{item.team_name}}</text>
+      <view class="head_shot">
+          <image class="avatar" src="./../../image/avatar.jpg"></image>
       </view>
-      <text class="introduction">{{item.introduction}}</text>
-    </view>
+      <view class="user_info">
+         <view>
+            <text class="nickname">{{item.team_name}}</text>
+         </view>
+            <!-- <text class="introduction">{{abstract[index]}}...</text> -->
+      </view>
     </view>
   </block>
 </view>

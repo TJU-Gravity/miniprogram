@@ -58,7 +58,17 @@ Page({
       success: function (res) {
         console.log(res.data);
         _this.setData({ teams: res.data.data.list });
-        console.log(_this.data.teams)
+        for (i = 0; i < res.data.data.list.length; i++) {
+          if (res.data.data.list[i].introduction.length > 15) {
+            summary[i] = res.data.data.list[i].introduction.substr(0, 15);
+          }
+          else {
+            summary[i] = res.data.data.list[i].introduction;
+          }
+        }
+        _this.setData({ abstract: summary });   
+        console.log(_this.data.teams);
+        console.log(_this.data.abstract);
       },
       fail: function (res) {
         console.log("加载失败");

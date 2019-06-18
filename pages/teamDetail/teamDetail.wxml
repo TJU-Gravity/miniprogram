@@ -24,7 +24,7 @@
           </view>
           </block>
         </view>
-        <text class="username">简介：{{abstract[index]}}...</text>
+        <!-- <text class="username">简介：{{abstract[index]}}...</text> -->
       </view>
       
     </view>
