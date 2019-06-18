@@ -433,8 +433,11 @@ onClose() {
   },
 
   onSelect(event) {
+    console.log("")
     console.log(event.detail);
+    this.onClose()
     this.setData({
+     
       selectedTeam: event.detail.teamid,
       selectedTeamName:event.detail.name
     })
