@@ -13,8 +13,10 @@
   <block wx:else>
     <view class="result_container" wx:for="{{users}}" bindtap='onClickUser' data-id='{{item.username}}'>
     <view class="head_shot">
-      <image class="avatar" src="{{item.headshot}}"></image>
+      <image wx:if="{{item.headshot.length>0}}" class="avatar" src="{{item.headshot}}"></image>
+      <image wx:else class="avatar" src="./../../image/head0.png"></image>    
     </view>
+    
     <view class="user_info">
       <view>
         <text class="nickname">{{item.nickname}}</text>
