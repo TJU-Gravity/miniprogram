@@ -4,7 +4,7 @@
   <view class="detail_container" > 
     <text class="title">{{post.title}}</text>
     <text class="second">{{post.nickname}}发布于{{post.postingtime}}</text>
-    <text class="second">点击量：{{post.hits}}</text>
+    <!-- <text class="second">点击量：{{post.hits}}</text> -->
     <view class="bodyBox">
     <text class="body">{{post.postbody}}</text>
   </view>
