@@ -290,9 +290,14 @@ Page({
     //lyx推送一下？
     that.setData({ lock: true })
     // console.log(that.data.youName) 
-   
+    var content = "NOTE: " + app.data.im.imName + " 已撤销加入 " + that.data.youName+" 的队伍。"
+    imhandler.onSendMsg(content, function cbOk() {
+      that.addMessage(content, true, that)
+    }, function cbErr(err) {
+      im.Log.error("消息发送失败", err)
+    })
     // 解锁
-   
+    that.setData({ lock: false })
     var that = this;
     wx.request({
       
@@ -304,13 +309,6 @@ Page({
         console.log(res)
         that.setData({apply:null})
         that.onLoad()
-        var content = "NOTE: " + app.data.im.imName + " 已撤销加入 " + that.data.youName + " 的队伍。"
-        imhandler.onSendMsg(content, function cbOk() {
-          that.addMessage(content, true, that)
-        }, function cbErr(err) {
-          im.Log.error("消息发送失败", err)
-        })
-        that.setData({ lock: false })
       }
     })
   },
