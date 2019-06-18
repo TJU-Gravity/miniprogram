@@ -87,7 +87,9 @@ Page({
        success: function (res) {
          console.log(res)
          if ( res.data.data)
-         {that.setData({apply:{teamName:res.data.data.teamname,
+         {that.setData({apply:{
+           type: res.data.data.type,
+           teamName:res.data.data.teamname,
            teamid:res.data.data.teamid,
            applicant: res.data.data.username,
            nickname: (res.data.data.username===that.data.youId?that.data.youName:"你")}});
@@ -295,8 +297,9 @@ Page({
     })
     // 解锁
     that.setData({ lock: false })
-   
+    var that = this;
     wx.request({
+      
       url: 'http://118.25.23.44:8080/apply/delete',
       data: [this.data.youId, app.globalData.userInfo.username],
       method: 'POST',
@@ -304,7 +307,7 @@ Page({
      
         console.log(res)
         that.setData({apply:null})
-        this.onLoad()
+        that.onLoad()
       }
     })
   },
@@ -331,7 +334,7 @@ Page({
      
         console.log(res)
         that.setData({ apply: null })
-        this.onLoad;
+        that.onLoad();
       }
     })
   },
@@ -363,7 +366,7 @@ Page({
       
         console.log(res)
         that.setData({ apply: null })
-        this.onLoad();
+        that.onLoad();
       }
     })
   },
@@ -448,8 +451,9 @@ onClose() {
     var captainid=app.globalData.userInfo.username;
     var username=this.data.youId;
     var teamid=this.data.selectedTeam;
+    var that=this;
     wx.request({
-      url: 'http://118.25.23.44:8080/apply/add',
+      url: 'http://192.168.1.100:8080/apply/add',
       data: {
         username: username,
         captainid: captainid,
@@ -467,7 +471,7 @@ onClose() {
           wx.showToast({ title: '已发送邀请', icon: 'none' });
         else if (res.data.code == 400)
           wx.showToast({ title: res.data.message, icon: 'none' });
-        this.onLoad()
+        that.onLoad()
       },
       fail: function (res) {
         console.log("邀请失败");
