@@ -21,6 +21,7 @@ Page({
     team_mem: [],
     captain:"",
     isCaptain: false,
+    abstract:[]
   },
 
   /**
@@ -29,6 +30,8 @@ Page({
   onLoad: function (options) {
     this.setData({ options: options });
     var _this = this;
+    var summary = new Array();
+    var i = 0;
     // console.log(options.id);
     if(app.globalData.userInfo) {
       this.setData({userInfo: app.globalData.userInfo});
@@ -48,8 +51,18 @@ Page({
         _this.setData({ team_info: res.data.data });
         _this.setData({ team_mem: res.data.data.members });
         _this.setData({ captain:res.data.data.captainid});
+        for (i = 0; i < res.data.data.members.length; i++) {
+          if (res.data.data.members[i].introduction != null){
+            summary[i] = res.data.data.members[i].introduction.substr(0, 15);
+          }
+          else{
+            summary[i] = "..."
+          }
+        }
+        _this.setData({ abstract: summary });   
         console.log(_this.data.captain);
         console.log(_this.data.team_info);
+        console.log(_this.data.abstract);
       },
       fail: function (res) {
         console.log("加载失败");

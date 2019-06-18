@@ -4,7 +4,7 @@
   <view class="detail_container" > 
     <text class="title">{{team_info.team_name}}</text>
     <text class="second">您创建于{{team_info.create_date}}</text>
-    <text class="second">招募人数：{{team_info.member_Num}}</text>
+    <text class="second">已有人数：{{team_info.member_Num}}</text>
     <view class="bodyBox">
     <text class="body">团队简介：{{team_info.introduction}}</text>
     </view>
