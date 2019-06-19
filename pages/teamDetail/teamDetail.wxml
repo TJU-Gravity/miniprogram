@@ -11,7 +11,9 @@
   <view class="replyContainer">
     <view class="content_container">
       <view class='avatarBox'> 
-        <image class="avatar" src="{{item.headshot}}" mode="aspectFill"></image>
+        <!-- <image class="avatar" src="{{item.headshot}}" mode="aspectFill"></image> -->
+        <image wx:if="{{item.headshot.length>0}}" class="avatar" src="{{item.headshot}}"></image>
+        <image wx:else class="avatar" src="./../../image/head0.png"></image>
       </view>
       <view class="bodyContainer">
         <view class="header">{{item.nickname}}
