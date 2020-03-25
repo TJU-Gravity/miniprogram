@@ -18,7 +18,7 @@ Page({
     this.setData({tags:tags});
     var _this=this;
     wx.request({
-      url: 'http://118.25.23.44:8080/user/tags/findUsersByTags',
+      url: app.globalData.host +'/user/tags/findUsersByTags',
       data:{
         tags:tags,
       },

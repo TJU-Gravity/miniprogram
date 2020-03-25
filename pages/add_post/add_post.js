@@ -76,8 +76,12 @@ Page({
   onClickPost() {
     // console.log(this.data.team);
     if (this.data.type=='1') {
+      if (this.data.team.team_name==null)
+      {
+
+      }else{
       wx.request({
-        url: 'http://118.25.23.44:8080/post/team/add',
+        url: app.globalData.host+'/post/team/add',
         data: {
           posttype: this.data.type,
           posterid: this.data.options.username,
@@ -104,9 +108,9 @@ Page({
           console.log("发布失败");
         }
       });
-    }else{
+    }}else{
       wx.request({
-        url: 'http://118.25.23.44:8080/post/add',
+        url: app.globalData.host +'/post/add',
         data: {
           posttype: this.data.type,
           posterid: this.data.options.username,

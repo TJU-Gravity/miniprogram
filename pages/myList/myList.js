@@ -22,7 +22,7 @@ Page({
     var summary = new Array();
     var style = new Array();
     wx.request({
-      url: 'http://118.25.23.44:8080/post/myList',
+      url: app.globalData.host+'/post/myList',
       data: {
         username:options.username,
         page: 1,
@@ -197,7 +197,7 @@ Page({
     var id = e.currentTarget.dataset.index;
     var _this = this;
     wx.request({
-      url: 'http://118.25.23.44:8080/post/delete',
+      url: app.globalData.host +'/post/delete',
       data: {
         ID: this.data.posts.list[id].postid
       },
@@ -221,7 +221,7 @@ Page({
     var id = e.currentTarget.dataset.index;
     var _this = this;
     wx.request({
-      url: 'http://118.25.23.44:8080/post/changeState',
+      url: app.globalData.host +'/post/changeState',
       data: {
         ID: this.data.posts.list[id].postid,
         state:1
@@ -245,7 +245,7 @@ Page({
     var id = e.currentTarget.dataset.index;
     var _this = this;
     wx.request({
-      url: 'http://118.25.23.44:8080/post/changeState',
+      url: app.globalData.host +'/post/changeState',
       data: {
         ID: this.data.posts.list[id].postid,
         state: 0

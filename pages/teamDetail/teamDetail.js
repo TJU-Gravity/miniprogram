@@ -38,7 +38,7 @@ Page({
     };
     console.log(this.data.userInfo);
     wx.request({
-      url: 'http://118.25.23.44:8080/team/detail',
+      url: app.globalData.host +'/team/detail',
       data: {
         ID: options.teamid //上一个页面传参
       },
@@ -143,7 +143,7 @@ Page({
     var id = e.currentTarget.dataset.id;
     console.log(id);
     wx.request({
-      url: 'http://118.25.23.44:8080/user/team/delete',
+      url: app.globalData.host +'/user/team/delete',
       data: {
         username: id,
         teamid: this.data.team_info.teamid,
@@ -166,7 +166,7 @@ Page({
     var id = e.currentTarget.dataset.id;
     console.log(id);
     wx.request({
-      url: 'http://118.25.23.44:8080/team/delete',
+      url: app.globalData.host +'/team/delete',
       data: {
         ID: this.data.team_info.teamid,
       },

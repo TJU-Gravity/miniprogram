@@ -103,7 +103,7 @@ Page({
         var _this = this;
         console.log(this.data.currentUser)
         wx.request({
-          url: 'http://118.25.23.44:8080/user/detail',
+          url: app.globalData.host +'/user/detail',
           data: {
             username: this.data.currentUser,
           },
@@ -133,7 +133,7 @@ Page({
 
         var _this = this;
         wx.request({
-          url: 'http://118.25.23.44:8080/user/detail',
+          url: app.globalData.host +'/user/detail',
           data: {
             username: this.data.currentUser,
           },

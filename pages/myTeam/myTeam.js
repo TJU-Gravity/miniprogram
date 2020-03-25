@@ -44,7 +44,7 @@ Page({
     var i = 0;
     var summary = new Array();
     wx.request({
-      url: 'http://118.25.23.44:8080/team/myList',
+      url: app.globalData.host +'/team/myList',
       data: {
         // page: 1,
         // size: 5,

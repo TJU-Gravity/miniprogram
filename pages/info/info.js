@@ -130,7 +130,7 @@ Page({
     }
     //console.log(this.data.gen);
     wx.request({
-      url: 'http://118.25.23.44:8080/user/tags/ChangeUserTags',
+      url: app.globalData.host+'/user/tags/ChangeUserTags',
       data: {
 
         username: this.data.userInfo.username,
@@ -150,7 +150,7 @@ Page({
       }
     });
     wx.request({
-      url: 'http://118.25.23.44:8080/user/update',
+      url: app.globalData.host+'/user/update',
       data: {
         username: this.data.userInfo.username,
         loc: this.data.location,
@@ -214,7 +214,7 @@ Page({
     }
     var _this = this;
     wx.request({
-      url: 'http://118.25.23.44:8080/user/detail',
+      url: app.globalData.host+'/user/detail',
       data: {
         username: this.data.userInfo.username,
       },

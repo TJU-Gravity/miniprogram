@@ -43,7 +43,7 @@ Page({
         var i = 0;
         var summary = new Array();
         wx.request({
-            url: 'http://118.25.23.44:8080/post/list',
+            url: app.globalData.host+'/post/list',
             data: {
                 
             },

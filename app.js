@@ -15,7 +15,8 @@ App({
 
   globalData: {
     userInfo: null,
-    tmpUserInfo: null
+    tmpUserInfo: null,
+    host: 'http://150.158.116.35:8080'
   },
   onLaunch: function() {
     // 展示本地存储能力
@@ -52,7 +53,7 @@ App({
               var app = this
               //请求后台获取openid，openid放在username里
               wx.request({
-                url: 'http://118.25.23.44:8080/user/loginWeChat',
+                url: app.globalData.host+'/user/loginWeChat',
                 method: "POST",
                 data: {
                   nickname: this.globalData.tmpUserInfo.nickName,
@@ -99,7 +100,7 @@ App({
   //初始化登陆TIM的验证，要查看cbOk
   initUserSig: function (cbOk) {
     var app = this;
-    var generatedSigUrl = 'http://118.25.23.44:8080/generatedSig'
+    var generatedSigUrl = app.globalData.host +'/generatedSig'
     var header = { "Content-Type": "application/x-www-form-urlencoded" };
     var data = { "identifier": app.data.im.imId}
     console.log('app init userSig')

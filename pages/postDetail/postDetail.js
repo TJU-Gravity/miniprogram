@@ -28,7 +28,7 @@ Page({
     this.setData({replyContent:""});
     var _this=this;
     wx.request({
-      url:'http://118.25.23.44:8080/post/detail',
+      url: app.globalData.host +'/post/detail',
       data:{
         ID:options.id//上一个页面传参
       },
@@ -46,7 +46,7 @@ Page({
          });
         if (res.data.data.post.posttype=='1'){
           wx.request({
-            url: 'http://118.25.23.44:8080/team/detail',
+            url: app.globalData.host +'/team/detail',
             data: {
               ID: res.data.data.post.teamid
             },
@@ -128,7 +128,7 @@ Page({
   onClick(){
     var _this=this;
     wx.request({
-      url: 'http://118.25.23.44:8080/reply/add',
+      url: app.globalData.host +'/reply/add',
       data: {
         posterid: this.data.options.username,
         postid: this.data.post.postid,
@@ -168,7 +168,7 @@ Page({
     }
     else{
       wx.request({
-        url: 'http://118.25.23.44:8080/apply/add',
+        url: app.globalData.host +'/apply/add',
         data:{
           username:this.data.options.username,
           captainid:this.data.post.posterid,
