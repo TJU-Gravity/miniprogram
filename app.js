@@ -16,7 +16,7 @@ App({
   globalData: {
     userInfo: null,
     tmpUserInfo: null,
-    host: 'http://150.158.116.35:8080'
+    host: 'https://www.gravity.red'
   },
   onLaunch: function() {
     // 展示本地存储能力
