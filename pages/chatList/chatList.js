@@ -210,7 +210,7 @@ Page({
 
       //获取userSig登陆进入详情页，或者直接进入聊天详情页
       wx.request({
-        url: 'http://118.25.23.44:8080/user/detail',
+        url: app.globalData.host+'/user/detail',
         method: 'POST',
         data: {
           username: username

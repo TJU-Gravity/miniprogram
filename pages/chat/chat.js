@@ -81,7 +81,7 @@ Page({
     that.data.msgList = [] // 清空历史消息
   
     wx.request({
-      url: 'http://118.25.23.44:8080/apply/check',
+      url: app.globalData.host+'/apply/check',
       data: [this.data.youId,app.globalData.userInfo.username],
       method:'POST',
        success: function (res) {
@@ -307,7 +307,7 @@ Page({
     var that = this;
     wx.request({
       
-      url: 'http://118.25.23.44:8080/apply/delete',
+      url: app.globalData.host+'/apply/delete',
       data: [this.data.youId, app.globalData.userInfo.username],
       method: 'POST',
       success: function (res) {
@@ -334,7 +334,7 @@ Page({
 
 
     wx.request({
-      url: 'http://118.25.23.44:8080/apply/delete',
+      url: app.globalData.host+'/apply/delete',
       data: [this.data.youId, app.globalData.userInfo.username],
       method: 'POST',
       success: function (res) {
@@ -363,7 +363,7 @@ Page({
 
 
     wx.request({
-      url: 'http://118.25.23.44:8080/user/team/add',
+      url: app.globalData.host+'/user/team/add',
       data: {
         teamid:that.data.apply.teamid,
         username: that.data.apply.applicant
@@ -400,7 +400,7 @@ Page({
       ] });
     var username = app.globalData.userInfo.username;
     wx.request({
-      url: 'http://118.25.23.44:8080/team/myList',
+      url: app.globalData.host+'/team/myList',
       data: {
         username: username
       },
@@ -460,7 +460,7 @@ onClose() {
     var teamid=this.data.selectedTeam;
     var that=this;
     wx.request({
-      url: 'http://118.25.23.44:8080/apply/add',
+      url: app.globalData.host+'/apply/add',
       data: {
         username: username,
         captainid: captainid,
