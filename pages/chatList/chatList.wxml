@@ -1,6 +1,6 @@
 <!--pages/postList/postList.wxml-->
 
-
+<van-loading type="spinner"  style = "{{hasData?'display:none':''}}"/> <text style="{{hasData?'display:none':''}}">加载中...</text>
 
 <block wx:for="{{chats}}" >
    <view class="replyContainer" catchtap='onDetailTap' data-id="{{item.username}}">

@@ -103,14 +103,15 @@ Page({
   //app.js里面加上data和获取函数
   onShow: function () {
     var that = this
-   
+    console.log("identifier")
+   console.log(app.data.im)
     // 私聊参数初始化
     imhandler.init({
       accountMode: app.data.im.accountMode,
       accountType: app.data.im.accountType,
       sdkAppID: app.data.im.sdkappid,
       selType: im.SESSION_TYPE.C2C, //私聊
-      imId: app.data.im.identifier,
+      imId: app.data.im.imId,
       imName: app.data.im.imName,
       imAvatarUrl: app.data.im.imAvatarUrl,
       friendId: that.data.youId,
@@ -124,7 +125,7 @@ Page({
       accountType: app.data.im.accountType,
       sdkAppID: app.data.im.sdkappid,
       selType: im.SESSION_TYPE.C2C, //私聊
-      imId: app.data.im.identifier,
+      imId: app.data.im.id,
       imName: app.data.im.imName,
       imAvatarUrl: app.data.im.imAvatarUrl,
       friendId: that.data.youId,

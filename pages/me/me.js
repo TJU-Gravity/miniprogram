@@ -36,8 +36,15 @@ Page({
     console.log(event.detail);
   },
   onLoad: function (query) {
-   
+    app.userInfoReadyCallback = res => {
+      console.log('callback')
+      this.setData({
+        userInfo: res.data.data,
+        hasUserInfo: true
+      })
+    }
   this.load(query)
+  console.log(this.data.currentUser)
    
   },
   load(query)
@@ -84,6 +91,7 @@ Page({
       }
       else {
         console.log("It is me")
+        
         this.setData
           ({
             currentUser: this.data.userInfo.username,
@@ -140,10 +148,8 @@ Page({
   getUserInfo: function (e) {
     console.log(e)
     app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
-    })
+    app.login()
+
   },
   navInfo: function () {
     wx.navigateTo({

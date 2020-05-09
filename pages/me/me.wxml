@@ -20,7 +20,7 @@
 
 <view class="detail">
   <van-cell title="邮箱" value="{{userInfo.email}}"/>
-   <van-cell title="所在地点" value=" {{userInfo.loc}}"/>
+   <van-cell title="所在地点" value="{{userInfo.loc?userInfo.loc:''}}"/>
   <view wx:if="{{userInfo.gender==1}}"> 
   <van-cell title="性别" value="男"/>
   </view>

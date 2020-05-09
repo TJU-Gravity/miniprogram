@@ -1,4 +1,5 @@
 // pages/myLsit/myList.js
+const app = getApp();
 Page({
 
   /**

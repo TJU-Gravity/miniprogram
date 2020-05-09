@@ -86,23 +86,26 @@ Page({
       'Count': 10
     }, function(resp) {
       if (resp.SessionItem && resp.SessionItem.length > 0) {
-        var contactList = resp.SessionItem.map((item, index) => {
-          return {
-            "username": item.To_Account,
-            "nickname": item.C2cNick,
-            "headshot": item.C2cImage,
-            "time": util.getDateDiff(item.MsgTimeStamp * 1000),
-            "body": item.MsgShow
+        console.log("resp.SessionItem")
+        console.log(resp.SessionItem)
+        var contactInfo = {}
+        for(var i = 0;i<resp.SessionItem.length;i++){
+          contactInfo[resp.SessionItem[i].To_Account] ={
+            "time": util.getDateDiff(resp.SessionItem[i].MsgTimeStamp * 1000),
+            "body": resp.SessionItem[i].MsgShow
           }
+        }
+       
+        var usernames = resp.SessionItem.map((item, index) => {
+          return item.To_Account
         })
         console.log('拉取到的会话列表')
        
-        console.log(contactList)
-        // 设置联系人列表
-        that.setData({
-          chats: contactList,
-          isNoData: true
-        })
+        console.log(contactInfo)
+        that.getUserList(usernames,contactInfo)
+
+        
+      
        
       } else {
         that.setData({
@@ -142,6 +145,7 @@ Page({
             // 初始化最近会话的消息未读数（监听新消息事件）
             im.syncMsgs(imhandler.onMsgNotify());
           });
+
         }
         wx.hideLoading()
       })
@@ -309,5 +313,41 @@ Page({
         }
       }
     })
+  },
+
+  getUserList:function(usernames,contactInfo){
+    var that = this
+    wx.request({
+      url: app.globalData.host+'/user/getUsers',
+      data: usernames,
+      method: 'POST',
+      header: {
+        'content-type': 'application/json'//默认值
+      },
+      success: function (res) {
+        console.log(res);
+        
+        console.log(contactInfo[res.data.data[0].username]);
+        var contactList = res.data.data.map((item, index) => {
+          return {
+            "username": item.username,
+            "nickname": item.nickname,
+            "headshot": item.headshot,
+            "time": contactInfo[item.username].time,
+            "body": contactInfo[item.username].body
+          }
+          
+        })
+        console.log(contactList)
+         // 设置联系人列表
+         that.setData({
+          chats: contactList,
+          hasData: true
+        })
+      },
+      fail: function (res) {
+        console.log("发布失败");
+      }
+    });
   }
 })

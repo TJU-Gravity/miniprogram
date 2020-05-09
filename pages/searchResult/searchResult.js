@@ -1,4 +1,5 @@
 // pages/searchResult/searchResult.js
+const app = getApp();
 Page({
 
   /**

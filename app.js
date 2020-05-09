@@ -2,7 +2,7 @@
 App({
   data:{
     im: {
-      sdkAppID: 1400202398, // 用户标识接入 SDK 的应用 ID，必填
+      sdkAppID: 1400202390, // 用户标识接入 SDK 的应用 ID，必填
       accountType: 36862, // 帐号体系集成中的 accountType，必填
       accountMode: 0, //帐号模式，0 - 独立模式 1 - 托管模式
       imId: null, // 用户的 id
@@ -16,7 +16,7 @@ App({
   globalData: {
     userInfo: null,
     tmpUserInfo: null,
-    host: 'http://150.158.116.35:8080'
+    host: 'https://www.gravity.red'
   },
   onLaunch: function() {
     // 展示本地存储能力
@@ -49,49 +49,52 @@ App({
 
               // 可以将 res 发送给后台解码出 unionId
               this.globalData.tmpUserInfo = res.userInfo
-
-              var app = this
-              //请求后台获取openid，openid放在username里
-              wx.request({
-                url: app.globalData.host+'/user/loginWeChat',
-                method: "POST",
-                data: {
-                  nickname: this.globalData.tmpUserInfo.nickName,
-                  headshot: this.globalData.tmpUserInfo.avatarUrl,
-                  gender: this.globalData.tmpUserInfo.gender,
-                  code: this.globalData.code
-                },
-                header: {
-                  'content-type': 'application/json'
-                },
-                success: function(res) {
-                  console.log("app-user info")
-                  console.log(res.data)
-                  // im 的信息
-                  console.log('登陆成功记录im')
-                  console.log(res.data.data)
-                  app.data.im.imId = res.data.data.username;
-                  app.data.im.imName = res.data.data.nickname;
-                  app.data.im.imAvatarUrl = res.data.data.headshot;
-                  console.log(app.data.im)
-
-
-                  app.globalData.userInfo = res.data.data
-                  if (app.userInfoReadyCallback) {
-                    app.userInfoReadyCallback(res)
-                  }
-
-
-
-                },
-                fail: function(res) {
-                  console.log(res.data)
-                }
-              })
-
+              this.login()
+           
             }
           })
         }
+      }
+    })
+
+  },
+  login:function(){
+    var app = this
+    //请求后台获取openid，openid放在username里
+    wx.request({
+      url: app.globalData.host+'/user/loginWeChat',
+      method: "POST",
+      data: {
+        nickname: this.globalData.tmpUserInfo.nickName,
+        headshot: this.globalData.tmpUserInfo.avatarUrl,
+        gender: this.globalData.tmpUserInfo.gender,
+        code: this.globalData.code
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      success: function(res) {
+        console.log("app-user info")
+        console.log(res.data)
+        // im 的信息
+        console.log('登陆成功记录im')
+        console.log(res.data.data)
+        app.data.im.imId = res.data.data.username;
+        app.data.im.imName = res.data.data.nickname;
+        app.data.im.imAvatarUrl = res.data.data.headshot;
+        console.log(app.data.im)
+
+
+        app.globalData.userInfo = res.data.data
+        if (app.userInfoReadyCallback) {
+          app.userInfoReadyCallback(res)
+        }
+
+
+
+      },
+      fail: function(res) {
+        console.log(res.data)
       }
     })
 

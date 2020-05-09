@@ -154,6 +154,7 @@ function onSendMsg(msg, cbOk, cbErr) {
   var msg = new im.Msg(selSess, isSend, seq, random, msgTime, imId, subType, imName);
   var textObj = new im.Msg.Elem.Text(msgtosend);
   msg.addText(textObj);
+  console.log(msg)
   im.sendMsg(msg, function (resp) {
     cbOk()
   }, function (err) {
@@ -187,4 +188,5 @@ module.exports = {
   onMsgNotify: onMsgNotify, //接收消息
   getC2CHistoryMsgs: getC2CHistoryMsgs, //拉取与特定好友的历史消息
   onSendMsg: onSendMsg //给特定好友发送消息
+  
 }

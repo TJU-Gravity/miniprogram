@@ -80,6 +80,16 @@ Page({
       {
 
       }else{
+        console.log({
+          posttype: this.data.type,
+          posterid: this.data.options.username,
+          title: this.data.title,
+          postbody: this.data.content,
+          state: this.data.value + 1,
+          team: this.data.team,
+          hits: 0,
+
+        })
       wx.request({
         url: app.globalData.host+'/post/team/add',
         data: {
