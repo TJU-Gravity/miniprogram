@@ -58,7 +58,7 @@ App({
     })
 
   },
-  login:function(){
+  login:function(page){
     var app = this
     //请求后台获取openid，openid放在username里
     wx.request({
@@ -89,8 +89,6 @@ App({
         if (app.userInfoReadyCallback) {
           app.userInfoReadyCallback(res)
         }
-
-
 
       },
       fail: function(res) {

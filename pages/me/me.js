@@ -42,6 +42,7 @@ Page({
         userInfo: res.data.data,
         hasUserInfo: true
       })
+      this.load(query)
     }
   this.load(query)
   console.log(this.data.currentUser)
@@ -147,7 +148,7 @@ Page({
   },
   getUserInfo: function (e) {
     console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
+    app.globalData.tmpUserInfo = e.detail.userInfo
     app.login()
 
   },
