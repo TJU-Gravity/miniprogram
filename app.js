@@ -16,7 +16,8 @@ App({
   globalData: {
     userInfo: null,
     tmpUserInfo: null,
-    host: 'https://www.gravity.red'
+    host: 'https://www.gravity.red',
+    login:false
   },
   onLaunch: function() {
     // 展示本地存储能力
@@ -27,11 +28,14 @@ App({
     // 登录
     wx.login({
       success: res => {
+        this.debug('getLoginCode')
+        this.debug(res)
         this.globalData.code = res.code
 
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
       },
       fail: res => {
+        this.debug(res)
         console.log(res)
       }
 
@@ -57,6 +61,8 @@ App({
 
   },
   login:function(page){
+    if(this.globalData.login) return
+    this.debug("尝试拉取用户详细信息")
     var app = this
     //请求后台获取openid，openid放在username里
     wx.request({
@@ -74,13 +80,13 @@ App({
       success: function(res) {
         console.log("app-user info")
         console.log(res.data)
-        if(page){
-          page.debug("login")
-          page.debug(res.data)
-        }
+        app.debug("login")
+        app.debug(res.data)
+        
         // im 的信息
         console.log('登陆成功记录im')
         console.log(res.data.data)
+    
         app.data.im.imId = res.data.data.username;
         app.data.im.imName = res.data.data.nickname;
         app.data.im.imAvatarUrl = res.data.data.headshot;
@@ -88,12 +94,14 @@ App({
 
 
         app.globalData.userInfo = res.data.data
+        app.globalData.login = true
         if (app.userInfoReadyCallback) {
           app.userInfoReadyCallback(res)
         }
 
       },
       fail: function(res) {
+        app.debug(res)
         console.log(res.data)
       }
     })
@@ -117,6 +125,8 @@ App({
         // 初始化 im 数据 初始化完毕再返回回调
         console.log('获取userSig并记录')
         console.log(res.data)
+        app.debug('获取userSig并记录')
+        app.debug(res.data)
         app.data.im.userSig = res.data.data //RestAPI 返回状态码，消息，和data
         console.log(res.data)
         cbOk()
@@ -124,7 +134,23 @@ App({
       fail:err=>{
         console.log('generateSig fail')
         console.log(err)
+        app.debug('generateSig fail')
+        app.debug(err)
       }
+    })
+  },
+
+  debug:function(e){
+    const pages = getCurrentPages()
+    const currentPage = pages[pages.length - 1];
+    var newLog = currentPage.data.log
+    if(currentPage.data.log.length>10){
+      newLog.splice(0,1)
+    } 
+    newLog.push(JSON.stringify(e))
+
+    currentPage.setData({
+      log:newLog
     })
   }
 

@@ -14,6 +14,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    log:[],
     post: {},
     chats: [{}],
     user: {},
@@ -88,6 +89,8 @@ Page({
       if (resp.SessionItem && resp.SessionItem.length > 0) {
         console.log("resp.SessionItem")
         console.log(resp.SessionItem)
+        app.debug("recentContact")
+        app.debug(resp.SessionItem)
         var contactInfo = {}
         for(var i = 0;i<resp.SessionItem.length;i++){
           contactInfo[resp.SessionItem[i].To_Account] ={
@@ -100,7 +103,6 @@ Page({
           return item.To_Account
         })
         console.log('拉取到的会话列表')
-       
         console.log(contactInfo)
         that.getUserList(usernames,contactInfo)
 
@@ -134,6 +136,7 @@ Page({
     wx.showLoading()
     if (!app.data.im.userSig) {
       console.log('聊天列表初始化userSig')
+      app.debug('聊天列表初始化userSig')
       app.initUserSig(function cbOk() {
         // 检查是否登录返回 true 和 false,不登录则重新登录
         if (im.checkLogin()) {
@@ -345,6 +348,8 @@ Page({
           
         })
         console.log(contactList)
+        app.debug("联系人列表加载完成")
+        app.debug(contactList)
          // 设置联系人列表
          that.setData({
           chats: contactList,

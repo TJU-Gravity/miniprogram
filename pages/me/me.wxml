@@ -1,6 +1,7 @@
 <!--home.wxml-->
 <view>
 
+
 <view class="container">
   <view class="userinfo">
     <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" round size="small"> 授权头像昵称 </button>
@@ -55,6 +56,6 @@
   </view>
 
  
-
+ 
  
 </view>

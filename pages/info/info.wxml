@@ -50,44 +50,36 @@
     border="{{ false }}"
     bind:change="onTypeIntroduction"
   />
-  <block wx:for="{{tags}}">
-      <van-field
-        value="{{ item }}"
-        clearable
-        label="修改标签"          
-        placeholder="{{item}}"
-        border="{{ false }}"
-        name= "{{index}}"
-        data-id="{{index}}"
-        bind:change="onTypeTag"
-      />
-      <view class="delBtn" >
-        <van-button round size="small" type="info" data-id="{{index}}" bind:click="onDelTag">删除这个标签</van-button>
-      </view>
-  </block>
-  <van-field
-        value=""
-        clearable
-        label="添加标签"
-        placeholder="请输入新标签"
-        border="{{ false }}"
-        name= "{{next}}"
-        data-id="{{next}}"
-        bind:change="onTypeAdd"
-      />
-  <view class="delBtn" >
-        <van-button round size="small" type="info" data-id="{{index}}" bind:click="onAddTag">添加这个标签</van-button>
-      </view>
-  <!-- <van-field
-    value="{{ password }}"
-    clearable
-    label="修改密码"
-    placeholder="{{password}}"
-    border="{{ false }}"
-    bind:change="onTypePassword"
-  /> -->
+  
   
   </van-cell-group>
+   <van-field
+    bind:change="onChangeTag"
+    value="{{ tag }}"
+    center
+    clearable
+    placeholder="请输入标签"
+    border="{{ false }}"
+    use-button-slot
+  >
+    <van-button slot="button" size="small" type="primary" bindtap="addTag"
+      >添加标签</van-button
+    >
+
+  
+  </van-field>
+
+
+  <view style="display:inline-block;">
+  	<view class="tab-box" wx:for="{{tags}}" wx:key="id" >
+			<view class="tab">
+				<van-tag round plain type="success" size="large"  >{{item}}
+			
+					<van-icon name="cross" bindtap="removeTag" data-id='{{index}}'/>
+				</van-tag>
+				</view>
+			</view>
+</view>
   </view>
 
   <view class="saveinfo">

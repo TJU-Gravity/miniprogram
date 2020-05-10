@@ -3,19 +3,18 @@ const app = getApp()
 
 Page({
   data: {
-    motto: 'Hello World',
+    selectedTag:false,
+    currentTagList: [
+  ],
+
     userInfo: {},
     hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    active: 0,
-    activeNames: [''],
+ 
     nickname: '',
     username: '',
     password: '',
-    tags: [],
-    next: '',
-    gen: '',
-    new_add: '',
+    tag:'',
+
   },
   //事件处理函数
   onTypeTag(event) {
@@ -28,48 +27,13 @@ Page({
     this.setData({ tags: new_tag });
   },
   //输入新标签
-  onTypeAdd(event) {
-    console.log(event.detail);
-    console.log(event);
-    this.setData({ new_add: event.detail });
-    //new_add = event.detail;
-    console.log(this.data.new_add);
-    // var new_tag = new Array();
-    // var end = this.data.tags.length;
-    // new_tag = this.data.tags;
-    // new_tag[end] = event.detail;
-    //this.setData({ tags: new_tag });
-  },
-  //添加所输入的新标签
-  onAddTag(event) {
-    var new_tag = new Array();
-    new_tag = this.data.tags;
-    console.log(new_tag)
-    new_tag.push(this.data.new_add);
-    console.log(new_tag)
-    this.setData({ tags: new_tag });
-    this.setData({ new_add: "" });
-  },
-  onDelTag(event) {
-    console.log(event.detail);
-    console.log(event);
-    var id = event.currentTarget.dataset.id;
-    var end = this.data.tags.length;
-    var new_tag = new Array();
-    for (var i = 0; i < id; i++) {
-      new_tag[i] = this.data.tags[i]
-    }
-    for (var i = id; i < end - 1; i++) {
-      new_tag[i] = this.data.tags[i + 1]
-    }
-    console.log(new_tag);
-    this.setData({ tags: new_tag });
-  },
+ 
+
   
 
   onClick() {
     console.log(this.data.tags)
-    var tags = JSON.stringify(this.data.tags);
+    var tags = JSON.stringify(this.data.currentTagList);
     wx.navigateTo({
       url: '../searchResult/searchResult?tags=' + tags,
     })
@@ -79,7 +43,7 @@ Page({
   },
   onChange(event) {
     this.setData({
-      activeNames: event.detail
+      tag: event.detail
     });
     //console.log(event.detail);
   },
@@ -122,5 +86,42 @@ Page({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
+  },
+  removeTag: function (options) {
+    console.log(options)
+    this.data.currentTagList.splice(options.currentTarget.dataset.id, 1)
+    var selected = true;
+    if(this.data.currentTagList.length==0) {selected = false}
+    this.setData({
+      currentTagList: this.data.currentTagList,
+      selectedTag : selected
+    })
+  },
+  addTag:function(options){
+    if(this.data.tag=='') return
+    if(this.data.currentTagList.length>=5) {
+      wx.showToast({
+        icon:'none',
+        title: '最多只能添加5个标签'
+      })
+    }
+    
+    if(this.data.currentTagList.find(element => element == this.data.tag)) {
+      wx.showToast({
+        icon:'none',
+        title: '不能添加相同标签'
+      })
+    }
+    var tagList = this.data.currentTagList
+    tagList.push(this.data.tag)
+    var selected = false;
+    if(tagList.length>0) {selected = true}
+    this.setData({
+      tag:'',
+      currentTagList : tagList,
+      selectedTag : selected
+    })
+    
+
   }
 })

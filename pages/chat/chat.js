@@ -51,7 +51,7 @@ Page({
     apply:null,
     meHeadIcon:null,
     youHeadIcon:"http://pic.9ht.com/up/2016-12/14810057988524092.jpg",
-    scrollHeight: '100vh',
+    scrollHeight: '70vh',
     inputVal:"",
     inputBottom: 0,
     msgList:[],
@@ -173,6 +173,7 @@ Page({
       msgList: historyMsgs,
       complete: result.Complete
     })
+    this.scrollToBottom()
   },
 
   
@@ -193,7 +194,7 @@ Page({
   //失去聚焦(软键盘消失)
   blur: function (e) {
     this.setData({
-      scrollHeight: '100vh',
+      scrollHeight: '70vh',
       inputBottom: 0
     })
     this.setData({
@@ -270,8 +271,10 @@ Page({
     that.scrollToBottom();
   },
   scrollToBottom: function () {
+    console.log('滚动到底部'+'msg-' + (this.data.msgList.length - 1))
+    console.log(this.data.msgList[this.data.msgList.length - 1])
     this.setData({
-      toView: 'row_' + (this.data.msgList.length - 1)
+      toView: 'msg-' + (this.data.msgList.length - 1)
     });
   },
 
@@ -456,6 +459,12 @@ onClose() {
   },
   invite()
   {
+    if (this.data.selectedTeam == null){
+      wx.showToast({
+        title: '未选择团队',
+        icon:'none'
+      })
+    }
     var captainid=app.globalData.userInfo.username;
     var username=this.data.youId;
     var teamid=this.data.selectedTeam;

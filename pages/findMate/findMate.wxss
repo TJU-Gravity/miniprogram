@@ -39,3 +39,10 @@
 .usermotto {
   margin-top: 200px;
 }
+.tab-box{
+  display: inline-block;
+}
+.tab{
+  padding:5rpx;
+  display:inline-block;
+}

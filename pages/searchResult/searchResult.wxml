@@ -23,8 +23,9 @@
         <van-icon wx:if="{{item.gender=='1'}}" class="boy" name="contact" size="35rpx"/>
         <van-icon wx:elif="{{item.gender=='2'}}"class="girl" name="contact" size="35rpx"/>
       </view>
-      <text class="introduction">{{item.introduction?item.introduction:''}}</text>
+      <text class="introduction">{{item.introduction?item.introduction:'这个人太懒了没有写自我介绍😢'}}</text>
     </view>
+
     </view>
   </block>
 </view>

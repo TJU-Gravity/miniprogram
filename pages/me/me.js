@@ -17,17 +17,7 @@ Page({
     log:[]
   },
 
-  debug:function(e){
-    var newLog = this.data.log
-    if(this.data.log.length>10){
-      newLog.splice(0,1)
-    } 
-    newLog.push(e)
-
-    this.setData({
-      log:newLog
-    })
-  },
+  
 
  //事件处理函数
   bindViewTap: function () {
@@ -105,7 +95,7 @@ Page({
       }
       else {
         console.log("It is me")
-        this.debug("It is me")
+        app.debug("It is me")
         this.setData
           ({
             currentUser: this.data.userInfo.username,
@@ -133,7 +123,7 @@ Page({
           }
         });
         console.log(this.data.userInfo);
-        this.debug(this.data.userInfo)
+        app.debug(this.data.userInfo)
       }
 
     } 
@@ -163,7 +153,7 @@ Page({
   },
   getUserInfo: function (e) {
     console.log(e)
-    this.debug(e)
+    app.debug(e)
     app.globalData.tmpUserInfo = e.detail.userInfo
     app.login()
 

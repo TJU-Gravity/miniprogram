@@ -19,6 +19,8 @@ Page({
     phone: '',
     username:'',
     password:'',
+    tag:'',
+    selectedTag:false,
     tags: [],
     next:'',
     
@@ -53,14 +55,7 @@ Page({
     // new_tag[end] = event.detail;
     //this.setData({ tags: new_tag });
   },
-  onAddTag(event) {
-    var new_tag = new Array();
-    new_tag = this.data.tags;
-    console.log(new_tag)
-    new_tag.push(this.data.new_add);
-    console.log(new_tag)
-    this.setData({ tags: new_tag });
-  },
+  
   onDelTag(event) {
     console.log(event.detail);
     console.log(event);
@@ -262,5 +257,47 @@ Page({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
+  },
+  onChangeTag(event) {
+    this.setData({
+      tag: event.detail
+    });
+    //console.log(event.detail);
+  },
+  removeTag: function (options) {
+    console.log(options)
+    this.data.tags.splice(options.currentTarget.dataset.id, 1)
+    var selected = true;
+    if(this.data.tags.length==0) {selected = false}
+    this.setData({
+      tags: this.data.tags,
+      selectedTag : selected
+    })
+  },
+  addTag:function(options){
+    if(this.data.tag=='') return
+    if(this.data.tags.length>=5) {
+      wx.showToast({
+        icon:'none',
+        title: '最多只能添加5个标签'
+      })
+    }
+    if(this.data.tags.find(element => element == this.data.tag)) {
+      wx.showToast({
+        icon:'none',
+        title: '不能添加相同标签'
+      })
+    }
+    var tagList = this.data.tags
+    tagList.push(this.data.tag)
+    var selected = false;
+    if(tagList.length>0) {selected = true}
+    this.setData({
+      tag:'',
+      tags : tagList,
+      selectedTag : selected
+    })
+    
+
   }
 })
