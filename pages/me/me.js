@@ -13,10 +13,23 @@ Page({
     active: 0,
     activeNames: [''],
     value: '',
-    tags:[]
+    tags:[],
+    log:[]
   },
 
-  //事件处理函数
+  debug:function(e){
+    var newLog = this.data.log
+    if(this.data.log.length>10){
+      newLog.splice(0,1)
+    } 
+    newLog.push(e)
+
+    this.setData({
+      log:newLog
+    })
+  },
+
+ //事件处理函数
   bindViewTap: function () {
     //是自己 才跳转到修改信息
     if (this.data.isMyself){
@@ -92,7 +105,7 @@ Page({
       }
       else {
         console.log("It is me")
-        
+        this.debug("It is me")
         this.setData
           ({
             currentUser: this.data.userInfo.username,
@@ -116,9 +129,11 @@ Page({
           },
           fail: function (res) {
             console.log("加载失败");
+            
           }
         });
         console.log(this.data.userInfo);
+        this.debug(this.data.userInfo)
       }
 
     } 
@@ -148,6 +163,7 @@ Page({
   },
   getUserInfo: function (e) {
     console.log(e)
+    this.debug(e)
     app.globalData.tmpUserInfo = e.detail.userInfo
     app.login()
 

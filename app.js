@@ -45,8 +45,6 @@ App({
           console.log("try to get user info from wechat")
           wx.getUserInfo({
             success: res => {
-
-
               // 可以将 res 发送给后台解码出 unionId
               this.globalData.tmpUserInfo = res.userInfo
               this.login()
@@ -76,6 +74,10 @@ App({
       success: function(res) {
         console.log("app-user info")
         console.log(res.data)
+        if(page){
+          page.debug("login")
+          page.debug(res.data)
+        }
         // im 的信息
         console.log('登陆成功记录im')
         console.log(res.data.data)

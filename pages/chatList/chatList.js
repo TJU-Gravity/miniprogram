@@ -109,7 +109,8 @@ Page({
        
       } else {
         that.setData({
-          isNoData: false,
+          isNoData: true,
+          finishLoading:true
         })
       }
     })
@@ -316,6 +317,11 @@ Page({
   },
 
   getUserList:function(usernames,contactInfo){
+    if(usernames==null||usernames==[]){
+      this.setData({
+        finishLoading: true
+      })
+    }
     var that = this
     wx.request({
       url: app.globalData.host+'/user/getUsers',
@@ -342,7 +348,7 @@ Page({
          // 设置联系人列表
          that.setData({
           chats: contactList,
-          hasData: true
+          finishLoading: true
         })
       },
       fail: function (res) {
